@@ -4,7 +4,7 @@ import Loader from './lottie/Loading.json';
 import Wave from './lottie/background.json';
 import CoverPage from './pages/intro';
 import AboutPage from './pages/about';
-import ServicesPage from './pages/services';
+import ServicesPage from './pages/ServicesSection';
 import ClientsPage from './pages/testimonials';
 import ContactPage from './pages/contact';
 import Project1 from './pages/project/Project1';
@@ -15,6 +15,8 @@ import Project5 from './pages/project/Project5';
 import HorizontalScroll from './gsap/HorizontalScroll';
 import Transition from './gsap/Transition';
 import { gsap } from 'gsap';
+
+import ProcessSection from './pages/ProcessSection';
 
 const App = () => {
   const [isLoading, setIsLoading] = useState(true);
@@ -125,6 +127,7 @@ const App = () => {
         </div>
         <div id="services">
           <ServicesPage scrollToSection={scrollToSection} />
+          <ProcessSection scrollToSection={scrollToSection} /> 
         </div>
         <div id="projects">
           <HorizontalScroll>
