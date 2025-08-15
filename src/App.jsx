@@ -18,7 +18,7 @@ import { gsap } from 'gsap';
 
 const App = () => {
   const [isLoading, setIsLoading] = useState(true);
-  const [activeSection, setActiveSection] = useState(null); // Track active section
+  const [activeSection, setActiveSection] = useState(null);
   const overlayRef = useRef();
 
   useEffect(() => {
@@ -30,25 +30,24 @@ const App = () => {
   }, []);
 
   const scrollToSection = (sectionId) => {
-    setActiveSection(sectionId); // Set the active section for display
+    setActiveSection(sectionId);
     const tl = gsap.timeline({
       onComplete: () => {
         document.getElementById(sectionId).scrollIntoView({ behavior: 'smooth' });
-        setActiveSection(null); // Clear active section after animation
+        setActiveSection(null);
       },
     });
 
-    // Animation: slide up from bottom, pause, then slide up out
     tl.to(overlayRef.current, {
-      translateY: '0%', // Slide up to cover screen
+      translateY: '0%',
       duration: 0.8,
       ease: 'power4.inOut',
     })
       .to(overlayRef.current, {
-        translateY: '-100%', // Slide up and out to top
+        translateY: '-100%',
         duration: 0.8,
         ease: 'power4.inOut',
-        delay: 0.6, // Brief pause to show section name
+        delay: 0.6,
       });
   };
 
@@ -73,7 +72,7 @@ const App = () => {
             </span>
           </div>
           <div className="flex space-x-10">
-            {['cover', 'about', 'services', 'clients', 'contact'].map((section) => (
+            {['cover', 'about', 'services', 'projects', 'clients', 'contact'].map((section) => (
               <button
                 key={section}
                 onClick={() => scrollToSection(section)}
@@ -97,13 +96,15 @@ const App = () => {
         <CoverPage scrollToSection={scrollToSection} waveAnimation={Wave} />
         <AboutPage scrollToSection={scrollToSection} />
         <ServicesPage scrollToSection={scrollToSection} />
-        <HorizontalScroll>
-          <Project1 scrollToSection={scrollToSection} />
-          <Project2 scrollToSection={scrollToSection} />
-          <Project3 scrollToSection={scrollToSection} />
-          <Project4 scrollToSection={scrollToSection} />
-          <Project5 scrollToSection={scrollToSection} />
-        </HorizontalScroll>
+        <div id="projects">
+          <HorizontalScroll>
+            <Project1 scrollToSection={scrollToSection} />
+            <Project2 scrollToSection={scrollToSection} />
+            <Project3 scrollToSection={scrollToSection} />
+            <Project4 scrollToSection={scrollToSection} />
+            <Project5 scrollToSection={scrollToSection} />
+          </HorizontalScroll>
+        </div>
         <ClientsPage scrollToSection={scrollToSection} />
         <ContactPage scrollToSection={scrollToSection} />
       </div>
