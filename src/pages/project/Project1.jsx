@@ -10,8 +10,8 @@ const Project1 = ({ scrollToSection }) => {
   ];
 
   return (
-    <div id="projects" className="min-h-screen flex flex-col items-center justify-center bg-gray-100 py-8">
-      <h2 className="text-3xl font-bold text-gray-900 mb-8 text-center">Our Projects</h2>
+    <div id="projects" className="min-h-screen flex flex-col items-center justify-center bg-blue-900 py-8">
+      <h2 className="text-3xl font-bold text-white mb-8 text-center">Our Projects</h2>
       <div className="space-y-8 w-full max-w-4xl px-4 flex flex-col items-center">
         {projects.map((project, index) => (
           <div
