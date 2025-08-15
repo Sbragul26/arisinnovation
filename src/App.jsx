@@ -7,7 +7,16 @@ import AboutPage from './pages/about';
 import ServicesPage from './pages/services';
 import ClientsPage from './pages/testimonials';
 import ContactPage from './pages/contact';
-import ProjectsPage from './pages/ProjectsPage';
+
+
+import Project1 from './pages/project/Project1';
+import Project2 from './pages/project/Project2';
+import Project3 from './pages/project/Project3';  
+import Project4 from './pages/project/Project4';
+import Project5 from './pages/project/Project5';
+
+
+import HorizontalScroll from './gsap/HorizontalScroll';
 
 const App = () => {
   const [isLoading, setIsLoading] = useState(true);
@@ -71,9 +80,20 @@ const App = () => {
         <CoverPage scrollToSection={scrollToSection} waveAnimation={Wave} />
         <AboutPage scrollToSection={scrollToSection} />
         <ServicesPage scrollToSection={scrollToSection} />
+
+        <HorizontalScroll>
+          <Project1 scrollToSection={scrollToSection} />
+          <Project2 scrollToSection={scrollToSection} />
+          <Project3 scrollToSection={scrollToSection} />
+          <Project4 scrollToSection={scrollToSection} />
+          <Project5 scrollToSection={scrollToSection} />
+
+        </HorizontalScroll>
+        
         <ClientsPage scrollToSection={scrollToSection} />
         <ContactPage scrollToSection={scrollToSection} />
-        <ProjectsPage />
+
+
       </div>
     </div>
   );
