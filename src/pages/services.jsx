@@ -1,179 +1,384 @@
 import React from 'react';
-import { Palette, Code, Search, BarChart, Smartphone, Globe } from 'lucide-react';
+import { motion } from 'framer-motion';
+import { Palette, Code, Search, BarChart, Smartphone, Globe, ChevronRight, Zap, Star, CheckCircle } from 'lucide-react';
 
 const ServicesPage = ({ scrollToSection }) => {
   const services = [
-    { icon: <Palette className="w-12 h-12" />, title: "Brand Identity & Design", description: "Create memorable brand experiences that resonate with your audience and stand out in the marketplace.", benefits: ["Logo & Visual Identity", "Brand Guidelines", "Marketing Materials", "Brand Strategy"], color: "from-pink-500 to-rose-500" },
-    { icon: <Code className="w-12 h-12" />, title: "Web Development", description: "Build fast, secure, and scalable websites that convert visitors into customers and grow with your business.", benefits: ["Custom Website Development", "E-commerce Solutions", "CMS Integration", "Performance Optimization"], color: "from-blue-500 to-cyan-500" },
-    { icon: <Smartphone className="w-12 h-12" />, title: "Mobile App Development", description: "Develop intuitive mobile applications that provide seamless user experiences across all devices.", benefits: ["iOS & Android Apps", "Cross-platform Solutions", "App Store Optimization", "Maintenance & Support"], color: "from-green-500 to-emerald-500" },
-    { icon: <Search className="w-12 h-12" />, title: "SEO & Digital Marketing", description: "Increase your online visibility and drive qualified traffic through strategic SEO and marketing campaigns.", benefits: ["Search Engine Optimization", "Content Marketing", "Social Media Management", "PPC Campaigns"], color: "from-purple-500 to-indigo-500" },
-    { icon: <BarChart className="w-12 h-12" />, title: "Analytics & Strategy", description: "Make data-driven decisions with comprehensive analytics and strategic planning for sustainable growth.", benefits: ["Performance Analytics", "User Experience Research", "Growth Strategy", "Conversion Optimization"], color: "from-orange-500 to-yellow-500" },
-    { icon: <Globe className="w-12 h-12" />, title: "Digital Consulting", description: "Get expert guidance on digital transformation and technology decisions to future-proof your business.", benefits: ["Technology Consultation", "Digital Transformation", "Process Optimization", "Training & Support"], color: "from-teal-500 to-blue-500" }
+    { 
+      icon: <Palette className="w-12 h-12" />, 
+      title: "Brand Identity & Design", 
+      description: "Create memorable brand experiences that resonate with your audience and stand out in the marketplace.", 
+      benefits: ["Logo & Visual Identity", "Brand Guidelines", "Marketing Materials", "Brand Strategy"], 
+      color: "from-pink-500 to-rose-500",
+      shadowColor: "shadow-pink-500/25",
+      emoji: "🎨"
+    },
+    { 
+      icon: <Code className="w-12 h-12" />, 
+      title: "Web Development", 
+      description: "Build fast, secure, and scalable websites that convert visitors into customers and grow with your business.", 
+      benefits: ["Custom Website Development", "E-commerce Solutions", "CMS Integration", "Performance Optimization"], 
+      color: "from-blue-500 to-cyan-500",
+      shadowColor: "shadow-blue-500/25",
+      emoji: "⚡"
+    },
+    { 
+      icon: <Smartphone className="w-12 h-12" />, 
+      title: "Mobile App Development", 
+      description: "Develop intuitive mobile applications that provide seamless user experiences across all devices.", 
+      benefits: ["iOS & Android Apps", "Cross-platform Solutions", "App Store Optimization", "Maintenance & Support"], 
+      color: "from-green-500 to-emerald-500",
+      shadowColor: "shadow-green-500/25",
+      emoji: "📱"
+    },
+    { 
+      icon: <Search className="w-12 h-12" />, 
+      title: "SEO & Digital Marketing", 
+      description: "Increase your online visibility and drive qualified traffic through strategic SEO and marketing campaigns.", 
+      benefits: ["Search Engine Optimization", "Content Marketing", "Social Media Management", "PPC Campaigns"], 
+      color: "from-purple-500 to-indigo-500",
+      shadowColor: "shadow-purple-500/25",
+      emoji: "🚀"
+    },
+    { 
+      icon: <BarChart className="w-12 h-12" />, 
+      title: "Analytics & Strategy", 
+      description: "Make data-driven decisions with comprehensive analytics and strategic planning for sustainable growth.", 
+      benefits: ["Performance Analytics", "User Experience Research", "Growth Strategy", "Conversion Optimization"], 
+      color: "from-orange-500 to-yellow-500",
+      shadowColor: "shadow-orange-500/25",
+      emoji: "📊"
+    },
+    { 
+      icon: <Globe className="w-12 h-12" />, 
+      title: "Digital Consulting", 
+      description: "Get expert guidance on digital transformation and technology decisions to future-proof your business.", 
+      benefits: ["Technology Consultation", "Digital Transformation", "Process Optimization", "Training & Support"], 
+      color: "from-teal-500 to-blue-500",
+      shadowColor: "shadow-teal-500/25",
+      emoji: "🌐"
+    }
   ];
 
   const processSteps = [
-    { number: "01", title: "Discovery", description: "We deep-dive into your business, goals, and challenges to understand your unique needs." },
-    { number: "02", title: "Strategy", description: "Based on our findings, we develop a comprehensive strategy tailored to your objectives." },
-    { number: "03", title: "Design & Development", description: "Our team brings your vision to life with stunning design and robust development." },
-    { number: "04", title: "Launch & Optimize", description: "We launch your project and continuously optimize for better performance and results." }
+    { 
+      number: "01", 
+      title: "Discovery", 
+      description: "We deep-dive into your business, goals, and challenges to understand your unique needs.",
+      icon: <Search className="w-8 h-8 text-blue-400" />,
+      color: "blue-500"
+    },
+    { 
+      number: "02", 
+      title: "Strategy", 
+      description: "Based on our findings, we develop a comprehensive strategy tailored to your objectives.",
+      icon: <BarChart className="w-8 h-8 text-indigo-400" />,
+      color: "indigo-500"
+    },
+    { 
+      number: "03", 
+      title: "Design & Development", 
+      description: "Our team brings your vision to life with stunning design and robust development.",
+      icon: <Code className="w-8 h-8 text-purple-400" />,
+      color: "purple-500"
+    },
+    { 
+      number: "04", 
+      title: "Launch & Optimize", 
+      description: "We launch your project and continuously optimize for better performance and results.",
+      icon: <Zap className="w-8 h-8 text-pink-400" />,
+      color: "pink-500"
+    }
   ];
 
+  const packages = [
+    {
+      name: "Starter",
+      description: "Perfect for small businesses",
+      price: "$2,999",
+      period: "Starting from",
+      features: ["5-page website", "Basic SEO setup", "Mobile responsive", "3 months support"],
+      color: "from-blue-500 to-blue-600",
+      popular: false,
+      buttonText: "Get Started"
+    },
+    {
+      name: "Professional",
+      description: "Ideal for growing businesses", 
+      price: "$7,999",
+      period: "Starting from",
+      features: ["Custom website design", "E-commerce integration", "Advanced SEO & Analytics", "6 months support"],
+      color: "from-indigo-500 to-purple-600",
+      popular: true,
+      buttonText: "Get Started"
+    },
+    {
+      name: "Enterprise",
+      description: "For established companies",
+      price: "Custom",
+      period: "Let's discuss",
+      features: ["Custom development", "Advanced integrations", "Dedicated support", "12+ months partnership"],
+      color: "from-purple-500 to-pink-600",
+      popular: false,
+      buttonText: "Contact Us"
+    }
+  ];
+
+  // Animation variants
+  const containerVariants = {
+    hidden: { opacity: 0 },
+    visible: { 
+      opacity: 1, 
+      transition: { 
+        staggerChildren: 0.2, 
+        delayChildren: 0.3,
+        duration: 0.8
+      } 
+    },
+  };
+
+  const itemVariants = {
+    hidden: { y: 30, opacity: 0 },
+    visible: { 
+      y: 0, 
+      opacity: 1,
+      transition: { 
+        duration: 0.6, 
+        ease: "easeOut"
+      } 
+    },
+  };
+
+  const cardHoverVariants = {
+    hover: { 
+      scale: 1.05, 
+      boxShadow: "0px 10px 20px rgba(0, 0, 0, 0.2)",
+      transition: {
+        duration: 0.3
+      }
+    }
+  };
+
   return (
-    <section id="services" className="py-20 px-6 bg-gradient-to-b from-white to-gray-50">
-      <div className="max-w-7xl mx-auto">
-        <div className="text-center mb-20">
-          <h1 className="text-5xl md:text-7xl font-black text-gray-900 mb-6">
-            Our <span className="bg-gradient-to-r from-indigo-600 to-purple-600 bg-clip-text text-transparent">Services</span>
-          </h1>
-          <p className="text-2xl text-gray-600 max-w-3xl mx-auto">
-            Comprehensive digital solutions designed to elevate your brand and drive meaningful results
-          </p>
-        </div>
-        <div className="grid md:grid-cols-2 lg:grid-cols-3 gap-8 mb-20">
+    <motion.section
+      id="services"
+      className="min-h-screen flex items-center justify-center bg-gradient-to-br from-slate-900 via-gray-900 to-neutral-900 py-24 px-4 sm:px-6 lg:px-8 relative overflow-hidden"
+      initial={{ opacity: 0 }}
+      animate={{ opacity: 1 }}
+      transition={{ duration: 1.2 }}
+    >
+      <div className="relative z-10 max-w-7xl mx-auto">
+        {/* Main Heading */}
+        <motion.div 
+          className="text-center mb-20"
+          variants={containerVariants}
+          initial="hidden"
+          animate="visible"
+        >
+          <motion.h1
+            className="text-4xl md:text-5xl lg:text-6xl font-bold mb-6 leading-tight tracking-tight"
+            variants={itemVariants}
+          >
+            <span className="bg-gradient-to-r from-blue-200 via-indigo-300 to-purple-400 bg-clip-text text-transparent">
+              Our 
+            </span>
+            {' '}
+            <span className="bg-gradient-to-r from-emerald-300 via-teal-400 to-cyan-400 bg-clip-text text-transparent">
+              Services
+            </span>
+          </motion.h1>
+          
+          <motion.p
+            className="text-lg md:text-xl lg:text-2xl font-light text-gray-200 max-w-4xl mx-auto leading-relaxed tracking-wide"
+            variants={itemVariants}
+          >
+            Comprehensive digital solutions designed to <span className="text-blue-400 font-semibold">elevate</span> your brand and drive <span className="text-purple-400 font-semibold">meaningful results</span>
+          </motion.p>
+        </motion.div>
+
+        {/* Services Grid */}
+        <motion.div 
+          className="grid md:grid-cols-2 lg:grid-cols-3 gap-8 mb-24"
+          variants={containerVariants}
+          initial="hidden"
+          animate="visible"
+        >
           {services.map((service, index) => (
-            <div key={index} className="bg-white rounded-3xl p-8 shadow-xl hover:shadow-2xl transition-all duration-500 transform hover:-translate-y-4 border border-gray-100 group">
-              <div className={`w-20 h-20 bg-gradient-to-r ${service.color} rounded-2xl flex items-center justify-center text-white mb-6 group-hover:scale-110 transition-transform duration-300`}>
-                {service.icon}
-              </div>
-              <h3 className="text-2xl font-bold text-gray-900 mb-4">{service.title}</h3>
-              <p className="text-gray-600 mb-6 leading-relaxed">{service.description}</p>
-              <div className="space-y-2">
-                {service.benefits.map((benefit, idx) => (
-                  <div key={idx} className="flex items-center text-sm text-gray-700">
-                    <div className={`w-2 h-2 bg-gradient-to-r ${service.color} rounded-full mr-3 flex-shrink-0`}></div>
-                    {benefit}
+            <motion.div
+              key={index}
+              variants={itemVariants}
+            >
+              <motion.div
+                className={`bg-gradient-to-br from-slate-800/90 to-gray-800/90 backdrop-blur-xl rounded-3xl p-8 border border-gray-600/40 shadow-2xl h-full flex flex-col`}
+                whileHover={cardHoverVariants.hover}
+              >
+                <div className="flex items-center justify-between mb-6">
+                  <div className={`w-20 h-20 bg-gradient-to-r ${service.color} rounded-2xl flex items-center justify-center text-white shadow-xl`}>
+                    {service.icon}
                   </div>
-                ))}
-              </div>
-            </div>
-          ))}
-        </div>
-        <div className="bg-gray-900 rounded-3xl p-12 mb-20">
-          <div className="text-center mb-12">
-            <h2 className="text-4xl font-bold text-white mb-6">Our Process</h2>
-            <p className="text-xl text-gray-300 max-w-3xl mx-auto">
-              We follow a proven methodology that ensures every project delivers exceptional results
-            </p>
-          </div>
-          <div className="grid md:grid-cols-2 lg:grid-cols-4 gap-8">
-            {processSteps.map((step, index) => (
-              <div key={index} className="text-center group">
-                <div className="w-16 h-16 bg-gradient-to-r from-indigo-500 to-purple-500 rounded-2xl flex items-center justify-center text-white text-2xl font-bold mx-auto mb-6 group-hover:scale-110 transition-transform duration-300">
-                  {step.number}
+                  <div className="text-3xl">
+                    {service.emoji}
+                  </div>
                 </div>
-                <h3 className="text-xl font-bold text-white mb-3">{step.title}</h3>
-                <p className="text-gray-400 leading-relaxed">{step.description}</p>
-              </div>
+                <h3 className="text-2xl font-bold text-white mb-4">{service.title}</h3>
+                <p className="text-gray-300 mb-6 leading-relaxed flex-grow">{service.description}</p>
+                <div className="space-y-3 mt-auto">
+                  {service.benefits.map((benefit, idx) => (
+                    <div key={idx} className="flex items-center text-sm text-gray-300">
+                      <div className={`w-2 h-2 bg-gradient-to-r ${service.color} rounded-full mr-3 flex-shrink-0`}></div>
+                      {benefit}
+                    </div>
+                  ))}
+                </div>
+              </motion.div>
+            </motion.div>
+          ))}
+        </motion.div>
+
+        {/* New Process Section - Vertical Timeline with Alternating Sides */}
+        <motion.div 
+          className="mb-24"
+          variants={containerVariants}
+          initial="hidden"
+          animate="visible"
+        >
+          <motion.div className="text-center mb-16" variants={itemVariants}>
+            <h2 className="text-3xl md:text-4xl font-bold mb-6 bg-gradient-to-r from-gray-100 to-gray-400 bg-clip-text text-transparent">
+              Our Process
+            </h2>
+            <p className="text-lg md:text-xl text-gray-300 max-w-3xl mx-auto leading-relaxed">
+              A step-by-step approach to deliver exceptional results, tailored to your needs
+            </p>
+          </motion.div>
+
+          <div className="relative max-w-4xl mx-auto">
+            {/* Central Vertical Line */}
+            <div className="absolute left-1/2 transform -translate-x-1/2 h-full w-1 bg-gradient-to-b from-blue-500/50 via-purple-500/50 to-pink-500/50"></div>
+
+            {processSteps.map((step, index) => (
+              <motion.div
+                key={index}
+                className={`relative flex ${index % 2 === 0 ? 'flex-row' : 'flex-row-reverse'} mb-12`}
+                variants={itemVariants}
+              >
+                <div className="w-1/2 px-8">
+                  <motion.div
+                    className="bg-gray-800/80 backdrop-blur-md rounded-xl p-6 shadow-xl border border-gray-700/30"
+                    whileHover={{ scale: 1.03, boxShadow: "0 8px 16px rgba(0, 0, 0, 0.25)" }}
+                  >
+                    <div className="flex items-center mb-4">
+                      {step.icon}
+                      <h3 className="text-xl font-semibold text-white ml-3">{step.title}</h3>
+                    </div>
+                    <p className="text-gray-300 text-sm">{step.description}</p>
+                  </motion.div>
+                </div>
+                <div className="absolute left-1/2 transform -translate-x-1/2 -translate-y-1/2 flex items-center justify-center">
+                  <motion.div
+                    className={`w-12 h-12 bg-${step.color} text-white font-bold rounded-full flex items-center justify-center shadow-lg`}
+                    whileHover={{ scale: 1.1 }}
+                  >
+                    {step.number}
+                  </motion.div>
+                </div>
+                <div className="w-1/2"></div>
+              </motion.div>
             ))}
           </div>
-        </div>
-        <div className="mb-20">
-          <h2 className="text-4xl font-bold text-center text-gray-900 mb-12">Service Packages</h2>
-          <div className="grid lg:grid-cols-3 gap-8">
-            <div className="bg-white rounded-3xl p-8 shadow-lg border border-gray-200 hover:shadow-xl transition-all duration-300">
-              <div className="text-center mb-8">
-                <h3 className="text-2xl font-bold text-gray-900 mb-2">Starter</h3>
-                <p className="text-gray-600">Perfect for small businesses</p>
-                <div className="text-4xl font-bold text-indigo-600 mt-4">$2,999</div>
-                <p className="text-sm text-gray-500">Starting from</p>
-              </div>
-              <div className="space-y-3 mb-8">
-                <div className="flex items-center">
-                  <div className="w-2 h-2 bg-indigo-600 rounded-full mr-3"></div>
-                  <span className="text-gray-700">5-page website</span>
-                </div>
-                <div className="flex items-center">
-                  <div className="w-2 h-2 bg-indigo-600 rounded-full mr-3"></div>
-                  <span className="text-gray-700">Basic SEO setup</span>
-                </div>
-                <div className="flex items-center">
-                  <div className="w-2 h-2 bg-indigo-600 rounded-full mr-3"></div>
-                  <span className="text-gray-700">Mobile responsive</span>
-                </div>
-                <div className="flex items-center">
-                  <div className="w-2 h-2 bg-indigo-600 rounded-full mr-3"></div>
-                  <span className="text-gray-700">3 months support</span>
-                </div>
-              </div>
-              <button className="w-full bg-indigo-600 hover:bg-indigo-700 text-white py-3 rounded-xl font-semibold transition-colors">
-                Get Started
-              </button>
-            </div>
-            <div className="bg-gradient-to-b from-indigo-600 to-purple-600 rounded-3xl p-8 shadow-2xl text-white transform scale-105 relative">
-              <div className="absolute -top-4 left-1/2 transform -translate-x-1/2 bg-yellow-500 text-yellow-900 px-4 py-1 rounded-full text-sm font-bold">
-                Most Popular
-              </div>
-              <div className="text-center mb-8">
-                <h3 className="text-2xl font-bold mb-2">Professional</h3>
-                <p className="text-indigo-100">Ideal for growing businesses</p>
-                <div className="text-4xl font-bold mt-4">$7,999</div>
-                <p className="text-sm text-indigo-200">Starting from</p>
-              </div>
-              <div className="space-y-3 mb-8">
-                <div className="flex items-center">
-                  <div className="w-2 h-2 bg-white rounded-full mr-3"></div>
-                  <span>Custom website design</span>
-                </div>
-                <div className="flex items-center">
-                  <div className="w-2 h-2 bg-white rounded-full mr-3"></div>
-                  <span>E-commerce integration</span>
-                </div>
-                <div className="flex items-center">
-                  <div className="w-2 h-2 bg-white rounded-full mr-3"></div>
-                  <span>Advanced SEO & Analytics</span>
-                </div>
-                <div className="flex items-center">
-                  <div className="w-2 h-2 bg-white rounded-full mr-3"></div>
-                  <span>6 months support</span>
-                </div>
-              </div>
-              <button className="w-full bg-white text-indigo-600 hover:bg-gray-100 py-3 rounded-xl font-semibold transition-colors">
-                Get Started
-              </button>
-            </div>
-            <div className="bg-white rounded-3xl p-8 shadow-lg border border-gray-200 hover:shadow-xl transition-all duration-300">
-              <div className="text-center mb-8">
-                <h3 className="text-2xl font-bold text-gray-900 mb-2">Enterprise</h3>
-                <p className="text-gray-600">For established companies</p>
-                <div className="text-4xl font-bold text-purple-600 mt-4">Custom</div>
-                <p className="text-sm text-gray-500">Let's discuss</p>
-              </div>
-              <div className="space-y-3 mb-8">
-                <div className="flex items-center">
-                  <div className="w-2 h-2 bg-purple-600 rounded-full mr-3"></div>
-                  <span className="text-gray-700">Custom development</span>
-                </div>
-                <div className="flex items-center">
-                  <div className="w-2 h-2 bg-purple-600 rounded-full mr-3"></div>
-                  <span className="text-gray-700">Advanced integrations</span>
-                </div>
-                <div className="flex items-center">
-                  <div className="w-2 h-2 bg-purple-600 rounded-full mr-3"></div>
-                  <span className="text-gray-700">Dedicated support</span>
-                </div>
-                <div className="flex items-center">
-                  <div className="w-2 h-2 bg-purple-600 rounded-full mr-3"></div>
-                  <span className="text-gray-700">12+ months partnership</span>
-                </div>
-              </div>
-              <button className="w-full bg-purple-600 hover:bg-purple-700 text-white py-3 rounded-xl font-semibold transition-colors">
-                Contact Us
-              </button>
-            </div>
-          </div>
-        </div>
-        <div className="text-center">
-          <h2 className="text-3xl font-bold text-gray-900 mb-6">Ready to Get Started?</h2>
-          <p className="text-xl text-gray-600 mb-8">Let's discuss how we can help bring your vision to life</p>
-          <button
-            onClick={() => scrollToSection('clients')}
-            className="bg-gradient-to-r from-indigo-600 to-purple-600 hover:from-indigo-700 hover:to-purple-700 px-12 py-4 rounded-full text-white text-xl font-semibold transition-all duration-300 transform hover:scale-105 shadow-xl"
+        </motion.div>
+
+        {/* Service Packages */}
+        <motion.div 
+          className="mb-20"
+          variants={containerVariants}
+          initial="hidden"
+          animate="visible"
+        >
+          <motion.h2 
+            className="text-3xl md:text-4xl font-bold text-center mb-16 bg-gradient-to-r from-gray-100 to-gray-400 bg-clip-text text-transparent"
+            variants={itemVariants}
           >
-            View Our Work
+            Service Packages
+          </motion.h2>
+          
+          <div className="grid lg:grid-cols-3 gap-8">
+            {packages.map((pkg, index) => (
+              <motion.div
+                key={index}
+                className={`relative ${pkg.popular ? 'scale-105' : ''}`}
+                variants={itemVariants}
+              >
+                {pkg.popular && (
+                  <div className="absolute -top-4 left-1/2 -translate-x-1/2 bg-gradient-to-r from-yellow-400 to-orange-500 text-gray-900 px-6 py-2 rounded-full text-sm font-bold shadow-xl z-10">
+                    <Star className="w-4 h-4 inline mr-1" />
+                    Most Popular
+                  </div>
+                )}
+                
+                <motion.div
+                  className={`h-full bg-gradient-to-br ${pkg.popular ? 'from-indigo-600/90 to-purple-600/90' : 'from-slate-800/90 to-gray-800/90'} backdrop-blur-xl rounded-3xl p-8 border ${pkg.popular ? 'border-indigo-400/50' : 'border-gray-600/40'} shadow-2xl flex flex-col`}
+                  whileHover={cardHoverVariants.hover}
+                >
+                  <div className="text-center mb-8">
+                    <h3 className="text-2xl font-bold text-white mb-3">
+                      {pkg.name}
+                    </h3>
+                    <p className={`${pkg.popular ? 'text-indigo-100' : 'text-gray-300'} mb-6`}>
+                      {pkg.description}
+                    </p>
+                    <div className={`text-5xl font-bold mb-2 ${pkg.popular ? 'text-white' : 'text-blue-400'}`}>
+                      {pkg.price}
+                    </div>
+                    <p className={`text-sm ${pkg.popular ? 'text-indigo-200' : 'text-gray-400'}`}>
+                      {pkg.period}
+                    </p>
+                  </div>
+                  <div className="space-y-4 mb-8 flex-grow">
+                    {pkg.features.map((feature, idx) => (
+                      <div key={idx} className="flex items-center">
+                        <CheckCircle className={`w-5 h-5 mr-3 ${pkg.popular ? 'text-white' : 'text-blue-400'}`} />
+                        <span className={`${pkg.popular ? 'text-white' : 'text-gray-300'}`}>
+                          {feature}
+                        </span>
+                      </div>
+                    ))}
+                  </div>
+                  <button
+                    className={`w-full py-4 rounded-xl font-bold ${pkg.popular ? 'bg-white text-indigo-600' : 'bg-gradient-to-r from-blue-600 to-indigo-600 text-white'}`}
+                  >
+                    {pkg.buttonText}
+                  </button>
+                </motion.div>
+              </motion.div>
+            ))}
+          </div>
+        </motion.div>
+
+        {/* CTA Section */}
+        <motion.div 
+          className="text-center"
+          variants={itemVariants}
+        >
+          <h2 className="text-3xl md:text-4xl font-bold mb-6 bg-gradient-to-r from-gray-100 to-gray-400 bg-clip-text text-transparent">
+            Ready to Get Started?
+          </h2>
+          
+          <p className="text-lg md:text-xl text-gray-300 mb-12 max-w-2xl mx-auto leading-relaxed">
+            Let's discuss how we can help bring your <span className="text-blue-400 font-semibold">vision</span> to life
+          </p>
+          
+          <button
+            onClick={() => scrollToSection('contact')}
+            className="group relative inline-flex items-center bg-gradient-to-r from-blue-500 to-indigo-600 hover:from-blue-600 hover:to-indigo-700 px-10 py-4 rounded-xl text-lg font-bold text-white transition-all duration-300 shadow-xl hover:shadow-blue-500/25"
+          >
+            <div className="absolute inset-0 bg-gradient-to-r from-white/0 via-white/20 to-white/0 rounded-xl opacity-0 group-hover:opacity-100 transition-opacity duration-300"></div>
+            <Zap className="w-5 h-5 mr-3" />
+            Start Your Project
+            <ChevronRight className="ml-3 w-5 h-5" />
           </button>
-        </div>
+        </motion.div>
       </div>
-    </section>
+    </motion.section>
   );
 };
 

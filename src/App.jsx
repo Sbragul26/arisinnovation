@@ -7,6 +7,7 @@ import AboutPage from './pages/about';
 import ServicesPage from './pages/services';
 import ClientsPage from './pages/testimonials';
 import ContactPage from './pages/contact';
+import ProjectsPage from './pages/ProjectsPage';
 
 const App = () => {
   const [isLoading, setIsLoading] = useState(true);
@@ -72,6 +73,7 @@ const App = () => {
         <ServicesPage scrollToSection={scrollToSection} />
         <ClientsPage scrollToSection={scrollToSection} />
         <ContactPage scrollToSection={scrollToSection} />
+        <ProjectsPage />
       </div>
     </div>
   );
