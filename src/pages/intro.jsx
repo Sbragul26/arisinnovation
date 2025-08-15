@@ -23,17 +23,6 @@ const CoverPage = ({ scrollToSection, waveAnimation }) => {
       <div className="absolute bottom-20 left-10 w-40 h-40 bg-gradient-to-tr from-gray-700/60 to-blue-600/40 rounded-full blur-3xl"></div>
 
       <div className="relative z-10 text-center max-w-6xl mx-auto px-6">
-        {/* Logo/Brand mark */}
-        <div className="mb-12 flex justify-center">
-          <div className="relative group">
-            <div className="w-20 h-20 bg-gradient-to-br from-blue-700 to-indigo-800 rounded-3xl flex items-center justify-center shadow-xl transform group-hover:scale-110 transition-all duration-500 relative overflow-hidden">
-              <div className="absolute inset-0 bg-gradient-to-r from-white/0 via-white/20 to-white/0 -skew-x-12 translate-x-full group-hover:translate-x-[-200%] transition-transform duration-700"></div>
-              <span className="text-2xl font-bold text-white relative z-10">A</span>
-            </div>
-            <div className="absolute -inset-2 bg-gradient-to-r from-blue-600/30 to-indigo-700/30 rounded-3xl blur-lg opacity-0 group-hover:opacity-100 transition-opacity duration-500"></div>
-          </div>
-        </div>
-
         {/* Main heading */}
         <h1 className="text-5xl md:text-7xl lg:text-8xl font-extrabold mb-8 leading-tight">
           <span className="bg-gradient-to-r from-gray-200 via-gray-100 to-gray-300 bg-clip-text text-transparent">
