@@ -1,12 +1,23 @@
 import React from 'react';
+import { gsap } from 'gsap';
+import HorizontalScroll from './gsap/HorizontalScroll';
 import CoverPage from './pages/intro';
 import AboutPage from './pages/about';
 import ServicesPage from './pages/services';
 import ClientsPage from './pages/testimonials';
 import ContactPage from './pages/contact';
+
 const App = () => {
   const scrollToSection = (sectionId) => {
-    document.getElementById(sectionId).scrollIntoView({ behavior: 'smooth' });
+    const section = document.getElementById(sectionId);
+    const sectionsContainer = document.querySelector('.flex.w-\\[fit-content\\]');
+    const offsetLeft = section.offsetLeft;
+
+    gsap.to(sectionsContainer, {
+      x: -offsetLeft,
+      duration: 1,
+      ease: 'power2.out',
+    });
   };
 
   return (
@@ -34,12 +45,14 @@ const App = () => {
         </div>
       </nav>
 
-      {/* Sections */}
-      <CoverPage scrollToSection={scrollToSection} />
-      <AboutPage scrollToSection={scrollToSection} />
-      <ServicesPage scrollToSection={scrollToSection} />
-      <ClientsPage scrollToSection={scrollToSection} />
-      <ContactPage scrollToSection={scrollToSection} />
+      {/* Horizontal Scroll Container */}
+      <HorizontalScroll>
+        <CoverPage scrollToSection={scrollToSection} />
+        <AboutPage scrollToSection={scrollToSection} />
+        <ServicesPage scrollToSection={scrollToSection} />
+        <ClientsPage scrollToSection={scrollToSection} />
+        <ContactPage scrollToSection={scrollToSection} />
+      </HorizontalScroll>
     </div>
   );
 };
