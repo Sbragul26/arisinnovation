@@ -30,30 +30,32 @@ const CoverPage = ({ scrollToSection, waveAnimation }) => {
         {/* Main heading */}
         <h1 className="text-5xl md:text-7xl lg:text-8xl font-extrabold mb-6 leading-tight tracking-tight text-[#FFFFFF]">
           <span>
-            Apex
+            {/*Apex*/}
           </span>
           <br />
           <span>
-            Agency
+            {/*Agency*/}
           </span>
         </h1>
 
         {/* Tagline */}
         <p className="text-xl md:text-2xl lg:text-3xl font-light mb-12 text-[#FFFFFF] max-w-4xl mx-auto leading-relaxed tracking-wide">
-          Crafting tomorrow's digital experiences with creativity, precision, and strategic vision
+          {/*Crafting tomorrow's digital experiences with creativity, precision, and strategic vision*/}
         </p>
 
         {/* Value proposition card */}
+        {/*
         <div className="relative mb-16 max-w-4xl mx-auto">
           <div className="absolute inset-0 bg-gradient-to-r from-[#241A7A]/25 to-[#1A135A]/30 rounded-3xl blur-xl"></div>
           <div className="relative bg-[#241A7A]/80 backdrop-blur-lg rounded-3xl p-8 md:p-12 border border-[#1A135A]/50 shadow-lg hover:shadow-xl hover:bg-[#241A7A]/90 transition-all duration-500">
             <p className="text-lg md:text-xl text-[#FFFFFF] font-medium leading-relaxed">
-              We collaborate with innovative brands to deliver digital solutions that redefine industries and drive impactful growth.
+              {We collaborate with innovative brands to deliver digital solutions that redefine industries and drive impactful growth.
             </p>
           </div>
-        </div>
+        </div>*/}
+        
 
-        {/* CTA Button */}
+        {/* CTA Button
         <div className="mb-16">
           <button
             onClick={() => scrollToSection('about')}
@@ -64,6 +66,7 @@ const CoverPage = ({ scrollToSection, waveAnimation }) => {
             <ChevronRight className="ml-3 w-6 h-6 group-hover:translate-x-2 transition-transform duration-300 relative" />
           </button>
         </div>
+         */}
       </div>
     </section>
   );

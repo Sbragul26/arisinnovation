@@ -90,42 +90,48 @@ const App = () => {
 
   return (
     <div className="relative bg-gradient-to-br from-gray-900 via-indigo-900 to-gray-800">
-   <nav className="fixed top-0 w-full bg-gray-900/80 backdrop-blur-md border-b border-gray-700 z-50 shadow-md">
-  <div className="max-w-7xl mx-auto flex justify-between items-center px-6 py-3">
-    {/* Logo + Brand Name */}
-    <div className="flex items-center space-x-3">
-      {/* Logo placeholder */}
-      <div className="w-8 h-8 bg-gradient-to-br from-cyan-400 to-blue-500 rounded-full shadow-md"></div>
-      <span className="text-2xl font-bold text-white tracking-tight">
-        ArisInnovation
-      </span>
-    </div>
-
-    {/* Center Menu - Dark theme pill */}
-    <div className="flex items-center space-x-2 bg-gray-800 px-4 py-2 rounded-full shadow-sm border border-gray-700">
-      {['cover', 'about', 'services', 'projects', 'clients', 'contact'].map((section) => (
-        <button
-          key={section}
-          onClick={() => scrollToSection(section)}
-          className="text-sm font-medium text-gray-200 hover:text-white hover:bg-cyan-500/20 px-3 py-1 rounded-full transition-colors"
-        >
-          {section === 'cover' ? 'Home' : section.charAt(0).toUpperCase() + section.slice(1)}
-        </button>
-      ))}
-    </div>
-
-    {/* Right-side Buttons */}
-    <div className="flex items-center space-x-4">
-      <button className="px-4 py-1 border border-cyan-400 rounded-full text-cyan-300 text-sm hover:bg-cyan-400/10">
-        Book a Call
-      </button>
-      <button className="px-4 py-1 bg-cyan-500 text-white rounded-full text-sm hover:bg-cyan-400">
-        Get started
-      </button>
-    </div>
-  </div>
-</nav>
-
+    <nav className="fixed top-0 w-full bg-gray-900/80 backdrop-blur-md z-50 shadow-md">
+      <div className="max-w-7xl mx-auto flex justify-between items-center px-6 py-3">
+        {/* Logo + Brand Name */}
+        <div className="flex items-center space-x-3">
+          {/* Enhanced Logo */}
+          <div className="w-10 h-10 bg-gradient-to-br from-cyan-400 via-blue-500 to-purple-600 rounded-full shadow-lg flex items-center justify-center">
+            <div className="w-6 h-6 bg-white/20 rounded-full backdrop-blur-sm"></div>
+          </div>
+          
+          {/* Attractive Brand Name */}
+          <div className="flex flex-col">
+            <span className="text-xl font-bold bg-gradient-to-r from-cyan-400 to-blue-400 bg-clip-text text-transparent">
+              Aris Innovations
+            </span>
+            <span className="text-xs text-gray-400 -mt-1">Digital Solutions</span>
+          </div>
+        </div>
+         
+        {/* Center Menu - Dark theme pill */}
+        <div className="flex items-center space-x-2 bg-gray-800 px-5 py-2.5 rounded-full shadow-sm">
+          {['cover', 'about', 'services', 'projects', 'clients', 'contact'].map((section) => (
+            <button
+              key={section}
+              onClick={() => scrollToSection(section)}
+              className="text-base font-medium text-gray-200 hover:text-white hover:bg-cyan-500/20 px-4 py-2 rounded-full transition-all duration-200 hover:scale-105"
+            >
+              {section === 'cover' ? 'Home' : section.charAt(0).toUpperCase() + section.slice(1)}
+            </button>
+          ))}
+        </div>
+         
+        {/* Right-side Buttons */}
+        <div className="flex items-center space-x-4">
+          <button className="px-5 py-2 border border-cyan-400 rounded-full text-cyan-300 text-base font-medium hover:bg-cyan-400/10 hover:scale-105 transition-all duration-200">
+            Book a Call
+          </button>
+          <button className="px-5 py-2 bg-gradient-to-r from-cyan-500 to-blue-500 text-white rounded-full text-base font-medium hover:from-cyan-400 hover:to-blue-400 hover:scale-105 transition-all duration-200 shadow-md">
+            Get Started
+          </button>
+        </div>
+      </div>
+    </nav>
 
 
 
