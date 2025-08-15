@@ -30,25 +30,49 @@ const App = () => {
   }, []);
 
   const scrollToSection = (sectionId) => {
+    console.log(`Attempting to scroll to section: ${sectionId}`);
     setActiveSection(sectionId);
-    const tl = gsap.timeline({
-      onComplete: () => {
-        document.getElementById(sectionId).scrollIntoView({ behavior: 'smooth' });
-        setActiveSection(null);
-      },
-    });
+    const sectionElement = document.getElementById(sectionId);
 
-    tl.to(overlayRef.current, {
-      translateY: '0%',
-      duration: 0.8,
-      ease: 'power4.inOut',
-    })
-      .to(overlayRef.current, {
+    if (sectionElement) {
+      // Log section position for debugging
+      const rect = sectionElement.getBoundingClientRect();
+      console.log(`Section ${sectionId} top: ${rect.top + window.scrollY}px, current scroll: ${window.scrollY}px`);
+
+      // Attempt scrollIntoView first
+      sectionElement.scrollIntoView({ behavior: 'smooth', block: 'start' });
+
+      // Fallback using window.scrollTo with timeout to handle layout shifts
+      setTimeout(() => {
+        const updatedRect = sectionElement.getBoundingClientRect();
+        window.scrollTo({
+          top: updatedRect.top + window.scrollY,
+          behavior: 'smooth',
+        });
+        console.log(`Fallback scroll to ${sectionId} at ${updatedRect.top + window.scrollY}px`);
+      }, 100);
+
+      // GSAP transition animation
+      const tl = gsap.timeline({
+        onComplete: () => {
+          console.log(`Transition complete for section: ${sectionId}`);
+          setActiveSection(null);
+        },
+      });
+
+      tl.to(overlayRef.current, {
+        translateY: '0%',
+        duration: 0.8,
+        ease: 'power4.inOut',
+      }).to(overlayRef.current, {
         translateY: '-100%',
         duration: 0.8,
         ease: 'power4.inOut',
         delay: 0.6,
       });
+    } else {
+      console.error(`Section with ID ${sectionId} not found`);
+    }
   };
 
   if (isLoading) {
@@ -93,9 +117,15 @@ const App = () => {
       </div>
 
       <div className="relative z-10">
-        <CoverPage scrollToSection={scrollToSection} waveAnimation={Wave} />
-        <AboutPage scrollToSection={scrollToSection} />
-        <ServicesPage scrollToSection={scrollToSection} />
+        <div id="cover">
+          <CoverPage scrollToSection={scrollToSection} waveAnimation={Wave} />
+        </div>
+        <div id="about">
+          <AboutPage scrollToSection={scrollToSection} />
+        </div>
+        <div id="services">
+          <ServicesPage scrollToSection={scrollToSection} />
+        </div>
         <div id="projects">
           <HorizontalScroll>
             <Project1 scrollToSection={scrollToSection} />
@@ -105,8 +135,12 @@ const App = () => {
             <Project5 scrollToSection={scrollToSection} />
           </HorizontalScroll>
         </div>
-        <ClientsPage scrollToSection={scrollToSection} />
-        <ContactPage scrollToSection={scrollToSection} />
+        <div id="clients">
+          <ClientsPage scrollToSection={scrollToSection} />
+        </div>
+        <div id="contact">
+          <ContactPage scrollToSection={scrollToSection} />
+        </div>
       </div>
     </div>
   );
