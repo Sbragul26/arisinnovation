@@ -90,27 +90,44 @@ const App = () => {
 
   return (
     <div className="relative bg-gradient-to-br from-gray-900 via-indigo-900 to-gray-800">
-      <nav className="fixed top-0 w-full bg-gray-900/80 backdrop-blur-md border-b border-gray-700/50 z-50 shadow-lg">
-        <div className="max-w-7xl mx-auto flex justify-between items-center px-6 py-4">
-          <div className="flex items-center space-x-4">
-            <span className="text-3xl font-extrabold text-transparent bg-clip-text bg-gradient-to-r from-blue-400 to-indigo-600 tracking-tight">
-              APEX AGENCY
-            </span>
-          </div>
-          <div className="flex space-x-10">
-            {['cover', 'about', 'services', 'projects', 'clients', 'contact'].map((section) => (
-              <button
-                key={section}
-                onClick={() => scrollToSection(section)}
-                className="text-gray-200 hover:text-blue-400 font-semibold text-lg tracking-wide relative group transition-colors duration-300"
-              >
-                {section === 'cover' ? 'Home' : section.charAt(0).toUpperCase() + section.slice(1)}
-                <span className="absolute bottom-0 left-0 w-0 h-0.5 bg-blue-400 group-hover:w-full transition-all duration-300"></span>
-              </button>
-            ))}
-          </div>
-        </div>
-      </nav>
+   <nav className="fixed top-0 w-full bg-gray-900/80 backdrop-blur-md border-b border-gray-700 z-50 shadow-md">
+  <div className="max-w-7xl mx-auto flex justify-between items-center px-6 py-3">
+    {/* Logo + Brand Name */}
+    <div className="flex items-center space-x-3">
+      {/* Logo placeholder */}
+      <div className="w-8 h-8 bg-gradient-to-br from-cyan-400 to-blue-500 rounded-full shadow-md"></div>
+      <span className="text-2xl font-bold text-white tracking-tight">
+        ArisInnovation
+      </span>
+    </div>
+
+    {/* Center Menu - Dark theme pill */}
+    <div className="flex items-center space-x-2 bg-gray-800 px-4 py-2 rounded-full shadow-sm border border-gray-700">
+      {['cover', 'about', 'services', 'projects', 'clients', 'contact'].map((section) => (
+        <button
+          key={section}
+          onClick={() => scrollToSection(section)}
+          className="text-sm font-medium text-gray-200 hover:text-white hover:bg-cyan-500/20 px-3 py-1 rounded-full transition-colors"
+        >
+          {section === 'cover' ? 'Home' : section.charAt(0).toUpperCase() + section.slice(1)}
+        </button>
+      ))}
+    </div>
+
+    {/* Right-side Buttons */}
+    <div className="flex items-center space-x-4">
+      <button className="px-4 py-1 border border-cyan-400 rounded-full text-cyan-300 text-sm hover:bg-cyan-400/10">
+        Book a Call
+      </button>
+      <button className="px-4 py-1 bg-cyan-500 text-white rounded-full text-sm hover:bg-cyan-400">
+        Get started
+      </button>
+    </div>
+  </div>
+</nav>
+
+
+
 
       <Transition overlayRef={overlayRef} activeSection={activeSection} />
 
