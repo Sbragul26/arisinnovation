@@ -97,32 +97,32 @@ const ClientsPage = ({ scrollToSection }) => {
 
   const impactStats = [
     { 
-      icon: <Briefcase className="w-10 h-10 text-white" />, 
+      icon: <Briefcase className="w-10 h-10 text-[#FFFFFF]" />, 
       value: '50+', 
       label: 'Projects Completed', 
-      gradient: 'from-amber-500 to-amber-700',
-      shadowColor: 'shadow-amber-500/25'
+      gradient: 'from-[#FF6B6B] to-[#FF8E8E]',
+      shadowColor: 'shadow-[#FF6B6B]/25'
     },
     { 
-      icon: <Users className="w-10 h-10 text-white" />, 
+      icon: <Users className="w-10 h-10 text-[#FFFFFF]" />, 
       value: '25+', 
       label: 'Happy Clients', 
-      gradient: 'from-teal-500 to-teal-700',
-      shadowColor: 'shadow-teal-500/25'
+      gradient: 'from-[#4A90E2] to-[#50B7E9]',
+      shadowColor: 'shadow-[#4A90E2]/25'
     },
     { 
-      icon: <Target className="w-10 h-10 text-white" />, 
+      icon: <Target className="w-10 h-10 text-[#FFFFFF]" />, 
       value: '95%', 
       label: 'Client Satisfaction', 
-      gradient: 'from-purple-500 to-purple-700',
-      shadowColor: 'shadow-purple-500/25'
+      gradient: 'from-[#9B59B6] to-[#B76DD2]',
+      shadowColor: 'shadow-[#9B59B6]/25'
     },
     { 
-      icon: <Award className="w-10 h-10 text-white" />, 
+      icon: <Award className="w-10 h-10 text-[#FFFFFF]" />, 
       value: '250%', 
       label: 'Average ROI Increase', 
-      gradient: 'from-emerald-500 to-emerald-700',
-      shadowColor: 'shadow-emerald-500/25'
+      gradient: 'from-[#2ECC71] to-[#36E289]',
+      shadowColor: 'shadow-[#2ECC71]/25'
     },
   ];
 
@@ -218,7 +218,7 @@ const ClientsPage = ({ scrollToSection }) => {
   return (
     <motion.section
       id="clients"
-      className="min-h-screen flex items-center justify-center bg-gradient-to-br from-slate-900 via-gray-900 to-neutral-900 py-24 px-4 sm:px-6 lg:px-8 relative overflow-hidden"
+      className="min-h-screen flex items-center justify-center bg-[#0A0A23] py-24 px-4 sm:px-6 lg:px-8 relative overflow-hidden"
       initial={{ opacity: 0 }}
       animate={{ opacity: 1 }}
       transition={{ duration: 1.2 }}
@@ -232,7 +232,7 @@ const ClientsPage = ({ scrollToSection }) => {
             style={{
               top: `${10 + (i * 12)}%`,
               left: `${5 + (i * 11)}%`,
-              background: i % 3 === 0 ? 'rgba(245, 158, 11, 0.3)' : i % 3 === 1 ? 'rgba(20, 184, 166, 0.3)' : 'rgba(139, 69, 193, 0.3)'
+              background: i % 3 === 0 ? '#241A7A/30' : i % 3 === 1 ? '#1A135A/30' : '#241A7A/20'
             }}
             variants={pulseVariants}
             animate="pulse"
@@ -242,18 +242,18 @@ const ClientsPage = ({ scrollToSection }) => {
 
       {/* Decorative elements */}
       <motion.div 
-        className="absolute top-20 right-20 w-32 h-32 bg-gradient-to-br from-amber-400/40 to-orange-600/40 rounded-full blur-3xl"
+        className="absolute top-20 right-20 w-32 h-32 bg-gradient-to-br from-[#241A7A]/40 to-[#1A135A]/40 rounded-full blur-3xl"
         variants={floatingVariants}
         animate="float"
       />
       <motion.div 
-        className="absolute bottom-32 left-16 w-40 h-40 bg-gradient-to-tr from-teal-500/40 to-cyan-600/40 rounded-full blur-3xl"
+        className="absolute bottom-32 left-16 w-40 h-40 bg-gradient-to-tr from-[#241A7A]/40 to-[#1A135A]/40 rounded-full blur-3xl"
         variants={floatingVariants}
         animate="float"
         transition={{ delay: 1 }}
       />
       <motion.div 
-        className="absolute top-1/2 right-1/3 w-24 h-24 bg-gradient-to-r from-purple-500/30 to-pink-600/30 rounded-full blur-2xl"
+        className="absolute top-1/2 right-1/3 w-24 h-24 bg-gradient-to-r from-[#241A7A]/30 to-[#1A135A]/30 rounded-full blur-2xl"
         variants={floatingVariants}
         animate="float"
         transition={{ delay: 2 }}
@@ -262,36 +262,23 @@ const ClientsPage = ({ scrollToSection }) => {
       <div className="relative z-10 max-w-7xl mx-auto text-center">
         {/* Main Heading */}
         <motion.h1
-          className="text-4xl md:text-5xl lg:text-6xl font-bold mb-6 leading-tight tracking-tight"
+          className="text-4xl md:text-5xl lg:text-6xl font-bold mb-6 leading-tight tracking-tight text-[#FFFFFF]"
           variants={itemVariants}
           initial="hidden"
           animate="visible"
         >
-          <motion.span 
-            className="bg-gradient-to-r from-amber-200 via-yellow-300 to-amber-400 bg-clip-text text-transparent"
-            whileHover={{ scale: 1.05 }}
-            transition={{ duration: 0.3 }}
-          >
-            Our{' '}
-          </motion.span>
-          <motion.span 
-            className="bg-gradient-to-r from-teal-300 via-cyan-400 to-emerald-400 bg-clip-text text-transparent"
-            whileHover={{ scale: 1.05 }}
-            transition={{ duration: 0.3 }}
-          >
-            Clients
-          </motion.span>
+          Our Clients
         </motion.h1>
 
         <motion.p
-          className="text-lg md:text-xl lg:text-2xl font-light mb-16 text-gray-200 max-w-4xl mx-auto leading-relaxed tracking-wide"
+          className="text-lg md:text-xl lg:text-2xl font-light mb-16 text-[#FFFFFF] max-w-4xl mx-auto leading-relaxed tracking-wide"
           variants={itemVariants}
           initial="hidden"
           animate="visible"
         >
           Trusted by innovative companies across{' '}
-          <span className="text-amber-400 font-semibold">diverse industries</span> for{' '}
-          <span className="text-teal-400 font-semibold">exceptional results</span>
+          <span className="text-[#FFFFFF] font-semibold">diverse industries</span> for{' '}
+          <span className="text-[#FFFFFF] font-semibold">exceptional results</span>
         </motion.p>
 
         {/* Companies Section */}
@@ -302,14 +289,14 @@ const ClientsPage = ({ scrollToSection }) => {
           animate="visible"
         >
           <motion.h2 
-            className="text-3xl md:text-4xl font-bold mb-12 bg-gradient-to-r from-white to-gray-300 bg-clip-text text-transparent"
+            className="text-3xl md:text-4xl font-bold mb-12 text-[#FFFFFF]"
             variants={itemVariants}
           >
             Companies We've Worked With
           </motion.h2>
           
           <motion.div 
-            className="relative overflow-hidden bg-gradient-to-br from-slate-800/80 to-gray-800/80 backdrop-blur-xl rounded-2xl p-6 border border-gray-600/30 shadow-2xl"
+            className="relative overflow-hidden bg-[#241A7A]/80 backdrop-blur-xl rounded-2xl p-6 border border-[#1A135A]/30 shadow-2xl"
             variants={cardHoverVariants}
             whileHover="hover"
           >
@@ -317,13 +304,13 @@ const ClientsPage = ({ scrollToSection }) => {
               {[...clientLogos, ...clientLogos].map((client, index) => (
                 <motion.div 
                   key={index} 
-                  className="bg-gradient-to-br from-slate-700/90 to-gray-700/90 backdrop-blur-sm rounded-xl p-4 border border-gray-600/40 shadow-lg text-center flex-shrink-0 mx-2 w-40"
+                  className="bg-[#241A7A]/90 backdrop-blur-sm rounded-xl p-4 border border-[#1A135A]/40 shadow-lg text-center flex-shrink-0 mx-2 w-40"
                   whileHover={{ scale: 1.05, y: -5 }}
                   transition={{ duration: 0.2 }}
                 >
                   <div className="text-3xl mb-2">{client.logo}</div>
-                  <h3 className="font-bold text-gray-100 text-sm mb-1">{client.name}</h3>
-                  <p className="text-xs text-gray-400">{client.industry}</p>
+                  <h3 className="font-bold text-[#FFFFFF] text-sm mb-1">{client.name}</h3>
+                  <p className="text-xs text-[#FFFFFF]">{client.industry}</p>
                 </motion.div>
               ))}
             </div>
@@ -358,7 +345,7 @@ const ClientsPage = ({ scrollToSection }) => {
           onMouseLeave={() => setIsPaused(false)}
         >
           <motion.h2 
-            className="text-3xl md:text-4xl font-bold mb-12 bg-gradient-to-r from-white to-gray-300 bg-clip-text text-transparent"
+            className="text-3xl md:text-4xl font-bold mb-12 text-[#FFFFFF]"
             variants={itemVariants}
           >
             What Our Clients Say
@@ -368,7 +355,7 @@ const ClientsPage = ({ scrollToSection }) => {
             <AnimatePresence mode="wait">
               <motion.div
                 key={currentTestimonial}
-                className="bg-gradient-to-br from-gray-800/95 to-gray-900/95 backdrop-blur-xl rounded-2xl p-8 md:p-10 border border-gray-700/20 shadow-2xl"
+                className="bg-[#241A7A]/95 backdrop-blur-xl rounded-2xl p-8 md:p-10 border border-[#1A135A]/20 shadow-2xl"
                 variants={{
                   initial: { opacity: 0, x: 100 },
                   animate: { opacity: 1, x: 0 },
@@ -387,9 +374,9 @@ const ClientsPage = ({ scrollToSection }) => {
                       whileHover={{ scale: 1.1, rotate: 10 }}
                       transition={{ duration: 0.3 }}
                     >
-                      <Quote className="w-10 h-10 text-gray-300/30" />
+                      <Quote className="w-10 h-10 text-[#FFFFFF]/30" />
                     </motion.div>
-                    <p className="text-lg md:text-xl text-gray-100 mb-6 font-medium italic leading-relaxed">
+                    <p className="text-lg md:text-xl text-[#FFFFFF] mb-6 font-medium italic leading-relaxed">
                       "{testimonials[currentTestimonial].content}"
                     </p>
                     <div className="flex items-center mb-4">
@@ -400,14 +387,14 @@ const ClientsPage = ({ scrollToSection }) => {
                           animate={{ scale: 1, rotate: 0 }}
                           transition={{ delay: i * 0.1, duration: 0.3 }}
                         >
-                          <Star className="w-5 h-5 fill-amber-400 text-amber-400 mr-1" />
+                          <Star className="w-5 h-5 fill-[#F1C40F] text-[#F1C40F] mr-1" />
                         </motion.div>
                       ))}
                     </div>
-                    <div className="bg-gradient-to-r from-blue-500/10 to-indigo-500/10 rounded-lg p-4 border-l-4 border-blue-400">
-                      <p className="font-bold text-lg text-white">{testimonials[currentTestimonial].name}</p>
-                      <p className="text-blue-400 font-semibold">{testimonials[currentTestimonial].role}</p>
-                      <p className="text-gray-300 text-sm">{testimonials[currentTestimonial].company}</p>
+                    <div className="bg-gradient-to-r from-[#241A7A]/10 to-[#1A135A]/10 rounded-lg p-4 border-l-4 border-[#241A7A]">
+                      <p className="font-bold text-lg text-[#FFFFFF]">{testimonials[currentTestimonial].name}</p>
+                      <p className="text-[#FFFFFF] font-semibold">{testimonials[currentTestimonial].role}</p>
+                      <p className="text-[#FFFFFF] text-sm">{testimonials[currentTestimonial].company}</p>
                     </div>
                   </div>
                   {/* Testimonial Image and Result */}
@@ -419,9 +406,9 @@ const ClientsPage = ({ scrollToSection }) => {
                     >
                       {testimonials[currentTestimonial].image}
                     </motion.div>
-                    <div className="bg-gradient-to-r from-teal-500/10 to-emerald-500/10 rounded-lg p-4 border border-teal-500/20">
-                      <p className="text-sm text-gray-300 mb-1 font-semibold">Key Result</p>
-                      <p className="font-bold text-lg text-teal-400">{testimonials[currentTestimonial].results}</p>
+                    <div className="bg-gradient-to-r from-[#241A7A]/10 to-[#1A135A]/10 rounded-lg p-4 border border-[#1A135A]/20">
+                      <p className="text-sm text-[#FFFFFF] mb-1 font-semibold">Key Result</p>
+                      <p className="font-bold text-lg text-[#FFFFFF]">{testimonials[currentTestimonial].results}</p>
                     </div>
                   </div>
                 </div>
@@ -432,21 +419,21 @@ const ClientsPage = ({ scrollToSection }) => {
             <div className="absolute inset-y-0 left-0 flex items-center -ml-12">
               <motion.button
                 onClick={prevTestimonial}
-                className="p-3 bg-gradient-to-r from-gray-700/80 to-gray-600/80 rounded-full hover:from-blue-500 hover:to-indigo-500 transition-all duration-300 shadow-lg"
+                className="p-3 bg-gradient-to-r from-[#241A7A]/80 to-[#1A135A]/80 rounded-full hover:from-[#1A135A] hover:to-[#241A7A] transition-all duration-300 shadow-lg"
                 whileHover={{ scale: 1.1, rotate: -5 }}
                 whileTap={{ scale: 0.9 }}
               >
-                <ChevronLeft className="w-6 h-6 text-white" />
+                <ChevronLeft className="w-6 h-6 text-[#FFFFFF]" />
               </motion.button>
             </div>
             <div className="absolute inset-y-0 right-0 flex items-center -mr-12">
               <motion.button
                 onClick={nextTestimonial}
-                className="p-3 bg-gradient-to-r from-gray-700/80 to-gray-600/80 rounded-full hover:from-blue-500 hover:to-indigo-500 transition-all duration-300 shadow-lg"
+                className="p-3 bg-gradient-to-r from-[#241A7A]/80 to-[#1A135A]/80 rounded-full hover:from-[#1A135A] hover:to-[#241A7A] transition-all duration-300 shadow-lg"
                 whileHover={{ scale: 1.1, rotate: 5 }}
                 whileTap={{ scale: 0.9 }}
               >
-                <ChevronRight className="w-6 h-6 text-white" />
+                <ChevronRight className="w-6 h-6 text-[#FFFFFF]" />
               </motion.button>
             </div>
 
@@ -457,8 +444,8 @@ const ClientsPage = ({ scrollToSection }) => {
                   key={index}
                   className={`w-3 h-3 rounded-full transition-all duration-300 ${
                     index === currentTestimonial 
-                      ? 'bg-blue-400 scale-125' 
-                      : 'bg-gray-600 hover:bg-gray-500'
+                      ? 'bg-[#241A7A] scale-125' 
+                      : 'bg-[#1A135A] hover:bg-[#241A7A]/80'
                   }`}
                   onClick={() => setCurrentTestimonial(index)}
                   whileHover={{ scale: 1.3 }}
@@ -469,124 +456,6 @@ const ClientsPage = ({ scrollToSection }) => {
           </div>
         </motion.div>
 
-        {/* Industries Section */}
-        <motion.div 
-          className="mb-20" 
-          variants={containerVariants} 
-          initial="hidden" 
-          animate="visible"
-        >
-          <motion.h2 
-            className="text-3xl md:text-4xl font-bold mb-12 bg-gradient-to-r from-white to-gray-300 bg-clip-text text-transparent"
-            variants={itemVariants}
-          >
-            Industries We Serve
-          </motion.h2>
-          
-          <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-4">
-            {[
-              { icon: '🏥', title: 'Healthcare', desc: 'Patient portals, telemedicine platforms, healthcare management systems', gradient: 'from-blue-500/20 to-cyan-500/20' },
-              { icon: '💰', title: 'Finance', desc: 'Trading platforms, banking apps, payment solutions, crypto exchanges', gradient: 'from-emerald-500/20 to-green-500/20' },
-              { icon: '🛍️', title: 'E-commerce', desc: 'Online stores, marketplace platforms, inventory management, POS systems', gradient: 'from-purple-500/20 to-pink-500/20' },
-              { icon: '🚀', title: 'Technology', desc: 'SaaS platforms, mobile apps, AI solutions, cloud infrastructure', gradient: 'from-orange-500/20 to-red-500/20' }
-            ].map((industry, index) => (
-              <motion.div
-                key={index}
-                className="relative group h-56"
-                variants={itemVariants}
-              >
-                <motion.div
-                  className={`relative bg-gradient-to-br from-slate-800/90 to-gray-800/90 backdrop-blur-xl rounded-2xl p-6 border border-gray-600/40 shadow-2xl transition-all duration-500 h-full flex flex-col items-center justify-center text-center`}
-                  variants={cardHoverVariants}
-                  whileHover="hover"
-                  whileTap="tap"
-                  style={{
-                    background: `linear-gradient(135deg, rgba(51, 65, 85, 0.9), rgba(75, 85, 99, 0.9)), ${industry.gradient}`
-                  }}
-                >
-                  <motion.div 
-                    className="text-4xl mb-4"
-                    whileHover={{ scale: 1.2, rotate: 10 }}
-                    transition={{ duration: 0.3 }}
-                  >
-                    {industry.icon}
-                  </motion.div>
-                  <h3 className="font-bold text-gray-100 mb-3 text-lg">{industry.title}</h3>
-                  <p className="text-gray-300 text-sm leading-relaxed">{industry.desc}</p>
-                </motion.div>
-              </motion.div>
-            ))}
-          </div>
-        </motion.div>
-
-        {/* Success Stories */}
-        <motion.div 
-          className="mb-20" 
-          variants={containerVariants} 
-          initial="hidden" 
-          animate="visible"
-        >
-          <motion.h2 
-            className="text-3xl md:text-4xl font-bold mb-12 bg-gradient-to-r from-white to-gray-300 bg-clip-text text-transparent"
-            variants={itemVariants}
-          >
-            Success Stories
-          </motion.h2>
-          
-          <div className="grid grid-cols-1 lg:grid-cols-3 gap-6">
-            {caseStudies.map((study, index) => (
-              <motion.div
-                key={index}
-                className="relative group h-auto"
-                variants={itemVariants}
-              >
-                <motion.div
-                  className="relative bg-gradient-to-br from-slate-800/90 to-gray-800/90 backdrop-blur-xl rounded-2xl p-8 border border-gray-600/40 shadow-2xl transition-all duration-500 h-full"
-                  variants={cardHoverVariants}
-                  whileHover="hover"
-                  whileTap="tap"
-                >
-                  <motion.div 
-                    className="text-5xl mb-6 text-center"
-                    whileHover={{ scale: 1.1, rotate: 5 }}
-                    transition={{ duration: 0.3 }}
-                  >
-                    {study.image}
-                  </motion.div>
-                  <h3 className="text-xl font-bold text-gray-100 mb-2">{study.title}</h3>
-                  <p className="text-amber-400 font-semibold mb-1">{study.client}</p>
-                  <p className="text-gray-400 text-sm mb-6">{study.industry}</p>
-                  <div className="space-y-4 mb-6">
-                    <div className="bg-gradient-to-r from-red-500/20 to-orange-500/20 rounded-lg p-3 border border-red-500/30">
-                      <h4 className="font-semibold text-gray-100 mb-1">Challenge:</h4>
-                      <p className="text-gray-300 text-sm">{study.challenge}</p>
-                    </div>
-                    <div className="bg-gradient-to-r from-blue-500/20 to-cyan-500/20 rounded-lg p-3 border border-blue-500/30">
-                      <h4 className="font-semibold text-gray-100 mb-1">Solution:</h4>
-                      <p className="text-gray-300 text-sm">{study.solution}</p>
-                    </div>
-                  </div>
-                  <div className="bg-gradient-to-r from-emerald-500/20 to-green-500/20 rounded-lg p-4 border border-emerald-500/30">
-                    <h4 className="font-semibold text-gray-100 mb-3">Results:</h4>
-                    <div className="space-y-2">
-                      {study.results.map((result, idx) => (
-                        <div key={idx} className="flex items-center text-sm text-gray-300">
-                          <motion.div 
-                            className="w-2 h-2 bg-emerald-400 rounded-full mr-3 flex-shrink-0"
-                            initial={{ scale: 0 }}
-                            animate={{ scale: 1 }}
-                            transition={{ delay: idx * 0.1 }}
-                          />
-                          {result}
-                        </div>
-                      ))}
-                    </div>
-                  </div>
-                </motion.div>
-              </motion.div>
-            ))}
-          </div>
-        </motion.div>
 
         {/* Impact Stats */}
         <motion.div
@@ -596,7 +465,7 @@ const ClientsPage = ({ scrollToSection }) => {
           animate="visible"
         >
           <motion.h2 
-            className="text-3xl md:text-4xl font-bold mb-12 bg-gradient-to-r from-white to-gray-300 bg-clip-text text-transparent"
+            className="text-3xl md:text-4xl font-bold mb-12 text-[#FFFFFF]"
             variants={itemVariants}
           >
             Our Impact
@@ -610,7 +479,7 @@ const ClientsPage = ({ scrollToSection }) => {
                 variants={itemVariants}
               >
                 <motion.div
-                  className={`relative flex flex-col items-center justify-center h-full p-6 rounded-2xl bg-gradient-to-br from-slate-800/90 to-gray-800/90 backdrop-blur-xl border border-gray-600/40 shadow-2xl ${stat.shadowColor} transition-all duration-500`}
+                  className="relative flex flex-col items-center justify-center h-full p-6 rounded-2xl bg-[#241A7A]/90 backdrop-blur-xl border border-[#1A135A]/40 shadow-2xl transition-all duration-500"
                   variants={cardHoverVariants}
                   whileHover="hover"
                   whileTap="tap"
@@ -623,12 +492,12 @@ const ClientsPage = ({ scrollToSection }) => {
                     {stat.icon}
                   </motion.div>
                   <motion.div 
-                    className="text-3xl md:text-4xl font-bold text-white mb-3"
+                    className="text-3xl md:text-4xl font-bold text-[#FFFFFF] mb-3"
                     whileHover={{ scale: 1.1 }}
                   >
                     {stat.value}
                   </motion.div>
-                  <div className="text-gray-200 font-bold text-lg text-center">{stat.label}</div>
+                  <div className="text-[#FFFFFF] font-bold text-lg text-center">{stat.label}</div>
                 </motion.div>
               </motion.div>
             ))}
@@ -643,31 +512,31 @@ const ClientsPage = ({ scrollToSection }) => {
           animate="visible"
         >
           <motion.h2 
-            className="text-3xl md:text-4xl font-bold mb-6 bg-gradient-to-r from-white to-gray-300 bg-clip-text text-transparent"
+            className="text-3xl md:text-4xl font-bold mb-6 text-[#FFFFFF]"
             whileHover={{ scale: 1.02 }}
           >
             Ready to Join Our Success Stories?
           </motion.h2>
           <motion.p 
-            className="text-lg md:text-xl text-gray-300 mb-8 font-medium"
+            className="text-lg md:text-xl text-[#FFFFFF] mb-8 font-medium"
             whileHover={{ scale: 1.02 }}
           >
-            Let's create something <span className="text-amber-400">amazing</span> together
+            Let's create something <span className="text-[#FFFFFF] font-semibold">amazing</span> together
           </motion.p>
           <motion.button
             onClick={() => scrollToSection('contact')}
-            className="group relative inline-flex items-center bg-gradient-to-r from-amber-500 to-orange-600 hover:from-amber-600 hover:to-orange-700 px-8 py-4 rounded-xl text-lg font-bold text-white transition-all duration-300 shadow-xl hover:shadow-amber-500/25"
+            className="group relative inline-flex items-center bg-gradient-to-r from-[#241A7A] to-[#1A135A] hover:from-[#1A135A] hover:to-[#241A7A] px-8 py-4 rounded-xl text-lg font-bold text-[#FFFFFF] transition-all duration-300 shadow-xl hover:shadow-[#241A7A]/25"
             whileHover={{ scale: 1.05, y: -2 }}
             whileTap={{ scale: 0.95 }}
           >
-            <div className="absolute inset-0 bg-gradient-to-r from-white/0 via-white/20 to-white/0 rounded-xl opacity-0 group-hover:opacity-100 transition-opacity duration-300"></div>
+            <div className="absolute inset-0 bg-gradient-to-r from-[#FFFFFF]/0 via-[#FFFFFF]/20 to-[#FFFFFF]/0 rounded-xl opacity-0 group-hover:opacity-100 transition-opacity duration-300"></div>
             <span className="relative">Start Your Project</span>
             <motion.div
               className="ml-3 relative"
               animate={{ x: [0, 5, 0] }}
               transition={{ duration: 1.5, repeat: Infinity }}
             >
-              <ChevronRight className="w-5 h-5" />
+              <ChevronRight className="w-5 h-5 text-[#FFFFFF]" />
             </motion.div>
           </motion.button>
         </motion.div>

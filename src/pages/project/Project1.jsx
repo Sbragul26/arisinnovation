@@ -10,13 +10,13 @@ const Project1 = ({ scrollToSection }) => {
   ];
 
   return (
-    <div id="projects" className="min-h-screen flex flex-col items-center justify-center bg-gray-100 py-8">
-      <h2 className="text-3xl font-bold text-gray-900 mb-8 text-center">Our Projects</h2>
+    <div id="projects" className="min-h-screen flex flex-col items-center justify-center bg-[#0A0A23] py-8">
+      <h2 className="text-3xl font-bold text-white mb-8 text-center">Our Projects</h2>
       <div className="space-y-8 w-full max-w-4xl px-4 flex flex-col items-center">
         {projects.map((project, index) => (
           <div
             key={index}
-            className="bg-white rounded-xl shadow-lg overflow-hidden w-full max-w-2xl"
+            className="bg-[#241A7A] rounded-xl shadow-lg overflow-hidden w-full max-w-2xl"
           >
             <img
               src={project.image}
@@ -24,8 +24,8 @@ const Project1 = ({ scrollToSection }) => {
               className="w-full h-64 object-cover"
             />
             <div className="p-6">
-              <h3 className="text-2xl font-bold text-gray-900 mb-2 text-center">{project.title}</h3>
-              <p className="text-gray-600 mb-4 text-center">{project.description}</p>
+              <h3 className="text-2xl font-bold text-white mb-2 text-center">{project.title}</h3>
+              <p className="text-gray-200 mb-4 text-center">{project.description}</p>
             </div>
           </div>
         ))}

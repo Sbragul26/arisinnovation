@@ -56,7 +56,7 @@ const App = () => {
             </span>
           </div>
           <div className="flex space-x-10">
-            {['cover', 'about', 'services', 'clients', 'contact'].map((section) => (
+            {['cover', 'about', 'services', 'projects', 'clients', 'contact'].map((section) => (
               <button
                 key={section}
                 onClick={() => scrollToSection(section)}
@@ -81,14 +81,15 @@ const App = () => {
         <AboutPage scrollToSection={scrollToSection} />
         <ServicesPage scrollToSection={scrollToSection} />
 
-        <HorizontalScroll>
-          <Project1 scrollToSection={scrollToSection} />
-          <Project2 scrollToSection={scrollToSection} />
-          <Project3 scrollToSection={scrollToSection} />
-          <Project4 scrollToSection={scrollToSection} />
-          <Project5 scrollToSection={scrollToSection} />
-
-        </HorizontalScroll>
+        <div id="projects">
+          <HorizontalScroll>
+            <Project1 scrollToSection={scrollToSection} />
+            <Project2 scrollToSection={scrollToSection} />
+            <Project3 scrollToSection={scrollToSection} />
+            <Project4 scrollToSection={scrollToSection} />
+            <Project5 scrollToSection={scrollToSection} />
+          </HorizontalScroll>
+        </div>
         
         <ClientsPage scrollToSection={scrollToSection} />
         <ContactPage scrollToSection={scrollToSection} />

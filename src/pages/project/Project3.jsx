@@ -2,7 +2,6 @@ import React from 'react';
 
 const Project3 = ({ scrollToSection }) => {
   const projects = [
-
     {
       title: 'Task Management App',
       description: 'A productivity app with real-time collaboration and task prioritization features.',
@@ -11,13 +10,12 @@ const Project3 = ({ scrollToSection }) => {
   ];
 
   return (
-    <div id="projects" className="min-h-screen flex flex-col items-center justify-center bg-gray-100 py-8">
-      
+    <div id="projects" className="min-h-screen flex flex-col items-center justify-center bg-[#0A0A23] py-8">
       <div className="space-y-8 w-full max-w-4xl px-4">
         {projects.map((project, index) => (
           <div
             key={index}
-            className="bg-white rounded-xl shadow-lg overflow-hidden"
+            className="bg-[#241A7A] rounded-xl shadow-lg overflow-hidden"
           >
             <img
               src={project.image}
@@ -25,8 +23,8 @@ const Project3 = ({ scrollToSection }) => {
               className="w-full h-64 object-cover"
             />
             <div className="p-6">
-              <h3 className="text-2xl font-bold text-gray-900 mb-2">{project.title}</h3>
-              <p className="text-gray-600 mb-4">{project.description}</p>
+              <h3 className="text-2xl font-bold text-white mb-2">{project.title}</h3>
+              <p className="text-gray-200 mb-4">{project.description}</p>
             </div>
           </div>
         ))}
