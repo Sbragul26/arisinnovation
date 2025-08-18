@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useState, useEffect, useRef } from 'react';
 import AnimatedTitle from './AnimatedTitle';
 import BentoTilt from './BentoTilt';
 import Button from './Button';
@@ -8,6 +8,95 @@ import gsap from 'gsap';
 import { ScrollTrigger } from 'gsap/ScrollTrigger';
 
 gsap.registerPlugin(ScrollTrigger);
+
+const CounterCard = ({ targetNumber, label, duration = 2000, delay = 0 }) => {
+  const [count, setCount] = useState(0);
+  const [hasAnimated, setHasAnimated] = useState(false);
+  const cardRef = useRef(null);
+
+  useEffect(() => {
+    const observer = new IntersectionObserver(
+      (entries) => {
+        entries.forEach((entry) => {
+          if (entry.isIntersecting && !hasAnimated) {
+            setHasAnimated(true);
+            
+            // Parse the target number (handle special cases like "24/7")
+            let target = 0;
+            if (typeof targetNumber === 'string') {
+              if (targetNumber.includes('/')) {
+                // Handle cases like "24/7" - just animate the first number
+                target = parseInt(targetNumber.split('/')[0]);
+              } else {
+                target = parseInt(targetNumber.replace(/\+/g, ''));
+              }
+            } else {
+              target = targetNumber;
+            }
+
+            setTimeout(() => {
+              let startTime = null;
+              const animate = (currentTime) => {
+                if (!startTime) startTime = currentTime;
+                const progress = Math.min((currentTime - startTime) / duration, 1);
+                
+                // Easing function for smooth animation
+                const easeOutQuart = 1 - Math.pow(1 - progress, 4);
+                const currentCount = Math.floor(easeOutQuart * target);
+                
+                setCount(currentCount);
+                
+                if (progress < 1) {
+                  requestAnimationFrame(animate);
+                } else {
+                  setCount(target);
+                }
+              };
+              
+              requestAnimationFrame(animate);
+            }, delay);
+          }
+        });
+      },
+      { threshold: 0.5 }
+    );
+
+    if (cardRef.current) {
+      observer.observe(cardRef.current);
+    }
+
+    return () => {
+      if (cardRef.current) {
+        observer.unobserve(cardRef.current);
+      }
+    };
+  }, [targetNumber, duration, delay, hasAnimated]);
+
+  const displayValue = () => {
+    if (typeof targetNumber === 'string') {
+      if (targetNumber.includes('/')) {
+        // For "24/7", show the animated number + the rest
+        return `${count}${targetNumber.substring(targetNumber.indexOf('/'))}`;
+      } else if (targetNumber.includes('+')) {
+        // For "100+", show the animated number + "+"
+        return `${count}+`;
+      }
+    }
+    return count;
+  };
+
+  return (
+    <div 
+      ref={cardRef}
+      className="stats-card text-center p-8 bg-gradient-to-br from-gray-800/70 to-gray-900/70 rounded-3xl border border-cyan-500/20 backdrop-blur-md shadow-lg"
+    >
+      <h3 className="text-5xl md:text-6xl font-bold text-cyan-300 mb-3">
+        {displayValue()}
+      </h3>
+      <p className="text-gray-300 text-sm uppercase tracking-wider">{label}</p>
+    </div>
+  );
+};
 
 const AboutUs = () => {
   useGSAP(() => {
@@ -94,12 +183,12 @@ const AboutUs = () => {
     },
     {
       title: 'Digital <b>M</b>arketing',
-      description: 'Boosting your brand’s reach with strategic campaigns that drive results.',
+      description: 'Boosting your brand reach with strategic campaigns that drive results.',
       image: '/images/digital-marketing.png',
     },
     {
       title: 'Graphic <b>D</b>esigning',
-      description: 'Creating captivating visuals to elevate your brand’s identity.',
+      description: 'Creating captivating visuals to elevate your brand identity.',
       image: '/images/graphic-design.png',
     },
     {
@@ -144,7 +233,7 @@ const AboutUs = () => {
         <div className="about-section text-center">
           <AnimatedTitle
             title="Shaping <b>F</b>utures: <br /> Your Creative <b>P</b>artner"
-            containerClass="text-4xl md:text-6xl lg:text-8xl font-semibold tracking-tight mb-12 font-['Montserrat',sans-serif]"
+            containerClass="text-7xl md:text-[6rem] font-black tracking-wide !text-white text-center mb-12"
           />
           <p className="max-w-4xl mx-auto text-lg md:text-xl font-light text-gray-200 leading-relaxed mb-10">
             At Aris, we transform visions into reality with innovative, high-impact digital and creative solutions designed to elevate your brand and captivate your audience.
@@ -160,18 +249,20 @@ const AboutUs = () => {
           </div>
         </div>
 
-        {/* Stats Section */}
+        {/* Stats Section with Counter Animation */}
         <div className="stats-section mt-28">
           <div className="grid grid-cols-2 md:grid-cols-4 gap-6 max-w-6xl mx-auto">
             {stats.map((stat, index) => (
-              <div key={index} className="stats-card text-center p-8 bg-gradient-to-br from-gray-800/70 to-gray-900/70 rounded-3xl border border-cyan-500/20 backdrop-blur-md shadow-lg">
-                <h3 className="text-5xl md:text-6xl font-bold text-cyan-300 mb-3">{stat.number}</h3>
-                <p className="text-gray-300 text-sm uppercase tracking-wider">{stat.label}</p>
-              </div>
+              <CounterCard
+                key={index}
+                targetNumber={stat.number}
+                label={stat.label}
+                duration={2000}
+                delay={index * 200}
+              />
             ))}
           </div>
         </div>
-
 
         {/* Services Section */}
         <div className="mt-32">
@@ -181,7 +272,7 @@ const AboutUs = () => {
               Explore our innovative solutions designed to elevate your brand and create meaningful connections with your audience.
             </p>
           </div>
-          
+
           <div className="services-grid grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6">
             {services.map((service, index) => (
               <BentoTilt key={index} className="service-card h-[24rem]">
@@ -211,61 +302,58 @@ const AboutUs = () => {
           </div>
         </div>
 
-{/* Partners Section */}
-<div className="partners-section mt-32">
-  <div className="text-center mb-16">
-    <h2 className="text-4xl md:text-5xl font-semibold text-cyan-300 mb-6">Trusted by <b>Leaders</b></h2>
-    <p className="text-lg text-gray-200">
-      Collaborating with top brands to deliver exceptional results
-    </p>
-  </div>
-  
-  <div className="relative overflow-hidden py-16">
-    <div className="absolute inset-y-0 left-0 w-40 bg-gradient-to-r from-black to-transparent z-10"></div>
-    <div className="absolute inset-y-0 right-0 w-40 bg-gradient-to-l from-black to-transparent z-10"></div>
-    
-    <div className="partners-scroll flex items-center space-x-24 whitespace-nowrap" style={{ width: '200%' }}>
-      {/* First set of logos */}
-      {partners.map((partner, index) => (
-        <div key={index} className="flex-shrink-0 w-64 h-36 bg-white/10 rounded-xl border border-cyan-500/20 backdrop-blur-md flex items-center justify-center hover:bg-white/20 transition-all duration-300">
-          <img 
-            src={`/logos/${partner}.png`} 
-            alt={partner}
-            className="max-w-48 max-h-24 object-contain filter brightness-90 hover:brightness-110 transition-all duration-300"
-            onError={(e) => {
-              e.target.style.display = 'none';
-              e.target.nextSibling.style.display = 'block';
-            }}
-          />
-          <span className="text-gray-300 text-sm font-medium hidden">{partner}</span>
+        {/* Partners Section */}
+        <div className="partners-section mt-32">
+          <div className="text-center mb-16">
+            <h2 className="text-4xl md:text-5xl font-semibold text-cyan-300 mb-6">Trusted by <b>Leaders</b></h2>
+            <p className="text-lg text-gray-200">
+              Collaborating with top brands to deliver exceptional results
+            </p>
+          </div>
+
+          <div className="relative overflow-hidden py-16">
+            <div className="absolute inset-y-0 left-0 w-40 bg-gradient-to-r from-black to-transparent z-10"></div>
+            <div className="absolute inset-y-0 right-0 w-40 bg-gradient-to-l from-black to-transparent z-10"></div>
+
+            <div className="partners-scroll flex items-center space-x-24 whitespace-nowrap" style={{ width: '200%' }}>
+              {partners.map((partner, index) => (
+                <div key={index} className="flex-shrink-0 w-64 h-36 bg-white/10 rounded-xl border border-cyan-500/20 backdrop-blur-md flex items-center justify-center hover:bg-white/20 transition-all duration-300">
+                  <img
+                    src={`/logos/${partner}.png`}
+                    alt={partner}
+                    className="max-w-48 max-h-24 object-contain filter brightness-90 hover:brightness-110 transition-all duration-300"
+                    onError={(e) => {
+                      e.target.style.display = 'none';
+                      e.target.nextSibling.style.display = 'block';
+                    }}
+                  />
+                  <span className="text-gray-300 text-sm font-medium hidden">{partner}</span>
+                </div>
+              ))}
+              {partners.map((partner, index) => (
+                <div key={`duplicate-${index}`} className="flex-shrink-0 w-64 h-36 bg-white/10 rounded-xl border border-cyan-500/20 backdrop-blur-md flex items-center justify-center hover:bg-white/20 transition-all duration-300">
+                  <img
+                    src={`/logos/${partner}.png`}
+                    alt={partner}
+                    className="max-w-48 max-h-24 object-contain filter brightness-90 hover:brightness-110 transition-all duration-300"
+                    onError={(e) => {
+                      e.target.style.display = 'none';
+                      e.target.nextSibling.style.display = 'block';
+                    }}
+                  />
+                  <span className="text-gray-300 text-sm font-medium hidden">{partner}</span>
+                </div>
+              ))}
+            </div>
+          </div>
         </div>
-      ))}
-      
-      {/* Duplicate set for seamless loop */}
-      {partners.map((partner, index) => (
-        <div key={`duplicate-${index}`} className="flex-shrink-0 w-64 h-36 bg-white/10 rounded-xl border border-cyan-500/20 backdrop-blur-md flex items-center justify-center hover:bg-white/20 transition-all duration-300">
-          <img 
-            src={`/logos/${partner}.png`} 
-            alt={partner}
-            className="max-w-48 max-h-24 object-contain filter brightness-90 hover:brightness-110 transition-all duration-300"
-            onError={(e) => {
-              e.target.style.display = 'none';
-              e.target.nextSibling.style.display = 'block';
-            }}
-          />
-          <span className="text-gray-300 text-sm font-medium hidden">{partner}</span>
-        </div>
-      ))}
-    </div>
-  </div>
-</div>
 
         {/* CTA Section */}
         <div className="mt-32 text-center">
           <div className="max-w-4xl mx-auto p-12 bg-gradient-to-r from-cyan-500/20 to-blue-600/20 rounded-3xl border border-cyan-500/30 backdrop-blur-lg">
             <h2 className="text-4xl md:text-5xl font-semibold text-cyan-300 mb-6">Ready to Build Something <b>Extraordinary</b>?</h2>
             <p className="text-lg text-gray-200 mb-8">
-              Partner with Aris to turn your ideas into impactful realities. Let’s create something unforgettable together.
+              Partner with Aris to turn your ideas into impactful realities. Let's create something unforgettable together.
             </p>
             <Link to="/contact">
               <Button
