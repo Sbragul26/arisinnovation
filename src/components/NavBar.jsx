@@ -96,13 +96,13 @@ const NavBar = () => {
         <nav className="flex size-full items-center justify-between p-4">
           {/* Logo and Product button */}
           <div className="flex items-center gap-7">
-            <img src="/img/logo.png" alt="logo" className="w-10" />
+            <img src="/img/logo.png" alt="logo" className="w-16 h-auto" />
             <Link to="/about">
               <Button
                 id="product-button"
                 title="Products"
                 rightIcon={<TiLocationArrow />}
-                containerClass="bg-blue-50 md:flex hidden items-center justify-center gap-1 text-3xl font-bold"
+                containerClass="bg-blue-50 md:flex hidden items-center justify-center gap-1 text-2xl font-bold py-2 px-4 h-10"
               />
             </Link>
           </div>
@@ -111,7 +111,7 @@ const NavBar = () => {
             <div className="hidden md:block">
               {NavbarLinks.map((item) => (
                 <Link
-                  className="nav-hover-btn text-3xl font-bold mx-4"
+                  className="nav-hover-btn text-900xl font-bold mx-4 hover:text-blue-600 transition-colors duration-200"
                   key={item.path}
                   to={item.path}
                 >

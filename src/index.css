@@ -262,6 +262,8 @@
   animation: wobble2 var(--uib-speed) infinite ease-in-out;
 }
 
+
+
 @keyframes spin78236 {
   0% {
     transform: rotate(0deg);
