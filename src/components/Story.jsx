@@ -59,18 +59,18 @@ const FloatingImage = () => {
             containerClass="mt-5 pointer-events-none mix-blend-difference relative z-10 font-extralight text-4xl md:text-6xl lg:text-7xl tracking-wide"
           />
 
-          <div className="story-img-container">
-            <div className="story-img-mask">
-              <div className="story-img-content">
+          <div className="story-img-container h-[500px] w-[800px]">
+            <div className="story-img-mask h-full w-full">
+              <div className="story-img-content flex justify-center items-center h-full">
                 <img
                   ref={frameRef}
                   onMouseMove={handleMouseMove}
                   onMouseLeave={handleMouseLeave}
                   onMouseUp={handleMouseLeave}
                   onMouseEnter={handleMouseLeave}
-                  src="/img/entrance.webp"
+                  src="/images/intro.png"
                   alt="Creative workspace showcasing design process"
-                  className="object-contain"
+                  className="object-contain max-h-full max-w-full"
                 />
               </div>
             </div>
@@ -104,7 +104,7 @@ const FloatingImage = () => {
           </div>
         </div>
 
-        <div className=" flex w-full justify-center -mt-30 md:me-44 md:justify-end">
+        <div className="flex w-full justify-center -mt-30 md:me-44 md:justify-end">
           <div className="flex h-full w-fit flex-col items-center md:items-start">
             <p className="mt-3 max-w-sm text-center font-thin text-base text-violet-50 md:text-start leading-loose">
               Where creativity meets strategy, lies Aris and endless possibilities.
