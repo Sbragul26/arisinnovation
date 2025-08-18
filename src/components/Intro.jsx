@@ -48,7 +48,7 @@ const Intro = () => {
       <div className='h-dvh w-screen' id="clip">
         <div className='mask-clip-path about-image'>
             <img 
-            //src="img/intro.jpg"
+            src="img/intro.jpg"
             alt="Creative design workspace showcasing Aris agency excellence"
             className='absolute left-0 top-0 size-full object-cover'
             />
