@@ -70,7 +70,7 @@ const Features = () => (
       <div className="flex flex-row w-full h-full gap-7 mt-7 md:mt-10">
         <BentoTilt className="bento-tilt_2 w-1/2">
           <BentoCard
-            src="videos/feature-5.mp4"
+            src="videos/feature-2.mp4"
             title={
               <>
                 Custom <b>S</b>oftware/SaaS
@@ -83,7 +83,7 @@ const Features = () => (
 
         <BentoTilt className="bento-tilt_2 w-1/2">
           <BentoCard
-            src="videos/feature-5.mp4"
+            src="videos/feature-2.mp4"
             title={
               <>
                 Progressive <b>W</b>eb Apps
