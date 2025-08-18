@@ -49,14 +49,14 @@ const FloatingImage = () => {
   return (
     <div id="story" className="min-h-dvh w-screen bg-black text-blue-50">
       <div className="flex size-full flex-col items-center py-10 pb-24">
-        <p className="font-general text-sm uppercase md:text-[10px]">
-          the multiversal ip world
+        <p className="font-thin text-xs uppercase tracking-[0.3em] text-gray-400">
+          creative design excellence
         </p>
 
         <div className="relative size-full">
           <AnimatedTitle
-            title="the st<b>o</b>ry of <br /> a hidden real<b>m</b>"
-            containerClass="mt-5 pointer-events-none mix-blend-difference relative z-10"
+            title="our vis<b>i</b>on comes <br /> to l<b>i</b>fe"
+            containerClass="mt-5 pointer-events-none mix-blend-difference relative z-10 font-extralight text-4xl md:text-6xl lg:text-7xl tracking-wide"
           />
 
           <div className="story-img-container">
@@ -69,7 +69,7 @@ const FloatingImage = () => {
                   onMouseUp={handleMouseLeave}
                   onMouseEnter={handleMouseLeave}
                   src="/img/entrance.webp"
-                  alt="entrance.webp"
+                  alt="Creative workspace showcasing design process"
                   className="object-contain"
                 />
               </div>
@@ -106,16 +106,16 @@ const FloatingImage = () => {
 
         <div className=" flex w-full justify-center -mt-30 md:me-44 md:justify-end">
           <div className="flex h-full w-fit flex-col items-center md:items-start">
-            <p className="mt-3 max-w-sm text-center font-circular-web text-violet-50 md:text-start">
-              Where realms converge, lies Zentry and the boundless pillar.
-              Discover its secrets and shape your fate amidst infinite
-              opportunities.
+            <p className="mt-3 max-w-sm text-center font-thin text-base text-violet-50 md:text-start leading-loose">
+              Where creativity meets strategy, lies Aris and endless possibilities.
+              Discover our approach and elevate your brand with innovative
+              solutions tailored for success.
             </p>
 
             <Link to={'/about'}>
                 <Button
-                    id="realm-btn"
-                    title="discover prologue"
+                    id="portfolio-btn"
+                    title="view our portfolio"
                     containerClass="mt-5"
                 />
             </Link>

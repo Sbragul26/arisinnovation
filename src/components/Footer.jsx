@@ -26,7 +26,7 @@ const Footer = () => {
     <div className='w-screen bg-violet-300 py-4 text-black'>
         <div className="container mx-auto flex flex-col items-center justify-between gap-4 px-4 md:flex-row">
           <p className='text-center text-sm md:text-left'>
-            &copy; Rajat {new Date().getFullYear()}. All right reserved 
+            &copy; Aris {new Date().getFullYear()}. All right reserved 
           </p>
 
             <div className="flex justify-center gap-4 md:justify-start">

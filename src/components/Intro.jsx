@@ -28,19 +28,19 @@ const Intro = () => {
   return (
     <div className='min-h-screen w-screen' id='about'>
       <div className='relative mb-8 mt-36 flex flex-col items-center gap-5'>
-        <h2 className='font-general text-sm uppercase'>
-            Welcome to the world of Gaming
+        <h2 className='font-thin text-xs uppercase tracking-[0.3em] text-gray-400'>
+            Welcome to Creative Excellence
         </h2>
         <AnimatedTitle
-          title="Disc<b>o</b>ver the world's <br /> largest shared <b>a</b>dventure"
-          containerClass="mt-5 !text-black text-center"
+          title="Where Creativ<b>i</b>ty Meets <br /> Strategic Innov<b>a</b>tion"
+          containerClass="mt-5 !text-black text-center font-extralight text-4xl md:text-6xl lg:text-7xl tracking-wide"
         />
         <div className='about-subtext'>
-            <p>
-                The Game of Games begins-your life, now an epic MMORPG
+            <p className='font-thin text-base text-gray-500 text-center max-w-3xl leading-loose'>
+                At Aris, we transform your vision into reality through comprehensive creative solutions
             </p>
-            <p>
-                Zentry Unites every Player from countless games and platforms
+            <p className='font-thin text-base text-gray-500 text-center max-w-3xl leading-loose'>
+                From UI/UX design to digital marketing, we craft experiences that captivate and convert
             </p>
         </div>
       </div>
@@ -49,7 +49,7 @@ const Intro = () => {
         <div className='mask-clip-path about-image'>
             <img 
             src="img/intro.jpg"
-            alt="BackGround"
+            alt="Creative design workspace showcasing Aris agency excellence"
             className='absolute left-0 top-0 size-full object-cover'
             />
         </div>
