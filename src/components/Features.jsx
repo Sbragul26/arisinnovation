@@ -10,7 +10,7 @@ const Features = () => (
           Empowering Digital Success
         </p>
         <p className="max-w-md font-circular-web text-lg text-blue-50 opacity-50">
-          Discover how Aris Innovation transforms businesses with cutting-edge digital marketing, full-stack development, and stunning graphic design services.
+          Discover how Aris Innovation transforms businesses with cutting-edge digital marketing, full-stack development, stunning graphic design, and more.
         </p>
       </div>
 
@@ -69,22 +69,52 @@ const Features = () => (
       </div>
       <div className="flex flex-row w-full h-full gap-7 mt-7 md:mt-10">
         <BentoTilt className="bento-tilt_2 w-1/2">
+          <BentoCard
+            src="videos/feature-5.mp4"
+            title={
+              <>
+                Custom <b>S</b>oftware/SaaS
+              </>
+            }
+            description="Develop tailored software and SaaS solutions to streamline operations and enhance business efficiency."
+            isComingSoon
+          />
+        </BentoTilt>
+
+        <BentoTilt className="bento-tilt_2 w-1/2">
+          <BentoCard
+            src="videos/feature-5.mp4"
+            title={
+              <>
+                Progressive <b>W</b>eb Apps
+              </>
+            }
+            description="Deliver fast, reliable, and engaging PWAs and websites for seamless cross-platform experiences."
+            isComingSoon
+          />
+        </BentoTilt>
+      </div>
+      <div className="flex flex-row w-full h-full gap-7 mt-7 md:mt-10">
+        <BentoTilt className="bento-tilt_2 w-1/2">
+          <BentoCard
+            src="videos/feature-5.mp4"
+            title={
+              <>
+                Brand <b>S</b>culpting
+              </>
+            }
+            description="Shape a powerful digital identity with strategic branding that resonates with your audience."
+            isComingSoon
+          />
+        </BentoTilt>
+
+        <BentoTilt className="bento-tilt_2 w-1/2">
           <div className="flex size-full flex-col justify-between bg-violet-300 p-5">
             <h1 className="bento-title special-font max-w-64 text-black">
               M<b>o</b>re <b>S</b>ervices <b>S</b>oon
             </h1>
             <TiLocationArrow className="m-5 scale-[5] self-end" />
           </div>
-        </BentoTilt>
-
-        <BentoTilt className="bento-tilt_2 w-1/2">
-          <video
-            src="videos/feature-5.mp4"
-            loop
-            muted
-            autoPlay
-            className="size-full object-cover object-center"
-          />
         </BentoTilt>
       </div>
     </div>
