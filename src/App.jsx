@@ -7,6 +7,7 @@ import About from './pages/About'
 import Contact from './pages/Contact'
 import Footer from './components/Footer'
 import ScrollTop from './components/ScrollTop'
+import Portfolio from './pages/Portfolio'
 const App = () => {
   return (
     <main className='relative min-h-screen w-screen overflow-x-hidden'>
@@ -17,6 +18,7 @@ const App = () => {
         <Route path="/aboutUs" element={<AboutUs />} />
         <Route path="/about" element={<About />} />
         <Route path="/contact" element={<Contact/>} />
+        <Route path="/portfolio" element={<Portfolio />} />
       </Routes>
       <Footer/>
     </main>
