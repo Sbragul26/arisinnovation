@@ -18,7 +18,7 @@ const NavbarLinks = [
   },
   {
     title: "Products",
-    path: "/about",
+    path: "/products",
   },
   {
     title: "Contact Us",
@@ -113,7 +113,7 @@ const NavBar = () => {
           {/* Logo and Product button */}
           <div className="flex items-center gap-7">
             <img src={logo} alt="Company Logo" className="w-16 h-auto" />
-            <Link to="/about">
+            <Link to="/products">
               <Button
                 id="product-button"
                 title="Products"

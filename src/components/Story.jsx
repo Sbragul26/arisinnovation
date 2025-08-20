@@ -112,7 +112,7 @@ const FloatingImage = () => {
               solutions tailored for success.
             </p>
 
-            <Link to={'/about'}>
+            <Link to={'/products'}>
                 <Button
                     id="portfolio-btn"
                     title="view our portfolio"
