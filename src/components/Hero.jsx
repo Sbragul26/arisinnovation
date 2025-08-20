@@ -4,14 +4,16 @@ import { TiLocationArrow } from 'react-icons/ti';
 import { useGSAP } from '@gsap/react';
 import gsap from 'gsap';
 import { ScrollTrigger } from 'gsap/ScrollTrigger';
+import { Link } from "react-router-dom";
 gsap.registerPlugin(ScrollTrigger);
+
 
 const Hero = () => {
     const [currentIndex, setCurrentIndex] = useState(1);
     const [hasClicked, setHasClicked] = useState(false);
     const [isLoading, setIsLoading] = useState(true);
     const [loadedVideos, setLoadedVideos] = useState(0);
-    const totalVideos = 4;
+    const totalVideos = 2;
     const nextVideoRef = useRef(null);
 
     const handleVideoLoad = () => {
@@ -137,12 +139,13 @@ const Hero = () => {
                             We deliver comprehensive digital & creative<br />
                             services that elevate your brand.
                         </p>
+                        <Link to="/services">
                         <Button
                             id="discover-services"
                             title="Discover Our Services"
                             leftIcon={<TiLocationArrow />}
                             containerClass="bg-yellow-300 flex-center gap-1"
-                        />
+                        /></Link>
                     </div>
                 </div>
             </div>

@@ -1,25 +1,21 @@
 import React from "react";
 import { Link } from "react-router-dom";
-import { FaDiscord, FaGithub, FaTwitch, FaTwitter } from "react-icons/fa"
+import { FaWhatsapp, FaInstagram, FaLinkedin } from "react-icons/fa";
 
 const links = [
   {
-    href: 'https://discord.com',
-    icon: <FaDiscord />
+    href: 'https://wa.me/9629210630', 
+    icon: <FaWhatsapp />
   },
   {
-    href: 'https://twitter.com',
-    icon: <FaTwitter />
+    href: 'https://instagram.com/yourprofile', 
+    icon: <FaInstagram />
   },
   {
-    href: 'https://github.com',
-    icon: <FaGithub />
-  },
-  {
-    href: 'https://twitch.com',
-    icon: <FaTwitch />
+    href: 'https://linkedin.com/in/yourprofile', 
+    icon: <FaLinkedin />
   }
-]
+];
 
 const Footer = () => {
   return (

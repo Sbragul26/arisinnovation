@@ -2,6 +2,7 @@ import React, { useRef, useState } from 'react';
 import { useGSAP } from '@gsap/react';
 import gsap from 'gsap';
 import { ScrollTrigger } from 'gsap/ScrollTrigger';
+import emailjs from '@emailjs/browser';
 
 gsap.registerPlugin(ScrollTrigger);
 
@@ -36,7 +37,11 @@ const ContactForm = () => {
     return errors;
   };
 
-  // Inside ContactForm component state hooks
+  // Initialize EmailJS (call this once in your app)
+  React.useEffect(() => {
+    emailjs.init('YOUR_PUBLIC_KEY'); // Replace with your EmailJS public key
+  }, []);
+
   const [formData, setFormData] = useState({
     firstName: '',
     lastName: '',
@@ -47,6 +52,7 @@ const ContactForm = () => {
 
   const [errors, setErrors] = useState({});
   const [isSubmitting, setIsSubmitting] = useState(false);
+  const [submitStatus, setSubmitStatus] = useState(null);
   const formRef = useRef(null);
   const cardRef = useRef(null);
 
@@ -104,29 +110,25 @@ const ContactForm = () => {
       });
     };
 
-    //  event listeners
     if (formRef.current) {
       formRef.current.addEventListener('mousemove', handleMouseMove);
       formRef.current.addEventListener('mouseleave', handleMouseLeave);
     }
 
-    // Cleanup
     return () => {
       if (formRef.current) {
         formRef.current.removeEventListener('mousemove', handleMouseMove);
         formRef.current.removeEventListener('mouseleave', handleMouseLeave);
       }
     };
-
   }, []);
 
-const handleChange = (e) => {
-  const { name, value } = e.target;
+  const handleChange = (e) => {
+    const { name, value } = e.target;
     setFormData(prev => ({
       ...prev,
       [name]: value
     }));
-    // Clear error when user starts typing
     if (errors[name]) {
       setErrors(prev => ({
         ...prev,
@@ -135,157 +137,193 @@ const handleChange = (e) => {
     }
   };
 
-  const handleSubmit = (e) => {
+  const handleSubmit = async (e) => {
     e.preventDefault();
     const validationErrors = validateForm(formData);
     setErrors(validationErrors);
     
     if (Object.keys(validationErrors).length === 0) {
       setIsSubmitting(true);
-      // Here you would typically make an API call
-      alert('Message sent successfully!');
-      setFormData({
-        firstName: '',
-        lastName: '',
-        email: '',
-        subject: '',
-        message: ''
-      });
-      setIsSubmitting(false);
+      setSubmitStatus(null);
+      
+      try {
+        // EmailJS template parameters
+        const templateParams = {
+          to_email: '71762333040@cit.edu.in',
+          from_name: `${formData.firstName} ${formData.lastName}`,
+          from_email: formData.email,
+          subject: formData.subject,
+          message: formData.message,
+          reply_to: formData.email
+        };
+
+        await emailjs.send(
+          'YOUR_SERVICE_ID',    // Replace with your EmailJS service ID
+          'YOUR_TEMPLATE_ID',   // Replace with your EmailJS template ID
+          templateParams
+        );
+
+        setSubmitStatus('success');
+        setFormData({
+          firstName: '',
+          lastName: '',
+          email: '',
+          subject: '',
+          message: ''
+        });
+        
+      } catch (error) {
+        console.error('Email sending failed:', error);
+        setSubmitStatus('error');
+      } finally {
+        setIsSubmitting(false);
+      }
     }
   };
 
   return (
-    <div className='min-h-[130vh] w-[100vw] relative mt-10 '>
-      {/* Contact Form Section */}
+    <div className='min-h-[130vh] w-[100vw] relative mt-10'>
+      <div 
+        ref={formRef}
+        className='mt-7 contact-form-container absolute inset-0 flex items-center justify-center p-8'>
         <div 
-          ref={formRef}
-          className='mt-7 contact-form-container absolute inset-0 flex items-center justify-center p-8'>
-          <div 
-            ref={cardRef}
-            className='bg-white/10 backdrop-blur-xl rounded-3xl p-8 max-w-2xl w-full shadow-2xl border border-cyan-300/20 hover:shadow-3xl transition-shadow duration-300'
-            style={{ perspective: '1000px' }}>
-            <div className='text-center mb-8'>
-              <h2 className='text-4xl font-bold text-white mb-4 font-zentry'>
-                Get In <span className='text-cyan-300'>Touch</span>
-              </h2>
-              <p className='text-white/80 text-lg'>
-                Ready to start your next project? Let's create something amazing together.
-              </p>
+          ref={cardRef}
+          className='bg-white/10 backdrop-blur-xl rounded-3xl p-8 max-w-2xl w-full shadow-2xl border border-cyan-300/20 hover:shadow-3xl transition-shadow duration-300'
+          style={{ perspective: '1000px' }}>
+          <div className='text-center mb-8'>
+            <h2 className='text-4xl font-bold text-white mb-4 font-zentry'>
+              Get In <span className='text-cyan-300'>Touch</span>
+            </h2>
+            <p className='text-white/80 text-lg'>
+              Ready to start your next project? Let's create something amazing together.
+            </p>
+          </div>
+
+          {/* Status Messages */}
+          {submitStatus === 'success' && (
+            <div className='mb-6 p-4 bg-green-500/20 border border-green-400/30 rounded-xl'>
+              <p className='text-green-400 text-center'>✓ Message sent successfully!</p>
             </div>
+          )}
+          
+          {submitStatus === 'error' && (
+            <div className='mb-6 p-4 bg-red-500/20 border border-red-400/30 rounded-xl'>
+              <p className='text-red-400 text-center'>✗ Failed to send message. Please try again.</p>
+            </div>
+          )}
 
-            <form onSubmit={handleSubmit} className='space-y-6'>
-              <div className='grid md:grid-cols-2 gap-6'>
-                <div className='group'>
-                  <label className='block text-white/90 text-sm font-medium mb-2 group-focus-within:text-cyan-300 transition-colors'>
-                First Name
-                  </label>
-                  <input
-                type='text'
-                name='firstName'
-                value={formData.firstName}
-                onChange={handleChange}
-                className={`w-full px-4 py-3 bg-white/5 border ${
-                  errors.firstName ? 'border-red-500' : 'border-white/20'
-                } rounded-xl text-white placeholder-white/50 focus:outline-none focus:border-cyan-300 focus:bg-white/10 transition-all duration-300 backdrop-blur-sm focus:shadow-lg focus:shadow-cyan-300/20`}
-                placeholder='John'
-                  />
-                  {errors.firstName && (
-                <p className="text-red-500 text-sm mt-1">{errors.firstName}</p>
-                  )}
-                </div>
-                <div className='group'>
-                  <label className='block text-white/90 text-sm font-medium mb-2 group-focus-within:text-cyan-300 transition-colors'>
-                Last Name
-                  </label>
-                  <input
-                type='text'
-                name='lastName'
-                value={formData.lastName}
-                onChange={handleChange}
-                className={`w-full px-4 py-3 bg-white/5 border ${
-                  errors.lastName ? 'border-red-500' : 'border-white/20'
-                } rounded-xl text-white placeholder-white/50 focus:outline-none focus:border-cyan-300 focus:bg-white/10 transition-all duration-300 backdrop-blur-sm focus:shadow-lg focus:shadow-cyan-300/20`}
-                placeholder='Doe'
-                  />
-                  {errors.lastName && (
-                <p className="text-red-500 text-sm mt-1">{errors.lastName}</p>
-                  )}
-                </div>
-              </div>
-
+          <form onSubmit={handleSubmit} className='space-y-6'>
+            <div className='grid md:grid-cols-2 gap-6'>
               <div className='group'>
                 <label className='block text-white/90 text-sm font-medium mb-2 group-focus-within:text-cyan-300 transition-colors'>
-                  Email Address
-                </label>
-                <input
-                  type='email'
-                  name='email'
-                  value={formData.email}
-                  onChange={handleChange}
-                  className={`w-full px-4 py-3 bg-white/5 border ${
-                errors.email ? 'border-red-500' : 'border-white/20'
-                  } rounded-xl text-white placeholder-white/50 focus:outline-none focus:border-cyan-300 focus:bg-white/10 transition-all duration-300 backdrop-blur-sm focus:shadow-lg focus:shadow-cyan-300/20`}
-                  placeholder='john@example.com'
-                />
-                {errors.email && (
-                  <p className="text-red-500 text-sm mt-1">{errors.email}</p>
-                )}
-              </div>
-
-              <div className='group'>
-                <label className='block text-white/90 text-sm font-medium mb-2 group-focus-within:text-cyan-300 transition-colors'>
-                  Subject
+                  First Name
                 </label>
                 <input
                   type='text'
-                  name='subject'
-                  value={formData.subject}
+                  name='firstName'
+                  value={formData.firstName}
                   onChange={handleChange}
                   className={`w-full px-4 py-3 bg-white/5 border ${
-                errors.subject ? 'border-red-500' : 'border-white/20'
+                    errors.firstName ? 'border-red-500' : 'border-white/20'
                   } rounded-xl text-white placeholder-white/50 focus:outline-none focus:border-cyan-300 focus:bg-white/10 transition-all duration-300 backdrop-blur-sm focus:shadow-lg focus:shadow-cyan-300/20`}
-                  placeholder='Project Inquiry'
+                  placeholder='John'
                 />
-                {errors.subject && (
-                  <p className="text-red-500 text-sm mt-1">{errors.subject}</p>
+                {errors.firstName && (
+                  <p className="text-red-500 text-sm mt-1">{errors.firstName}</p>
                 )}
               </div>
-
               <div className='group'>
                 <label className='block text-white/90 text-sm font-medium mb-2 group-focus-within:text-cyan-300 transition-colors'>
-                  Message
+                  Last Name
                 </label>
-                <textarea
-                  name='message'
-                  value={formData.message}
+                <input
+                  type='text'
+                  name='lastName'
+                  value={formData.lastName}
                   onChange={handleChange}
-                  rows='5'
                   className={`w-full px-4 py-3 bg-white/5 border ${
-                errors.message ? 'border-red-500' : 'border-white/20'
-                  } rounded-xl text-white placeholder-white/50 focus:outline-none focus:border-cyan-300 focus:bg-white/10 transition-all duration-300 backdrop-blur-sm resize-none focus:shadow-lg focus:shadow-cyan-300/20`}
-                  placeholder='Tell us about your project...'
-                ></textarea>
-                {errors.message && (
-                  <p className="text-red-500 text-sm mt-1">{errors.message}</p>
+                    errors.lastName ? 'border-red-500' : 'border-white/20'
+                  } rounded-xl text-white placeholder-white/50 focus:outline-none focus:border-cyan-300 focus:bg-white/10 transition-all duration-300 backdrop-blur-sm focus:shadow-lg focus:shadow-cyan-300/20`}
+                  placeholder='Doe'
+                />
+                {errors.lastName && (
+                  <p className="text-red-500 text-sm mt-1">{errors.lastName}</p>
                 )}
               </div>
+            </div>
 
-              <div className='flex justify-center pt-4'>
-                <button
-                  type='submit'
-                  disabled={isSubmitting}
-                  className='group relative px-8 py-4 bg-gradient-to-r from-cyan-400 via-blue-500 to-purple-600 text-white font-bold rounded-xl overflow-hidden transition-all duration-300 hover:scale-105 hover:shadow-xl hover:shadow-cyan-400/25 active:scale-95 disabled:opacity-50 disabled:cursor-not-allowed'
-                >
-                  <span className='relative z-10'>
-                {isSubmitting ? 'Sending...' : 'Send Message'}
-                  </span>
-                  <div className='absolute inset-0 bg-gradient-to-r from-purple-600 via-blue-500 to-cyan-400 opacity-0 group-hover:opacity-100 transition-opacity duration-300'></div>
-                </button>
-              </div>
-            </form>
+            <div className='group'>
+              <label className='block text-white/90 text-sm font-medium mb-2 group-focus-within:text-cyan-300 transition-colors'>
+                Email Address
+              </label>
+              <input
+                type='email'
+                name='email'
+                value={formData.email}
+                onChange={handleChange}
+                className={`w-full px-4 py-3 bg-white/5 border ${
+                  errors.email ? 'border-red-500' : 'border-white/20'
+                } rounded-xl text-white placeholder-white/50 focus:outline-none focus:border-cyan-300 focus:bg-white/10 transition-all duration-300 backdrop-blur-sm focus:shadow-lg focus:shadow-cyan-300/20`}
+                placeholder='john@example.com'
+              />
+              {errors.email && (
+                <p className="text-red-500 text-sm mt-1">{errors.email}</p>
+              )}
+            </div>
 
-            {/* Decorative elements */}
+            <div className='group'>
+              <label className='block text-white/90 text-sm font-medium mb-2 group-focus-within:text-cyan-300 transition-colors'>
+                Subject
+              </label>
+              <input
+                type='text'
+                name='subject'
+                value={formData.subject}
+                onChange={handleChange}
+                className={`w-full px-4 py-3 bg-white/5 border ${
+                  errors.subject ? 'border-red-500' : 'border-white/20'
+                } rounded-xl text-white placeholder-white/50 focus:outline-none focus:border-cyan-300 focus:bg-white/10 transition-all duration-300 backdrop-blur-sm focus:shadow-lg focus:shadow-cyan-300/20`}
+                placeholder='Project Inquiry'
+              />
+              {errors.subject && (
+                <p className="text-red-500 text-sm mt-1">{errors.subject}</p>
+              )}
+            </div>
+
+            <div className='group'>
+              <label className='block text-white/90 text-sm font-medium mb-2 group-focus-within:text-cyan-300 transition-colors'>
+                Message
+              </label>
+              <textarea
+                name='message'
+                value={formData.message}
+                onChange={handleChange}
+                rows='5'
+                className={`w-full px-4 py-3 bg-white/5 border ${
+                  errors.message ? 'border-red-500' : 'border-white/20'
+                } rounded-xl text-white placeholder-white/50 focus:outline-none focus:border-cyan-300 focus:bg-white/10 transition-all duration-300 backdrop-blur-sm resize-none focus:shadow-lg focus:shadow-cyan-300/20`}
+                placeholder='Tell us about your project...'
+              ></textarea>
+              {errors.message && (
+                <p className="text-red-500 text-sm mt-1">{errors.message}</p>
+              )}
+            </div>
+
+            <div className='flex justify-center pt-4'>
+              <button
+                type='submit'
+                disabled={isSubmitting}
+                className='group relative px-8 py-4 bg-gradient-to-r from-cyan-400 via-blue-500 to-purple-600 text-white font-bold rounded-xl overflow-hidden transition-all duration-300 hover:scale-105 hover:shadow-xl hover:shadow-cyan-400/25 active:scale-95 disabled:opacity-50 disabled:cursor-not-allowed'
+              >
+                <span className='relative z-10'>
+                  {isSubmitting ? 'Sending...' : 'Send Message'}
+                </span>
+                <div className='absolute inset-0 bg-gradient-to-r from-purple-600 via-blue-500 to-cyan-400 opacity-0 group-hover:opacity-100 transition-opacity duration-300'></div>
+              </button>
+            </div>
+          </form>
+
+          {/* Decorative elements */}
           <div className='absolute -top-4 -right-4 w-8 h-8 bg-cyan-400/20 rounded-full blur-sm'></div>
           <div className='absolute -bottom-6 -left-6 w-12 h-12 bg-purple-400/20 rounded-full blur-md'></div>
           <div className='absolute top-1/2 -right-2 w-4 h-4 bg-white/10 rounded-full'></div>
@@ -300,14 +338,3 @@ const handleChange = (e) => {
 };
 
 export default ContactForm;
-
-
-
-
-
-
-
-
-
-
-

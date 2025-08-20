@@ -1,14 +1,84 @@
 import React, { useState, useEffect, useRef } from 'react';
-import AnimatedTitle from './AnimatedTitle';
-import BentoTilt from './BentoTilt';
-import Button from './Button';
-import { Link } from 'react-router-dom';
-import { useGSAP } from '@gsap/react';
-import gsap from 'gsap';
-import { ScrollTrigger } from 'gsap/ScrollTrigger';
+import { Link } from "react-router-dom";
 
-gsap.registerPlugin(ScrollTrigger);
+// AnimatedTitle Component
+const AnimatedTitle = ({ title, containerClass }) => {
+  return (
+    <div className={containerClass}>
+      <h1 dangerouslySetInnerHTML={{ __html: title }} />
+    </div>
+  );
+};
 
+// Button Component
+const Button = ({ title, containerClass, onClick }) => {
+  const handleClick = (e) => {
+    // Add click animation
+    const button = e.target;
+    button.style.transform = 'scale(0.95)';
+    setTimeout(() => {
+      button.style.transform = '';
+    }, 150);
+    
+    if (onClick) onClick(e);
+  };
+
+  return (
+    <button className={containerClass} onClick={handleClick}>
+      {title}
+    </button>
+  );
+};
+
+// BentoTilt Component for service cards
+const BentoTilt = ({ children, className }) => {
+  const elementRef = useRef(null);
+
+  const handleMouseMove = (e) => {
+    const element = elementRef.current;
+    if (!element) return;
+
+    const rect = element.getBoundingClientRect();
+    const x = e.clientX - rect.left;
+    const y = e.clientY - rect.top;
+
+    const centerX = rect.width / 2;
+    const centerY = rect.height / 2;
+
+    const rotateX = ((y - centerY) / centerY) * -10;
+    const rotateY = ((x - centerX) / centerX) * 10;
+
+    gsap.to(element, {
+      duration: 0.3,
+      rotateX,
+      rotateY,
+      transformPerspective: 1000,
+      ease: "power2.out",
+    });
+  };
+
+  const handleMouseLeave = () => {
+    gsap.to(elementRef.current, {
+      duration: 0.5,
+      rotateX: 0,
+      rotateY: 0,
+      ease: "power2.out",
+    });
+  };
+
+  return (
+    <div
+      ref={elementRef}
+      className={className}
+      onMouseMove={handleMouseMove}
+      onMouseLeave={handleMouseLeave}
+    >
+      {children}
+    </div>
+  );
+};
+
+// Counter Card Component
 const CounterCard = ({ targetNumber, label, duration = 2000, delay = 0 }) => {
   const [count, setCount] = useState(0);
   const [hasAnimated, setHasAnimated] = useState(false);
@@ -21,11 +91,9 @@ const CounterCard = ({ targetNumber, label, duration = 2000, delay = 0 }) => {
           if (entry.isIntersecting && !hasAnimated) {
             setHasAnimated(true);
             
-            // Parse the target number (handle special cases like "24/7")
             let target = 0;
             if (typeof targetNumber === 'string') {
               if (targetNumber.includes('/')) {
-                // Handle cases like "24/7" - just animate the first number
                 target = parseInt(targetNumber.split('/')[0]);
               } else {
                 target = parseInt(targetNumber.replace(/\+/g, ''));
@@ -40,7 +108,6 @@ const CounterCard = ({ targetNumber, label, duration = 2000, delay = 0 }) => {
                 if (!startTime) startTime = currentTime;
                 const progress = Math.min((currentTime - startTime) / duration, 1);
                 
-                // Easing function for smooth animation
                 const easeOutQuart = 1 - Math.pow(1 - progress, 4);
                 const currentCount = Math.floor(easeOutQuart * target);
                 
@@ -75,10 +142,8 @@ const CounterCard = ({ targetNumber, label, duration = 2000, delay = 0 }) => {
   const displayValue = () => {
     if (typeof targetNumber === 'string') {
       if (targetNumber.includes('/')) {
-        // For "24/7", show the animated number + the rest
         return `${count}${targetNumber.substring(targetNumber.indexOf('/'))}`;
       } else if (targetNumber.includes('+')) {
-        // For "100+", show the animated number + "+"
         return `${count}+`;
       }
     }
@@ -88,7 +153,7 @@ const CounterCard = ({ targetNumber, label, duration = 2000, delay = 0 }) => {
   return (
     <div 
       ref={cardRef}
-      className="stats-card text-center p-8 bg-gradient-to-br from-gray-800/70 to-gray-900/70 rounded-3xl border border-cyan-500/20 backdrop-blur-md shadow-lg"
+      className="stats-card text-center p-8 bg-gradient-to-br from-gray-800/70 to-gray-900/70 rounded-3xl border border-cyan-500/20 backdrop-blur-md shadow-lg hover:shadow-2xl hover:shadow-cyan-500/20 transition-all duration-300"
     >
       <h3 className="text-5xl md:text-6xl font-bold text-cyan-300 mb-3">
         {displayValue()}
@@ -98,269 +163,278 @@ const CounterCard = ({ targetNumber, label, duration = 2000, delay = 0 }) => {
   );
 };
 
-const ArisServices = () => {
-  useGSAP(() => {
-    gsap.from('.about-section', {
-      opacity: 0,
-      y: 50,
-      duration: 1,
-      ease: 'power2.out',
-      scrollTrigger: {
-        trigger: '.about-section',
-        start: 'top 80%',
-        toggleActions: 'play none none reverse',
+// Floating Hero Image Component
+const FloatingHeroImage = () => {
+  const frameRef = useRef(null);
+
+  const handleMouseMove = (e) => {
+    const { clientX, clientY } = e;
+    const element = frameRef.current;
+
+    if (!element) return;
+
+    const rect = element.getBoundingClientRect();
+    const xPos = clientX - rect.left;
+    const yPos = clientY - rect.top;
+
+    const centerX = rect.width / 2;
+    const centerY = rect.height / 2;
+
+    const rotateX = ((yPos - centerY) / centerY) * -15;
+    const rotateY = ((xPos - centerX) / centerX) * 15;
+
+    gsap.to(element, {
+      duration: 0.3,
+      rotateX,
+      rotateY,
+      transformPerspective: 800,
+      ease: "power1.inOut",
+    });
+  };
+
+  const handleMouseLeave = () => {
+    const element = frameRef.current;
+
+    if (element) {
+      gsap.to(element, {
+        duration: 0.5,
+        rotateX: 0,
+        rotateY: 0,
+        ease: "power1.inOut",
+      });
+    }
+  };
+
+  return (
+    <div className="flex justify-center items-center h-[600px] w-full mb-16">
+      <div className="relative">
+        <img
+          ref={frameRef}
+          onMouseMove={handleMouseMove}
+          onMouseLeave={handleMouseLeave}
+          src="https://images.unsplash.com/photo-1522202176988-66273c2fd55f?ixlib=rb-4.0.3&auto=format&fit=crop&w=1000&q=80"
+          alt="Creative team collaboration"
+          className="rounded-3xl shadow-2xl shadow-cyan-500/20 max-w-4xl w-full h-auto object-cover border border-cyan-500/30"
+        />
+        <div className="absolute inset-0 bg-gradient-to-t from-black/50 to-transparent rounded-3xl"></div>
+      </div>
+    </div>
+  );
+};
+
+// Main Services Component
+const InnovativeServicesPage = () => {
+  const [activeService, setActiveService] = useState(0);
+
+  useEffect(() => {
+    // Animate elements on scroll
+    const observer = new IntersectionObserver(
+      (entries) => {
+        entries.forEach((entry) => {
+          if (entry.isIntersecting) {
+            gsap.fromTo(entry.target, 
+              { opacity: 0, y: 50 },
+              { opacity: 1, y: 0, duration: 0.8, ease: "power2.out" }
+            );
+          }
+        });
       },
+      { threshold: 0.1 }
+    );
+
+    document.querySelectorAll('.animate-on-scroll').forEach((el) => {
+      observer.observe(el);
     });
 
-    gsap.from('.service-card', {
-      opacity: 0,
-      scale: 0.9,
-      stagger: 0.2,
-      duration: 0.8,
-      ease: 'power2.out',
-      scrollTrigger: {
-        trigger: '.services-grid',
-        start: 'top 75%',
-        toggleActions: 'play none none reverse',
-      },
-    });
-
-    gsap.from('.stats-card', {
-      opacity: 0,
-      y: 30,
-      stagger: 0.1,
-      duration: 0.6,
-      ease: 'power2.out',
-      scrollTrigger: {
-        trigger: '.stats-section',
-        start: 'top 80%',
-        toggleActions: 'play none none reverse',
-      },
-    });
-
-    gsap.from('.mission-section', {
-      opacity: 0,
-      x: -50,
-      duration: 1,
-      ease: 'power2.out',
-      scrollTrigger: {
-        trigger: '.mission-section',
-        start: 'top 80%',
-        toggleActions: 'play none none reverse',
-      },
-    });
-
-    gsap.from('.partners-section', {
-      opacity: 0,
-      y: 30,
-      duration: 1,
-      ease: 'power2.out',
-      scrollTrigger: {
-        trigger: '.partners-section',
-        start: 'top 85%',
-        toggleActions: 'play none none reverse',
-      },
-    });
-
-    gsap.to('.partners-scroll', {
-      x: '-50%',
-      duration: 20,
-      ease: 'none',
-      repeat: -1,
-    });
+    return () => observer.disconnect();
   }, []);
 
-  const services = [
-    {
-      title: 'UI/UX <b>D</b>esign',
-      description: 'Crafting intuitive and engaging designs to deliver seamless user experiences.',
-      image: '/images/ui-ux-design.png',
-    },
-    {
-      title: 'Web <b>D</b>esigning',
-      description: 'Building visually stunning and functional websites tailored to your brand.',
-      image: '/images/web-design.png',
-    },
-    {
-      title: 'Digital <b>M</b>arketing',
-      description: 'Boosting your brand reach with strategic campaigns that drive results.',
-      image: '/images/digital-marketing.png',
-    },
-    {
-      title: 'Graphic <b>D</b>esigning',
-      description: 'Creating captivating visuals to elevate your brand identity.',
-      image: '/images/graphic-design.png',
-    },
-    {
-      title: 'Br<b>a</b>nding',
-      description: 'Developing a unique brand story that resonates with your audience.',
-      image: '/images/branding.png',
-    },
-    {
-      title: 'Print <b>M</b>edia',
-      description: 'Designing high-impact print materials for lasting impressions.',
-      image: '/images/photoshoot.png',
-    },
-    {
-      title: 'Custom PC & Server <b>B</b>uilding',
-      description: 'Delivering high-performance hardware solutions for your needs.',
-      image: '/images/photoshoot.png',
-    },
-    {
-      title: 'Product <b>P</b>hotoshoots',
-      description: 'Capturing your products with professional, high-quality photography.',
-      image: '/images/photoshoot.png',
-    },
-  ];
+const services = [
+  {
+    title: 'Custom Software / SaaS Solutions',
+    description: 'Tailored software and SaaS platforms designed to streamline business operations and deliver scalable growth.',
+    image: 'https://images.unsplash.com/photo-1512941937669-90a1b58e7e9c?ixlib=rb-4.0.3&auto=format&fit=crop&w=500&q=80',
+    features: ['Enterprise Applications', 'Cloud Integration', 'Workflow Automation', 'Custom APIs']
+  },
+  {
+    title: 'Progressive Web Applications (PWAs) / Websites',
+    description: 'Modern, responsive, and high-performing web solutions that work seamlessly across all devices.',
+    image: 'https://images.unsplash.com/photo-1505238680356-667803448bb6?ixlib=rb-4.0.3&auto=format&fit=crop&w=500&q=80',
+    features: ['PWAs', 'Next.js/React', 'SEO Optimization', 'Cross-Browser Compatibility']
+  },
+  {
+    title: 'Brand Sculpting & Digital Identity',
+    description: 'Crafting strong digital identities and brand strategies that connect with your target audience.',
+    image: 'https://images.unsplash.com/photo-1503602642458-232111445657?ixlib=rb-4.0.3&auto=format&fit=crop&w=500&q=80',
+    features: ['Logo Design', 'Visual Identity', 'Brand Guidelines', 'Content Strategy']
+  }
+];
+
 
   const stats = [
-    { number: '100+', label: 'Projects Completed' },
-    { number: '50+', label: 'Happy Clients' },
-    { number: '5+', label: 'Years Experience' },
-    { number: '24/7', label: 'Support Available' },
-  ];
-
-  const partners = [
-    'astra', 'BA', 'Dia cure logo', 'Eicher-Motors-Logo', 'GK Logo',
-    'H&H Logo', 'Happy bites Logo', 'Homefin Logo', 'KB Logo', 'MKS Logo',
-    'SDC Logo', 'SSb Logo-01', 'TK LOGO', 'Trip38 Logo', 'Trust Logo'
+    { number: '250+', label: 'Projects Completed' },
+    { number: '98', label: 'Client Satisfaction %' },
+    { number: '5', label: 'Years Experience' },
+    { number: '24/7', label: 'Support Available' }
   ];
 
   return (
-    <div className="min-h-screen w-screen bg-gradient-to-br from-gray-900 via-black to-gray-900 text-white overflow-x-hidden font-['Poppins',sans-serif]">
+    <div className="min-h-screen w-full bg-gradient-to-br from-gray-900 via-black to-gray-900 text-white overflow-x-hidden font-['Inter',sans-serif]">
+      
       {/* Hero Section */}
-      <div className="container mx-auto px-6 py-24">
-        <div className="about-section text-center">
-          <AnimatedTitle
-            title="Shaping <b>F</b>utures: <br /> Your Creative <b>P</b>artner"
-            containerClass="text-7xl md:text-[6rem] font-black tracking-wide !text-white text-center mb-12"
-          />
-          <p className="max-w-4xl mx-auto text-lg md:text-xl font-light text-gray-200 leading-relaxed mb-10">
-            At Aris, we transform visions into reality with innovative, high-impact digital and creative solutions designed to elevate your brand and captivate your audience.
+      <div className="container mx-auto px-6 py-20">
+        <div className="text-center animate-on-scroll">
+          <p className="font-light text-sm uppercase tracking-[0.3em] text-cyan-400 mb-8">
+            Creative Excellence & Innovation
           </p>
-          <div className="flex flex-wrap justify-center gap-4 text-sm uppercase tracking-widest text-cyan-300 font-medium">
-            <span>Creativity</span>
-            <span>•</span>
-            <span>Innovation</span>
-            <span>•</span>
-            <span>Impact</span>
-            <span>•</span>
-            <span>Excellence</span>
+          
+          <AnimatedTitle
+            title="Transform Your <b>V</b>ision Into <br /> Digital <b>R</b>eality"
+            containerClass="text-6xl md:text-8xl font-black tracking-tight text-white mb-8 leading-tight"
+          />
+          
+          <p className="max-w-4xl mx-auto text-xl md:text-2xl font-light text-gray-200 leading-relaxed mb-12">
+            We craft exceptional digital experiences that captivate audiences, drive engagement, and deliver measurable results for your business.
+          </p>
+          
+          <div className="flex flex-wrap justify-center gap-6 text-sm uppercase tracking-widest text-cyan-300 font-medium mb-16">
+            <span className="px-4 py-2 border border-cyan-500/30 rounded-full">Innovation</span>
+            <span className="px-4 py-2 border border-cyan-500/30 rounded-full">Quality</span>
+            <span className="px-4 py-2 border border-cyan-500/30 rounded-full">Results</span>
           </div>
         </div>
 
-        {/* Stats Section with Counter Animation */}
-        <div className="stats-section mt-28">
-          <div className="grid grid-cols-2 md:grid-cols-4 gap-6 max-w-6xl mx-auto">
-            {stats.map((stat, index) => (
-              <CounterCard
-                key={index}
-                targetNumber={stat.number}
-                label={stat.label}
-                duration={2000}
-                delay={index * 200}
-              />
-            ))}
-          </div>
+        <FloatingHeroImage />
+      </div>
+
+      {/* Services Grid Section */}
+      <div className="container mx-auto px-6 py-20">
+        <div className="text-center mb-20 animate-on-scroll">
+          <h2 className="text-5xl md:text-7xl font-bold text-transparent bg-clip-text bg-gradient-to-r from-cyan-400 to-blue-500 mb-8">
+            Our <span className="text-white">Services</span>
+          </h2>
+          <p className="max-w-3xl mx-auto text-lg text-gray-300 leading-relaxed">
+            Comprehensive digital solutions designed to elevate your brand and drive sustainable growth in the digital landscape.
+          </p>
         </div>
 
-        {/* Services Section */}
-        <div className="mt-32">
-          <div className="text-center mb-16">
-            <h2 className="text-5xl md:text-6xl font-semibold text-cyan-300 mb-8">Our <b>Services</b></h2>
-            <p className="max-w-3xl mx-auto text-lg text-gray-200">
-              Explore our innovative solutions designed to elevate your brand and create meaningful connections with your audience.
-            </p>
-          </div>
-
-          <div className="services-grid grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6">
-            {services.map((service, index) => (
-              <BentoTilt key={index} className="service-card h-[24rem]">
-                <div className="relative h-full rounded-2xl overflow-hidden bg-gradient-to-br from-gray-800/80 to-gray-900/80 border border-cyan-500/30">
+        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8 mb-20">
+          {services.map((service, index) => (
+            <BentoTilt key={index} className="animate-on-scroll">
+              <div 
+                className={`service-card h-[400px] rounded-3xl overflow-hidden bg-gradient-to-br from-gray-800/90 to-gray-900/90 border transition-all duration-500 cursor-pointer ${
+                  activeService === index 
+                    ? 'border-cyan-400/50 shadow-2xl shadow-cyan-400/20' 
+                    : 'border-cyan-500/20 hover:border-cyan-400/40'
+                }`}
+                onClick={() => setActiveService(index)}
+              >
+                <div className="relative h-full">
                   <img
                     src={service.image}
                     alt={service.title}
-                    className="absolute inset-0 w-full h-full object-cover opacity-60"
+                    className="absolute inset-0 w-full h-full object-cover opacity-40"
                   />
-                  <div className="relative z-10 flex flex-col justify-between h-full p-6 text-white">
+                  <div className="absolute inset-0 bg-gradient-to-t from-black/80 via-black/40 to-transparent" />
+                  
+                  <div className="relative z-10 flex flex-col justify-between h-full p-8">
                     <div>
-                      <h1 className="text-2xl font-semibold" dangerouslySetInnerHTML={{ __html: service.title }} />
-                      <p className="mt-4 text-sm text-gray-200">{service.description}</p>
+                      <h3 
+                        className="text-2xl md:text-3xl font-bold mb-4 text-white" 
+                        dangerouslySetInnerHTML={{ __html: service.title }}
+                      />
+                      <p className="text-gray-200 mb-6 text-sm leading-relaxed">
+                        {service.description}
+                      </p>
+                      
+                      <div className="space-y-2">
+                        {service.features.map((feature, idx) => (
+                          <div key={idx} className="flex items-center text-xs text-cyan-300">
+                            <div className="w-1.5 h-1.5 bg-cyan-400 rounded-full mr-2" />
+                            {feature}
+                          </div>
+                        ))}
+                      </div>
                     </div>
-                    <div className="mt-4">
-                      <Link to="/contact">
-                        <Button
-                          title="Learn More"
-                          containerClass="bg-cyan-400 text-black px-6 py-2 text-sm font-semibold rounded-full hover:scale-105 transition-all duration-300"
-                        />
-                      </Link>
-                    </div>
+                    
+                    <Button
+                      title="Learn More"
+                      containerClass="mt-6 bg-gradient-to-r from-cyan-400 to-blue-500 text-black px-6 py-3 text-sm font-semibold rounded-full hover:scale-105 hover:shadow-lg hover:shadow-cyan-400/30 transition-all duration-300"
+                    />
                   </div>
                 </div>
-              </BentoTilt>
-            ))}
-          </div>
+              </div>
+            </BentoTilt>
+          ))}
+        </div>
+      </div>
+
+      {/* Stats Section */}
+      <div className="container mx-auto px-6 py-20">
+        <div className="grid grid-cols-2 md:grid-cols-4 gap-8 animate-on-scroll">
+          {stats.map((stat, index) => (
+            <CounterCard
+              key={index}
+              targetNumber={stat.number}
+              label={stat.label}
+              delay={index * 200}
+            />
+          ))}
+        </div>
+      </div>
+
+      {/* Process Section */}
+      <div className="container mx-auto px-6 py-20">
+        <div className="text-center mb-16 animate-on-scroll">
+          <h2 className="text-5xl md:text-6xl font-bold text-white mb-8">
+            Our <span className="text-cyan-400">Process</span>
+          </h2>
+          <p className="max-w-3xl mx-auto text-lg text-gray-300">
+            A streamlined approach that ensures exceptional results from concept to completion.
+          </p>
         </div>
 
-        {/* Partners Section */}
-        <div className="partners-section mt-32">
-          <div className="text-center mb-16">
-            <h2 className="text-4xl md:text-5xl font-semibold text-cyan-300 mb-6">Trusted by <b>Leaders</b></h2>
-            <p className="text-lg text-gray-200">
-              Collaborating with top brands to deliver exceptional results
-            </p>
-          </div>
-
-          <div className="relative overflow-hidden py-16">
-            <div className="absolute inset-y-0 left-0 w-40 bg-gradient-to-r from-black to-transparent z-10"></div>
-            <div className="absolute inset-y-0 right-0 w-40 bg-gradient-to-l from-black to-transparent z-10"></div>
-
-            <div className="partners-scroll flex items-center space-x-24 whitespace-nowrap" style={{ width: '200%' }}>
-              {partners.map((partner, index) => (
-                <div key={index} className="flex-shrink-0 w-64 h-36 bg-white/10 rounded-xl border border-cyan-500/20 backdrop-blur-md flex items-center justify-center hover:bg-white/20 transition-all duration-300">
-                  <img
-                    src={`/logos/${partner}.png`}
-                    alt={partner}
-                    className="max-w-48 max-h-24 object-contain filter brightness-90 hover:brightness-110 transition-all duration-300"
-                    onError={(e) => {
-                      e.target.style.display = 'none';
-                      e.target.nextSibling.style.display = 'block';
-                    }}
-                  />
-                  <span className="text-gray-300 text-sm font-medium hidden">{partner}</span>
-                </div>
-              ))}
-              {partners.map((partner, index) => (
-                <div key={`duplicate-${index}`} className="flex-shrink-0 w-64 h-36 bg-white/10 rounded-xl border border-cyan-500/20 backdrop-blur-md flex items-center justify-center hover:bg-white/20 transition-all duration-300">
-                  <img
-                    src={`/logos/${partner}.png`}
-                    alt={partner}
-                    className="max-w-48 max-h-24 object-contain filter brightness-90 hover:brightness-110 transition-all duration-300"
-                    onError={(e) => {
-                      e.target.style.display = 'none';
-                      e.target.nextSibling.style.display = 'block';
-                    }}
-                  />
-                  <span className="text-gray-300 text-sm font-medium hidden">{partner}</span>
-                </div>
-              ))}
+        <div className="grid grid-cols-1 md:grid-cols-4 gap-8 animate-on-scroll">
+          {['Discover', 'Design', 'Develop', 'Deliver'].map((step, index) => (
+            <div key={index} className="text-center group">
+              <div className="w-16 h-16 mx-auto mb-6 bg-gradient-to-r from-cyan-400 to-blue-500 rounded-full flex items-center justify-center text-black font-bold text-xl group-hover:scale-110 transition-transform duration-300">
+                {index + 1}
+              </div>
+              <h3 className="text-2xl font-semibold text-white mb-4">{step}</h3>
+              <div className="w-12 h-0.5 bg-gradient-to-r from-cyan-400 to-blue-500 mx-auto"></div>
             </div>
-          </div>
+          ))}
         </div>
+      </div>
 
-        {/* CTA Section */}
-        <div className="mt-32 text-center">
-          <div className="max-w-4xl mx-auto p-12 bg-gradient-to-r from-cyan-500/20 to-blue-600/20 rounded-3xl border border-cyan-500/30 backdrop-blur-lg">
-            <h2 className="text-4xl md:text-5xl font-semibold text-cyan-300 mb-6">Ready to Build Something <b>Extraordinary</b>?</h2>
-            <p className="text-lg text-gray-200 mb-8">
-              Partner with Aris to turn your ideas into impactful realities. Let's create something unforgettable together.
+      {/* CTA Section */}
+      <div className="container mx-auto px-6 py-20">
+        <div className="text-center animate-on-scroll">
+          <div className="max-w-5xl mx-auto p-16 bg-gradient-to-r from-cyan-500/20 via-blue-600/20 to-purple-600/20 rounded-3xl border border-cyan-500/30 backdrop-blur-lg">
+            <h2 className="text-4xl md:text-6xl font-bold text-white mb-8">
+              Ready to Create Something <br />
+              <span className="text-transparent bg-clip-text bg-gradient-to-r from-cyan-400 to-blue-500">
+                Extraordinary?
+              </span>
+            </h2>
+            <p className="text-xl text-gray-200 mb-12 max-w-3xl mx-auto leading-relaxed">
+              Let's transform your vision into a digital masterpiece that captivates your audience and drives real business results.
             </p>
-            <Link to="/contact">
-              <Button
-                title="Start Your Journey"
-                containerClass="bg-gradient-to-r from-cyan-400 to-blue-500 text-black px-12 py-4 text-lg font-semibold rounded-full hover:scale-105 hover:shadow-2xl hover:shadow-cyan-400/30 transition-all duration-300"
+            
+            <div className="flex flex-col sm:flex-row gap-6 justify-center">
+              <Link to="/contact">
+                <Button
+                  title="Start Your Project"
+                  containerClass="bg-gradient-to-r from-cyan-400 to-blue-500 text-black px-12 py-4 text-lg font-semibold rounded-full hover:scale-105 hover:shadow-2xl hover:shadow-cyan-400/30 transition-all duration-300"
+                />
+              </Link>
+              <Link to="/portfolio">
+                <Button
+                  title="View Our Work"
+                  containerClass="border-2 border-cyan-400 text-cyan-400 px-12 py-4 text-lg font-semibold rounded-full hover:bg-cyan-400 hover:text-black hover:scale-105 transition-all duration-300"
               />
-            </Link>
+              </Link>
+            </div>
           </div>
         </div>
       </div>
@@ -368,4 +442,4 @@ const ArisServices = () => {
   );
 };
 
-export default ArisServices;
+export default InnovativeServicesPage;

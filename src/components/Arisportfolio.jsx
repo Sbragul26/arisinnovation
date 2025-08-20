@@ -254,12 +254,14 @@ const Arisportfolio = () => {
               Be the first to experience our new portfolio showcase. Follow us for updates and behind-the-scenes content.
             </p>
             <div className="flex flex-wrap justify-center gap-4">
+              {/*}
               <button className="bg-gradient-to-r from-cyan-400 to-blue-500 text-black px-8 py-3 text-lg font-semibold rounded-full hover:scale-105 hover:shadow-2xl hover:shadow-cyan-400/30 transition-all duration-300">
                 Notify Me
               </button>
               <button className="border border-cyan-400 text-cyan-300 px-8 py-3 text-lg font-semibold rounded-full hover:bg-cyan-400/10 hover:scale-105 transition-all duration-300">
                 Learn More
               </button>
+              */}
             </div>
           </div>
         </div>

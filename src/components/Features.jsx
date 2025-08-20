@@ -24,6 +24,7 @@ const Features = () => (
           }
           description="Boost your brand with tailored strategies, SEO, and social media campaigns that drive engagement and growth."
           isComingSoon
+          comingSoonTextColor="text-white"
         />
       </BentoTilt>
       <div className="flex flex-col md:flex-row h-[100vh] w-full grid-cols-2 grid-rows-2 gap-7">
@@ -37,6 +38,7 @@ const Features = () => (
             }
             description="Build robust, scalable web and mobile applications with our expert full-stack development services."
             isComingSoon
+            comingSoonTextColor="text-white"
           />
         </BentoTilt>
         <div className="flex flex-col md:w-1/2 h-full gap-7">
@@ -50,6 +52,7 @@ const Features = () => (
               }
               description="Create visually stunning designs for logos, branding, and marketing materials that captivate your audience."
               isComingSoon
+              comingSoonTextColor="text-white"
             />
           </BentoTilt>
 
@@ -63,6 +66,7 @@ const Features = () => (
               }
               description="Craft intuitive and user-friendly interfaces that enhance user experience and engagement."
               isComingSoon
+              comingSoonTextColor="text-white"
             />
           </BentoTilt>
         </div>
@@ -78,6 +82,7 @@ const Features = () => (
             }
             description="Develop tailored software and SaaS solutions to streamline operations and enhance business efficiency."
             isComingSoon
+            comingSoonTextColor="text-white"
           />
         </BentoTilt>
 
@@ -91,6 +96,7 @@ const Features = () => (
             }
             description="Deliver fast, reliable, and engaging PWAs and websites for seamless cross-platform experiences."
             isComingSoon
+            comingSoonTextColor="text-white"
           />
         </BentoTilt>
       </div>
@@ -105,6 +111,7 @@ const Features = () => (
             }
             description="Shape a powerful digital identity with strategic branding that resonates with your audience."
             isComingSoon
+            comingSoonTextColor="text-white"
           />
         </BentoTilt>
 

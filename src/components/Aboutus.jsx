@@ -231,7 +231,7 @@ const AboutUs = () => {
       <div className="container mx-auto px-6 py-24">
         <div className="about-section text-center">
           <AnimatedTitle
-            title="Shaping <b>F</b>utures: <br /> Your Creative <b>P</b>artner"
+            title="Shaping <b>F</b>utures <br /> Your Creative <b>P</b>artner"
             containerClass="text-7xl md:text-[6rem] font-black tracking-wide !text-white text-center mb-12"
           />
           <p className="max-w-4xl mx-auto text-lg md:text-xl font-light text-gray-200 leading-relaxed mb-10">
