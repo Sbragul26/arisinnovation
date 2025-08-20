@@ -1,5 +1,6 @@
 import React, { useState, useEffect, useRef } from 'react';
 import AnimatedTitle from './AnimatedTitle';
+import BentoTilt from './BentoTilt';
 import Button from './Button';
 import { Link } from 'react-router-dom';
 import { useGSAP } from '@gsap/react';
@@ -263,6 +264,43 @@ const AboutUs = () => {
           </div>
         </div>
 
+        {/* Services Section */}
+        <div className="mt-32">
+          <div className="text-center mb-16">
+            <h2 className="text-5xl md:text-6xl font-semibold text-cyan-300 mb-8">Our <b>Services</b></h2>
+            <p className="max-w-3xl mx-auto text-lg text-gray-200">
+              Explore our innovative solutions designed to elevate your brand and create meaningful connections with your audience.
+            </p>
+          </div>
+
+          <div className="services-grid grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6">
+            {services.map((service, index) => (
+              <BentoTilt key={index} className="service-card h-[24rem]">
+                <div className="relative h-full rounded-2xl overflow-hidden bg-gradient-to-br from-gray-800/80 to-gray-900/80 border border-cyan-500/30">
+                  <img
+                    src={service.image}
+                    alt={service.title}
+                    className="absolute inset-0 w-full h-full object-cover opacity-60"
+                  />
+                  <div className="relative z-10 flex flex-col justify-between h-full p-6 text-white">
+                    <div>
+                      <h1 className="text-2xl font-semibold" dangerouslySetInnerHTML={{ __html: service.title }} />
+                      <p className="mt-4 text-sm text-gray-200">{service.description}</p>
+                    </div>
+                    <div className="mt-4">
+                      <Link to="/contact">
+                        <Button
+                          title="Learn More"
+                          containerClass="bg-cyan-400 text-black px-6 py-2 text-sm font-semibold rounded-full hover:scale-105 transition-all duration-300"
+                        />
+                      </Link>
+                    </div>
+                  </div>
+                </div>
+              </BentoTilt>
+            ))}
+          </div>
+        </div>
 
         {/* Partners Section */}
         <div className="partners-section mt-32">
