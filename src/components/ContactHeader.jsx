@@ -85,7 +85,7 @@ const ContactHeader = () => {
         {/* Main image container */}
         <div className='mask-clip-path relative overflow-hidden'>
           <img 
-            src="img/contactHeader.jpg" 
+            src="img/intro.jpg" 
             alt="Background" 
             className='absolute left-0 top-0 size-full object-cover transition-transform duration-300' 
           />

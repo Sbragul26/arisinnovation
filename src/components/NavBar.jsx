@@ -21,16 +21,16 @@ const NavbarLinks = [
     path: "/products",
   },
   {
-    title: "Contact Us",
-    path: "/contact",
-  },
-  {
     title: "Services",
     path: "/services",
   },
   {
     title: "Portfolio",
     path: "/portfolio",
+  },
+  {
+    title: "Contact Us",
+    path: "/contact",
   },
 ];
 
