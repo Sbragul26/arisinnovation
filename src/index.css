@@ -44,11 +44,12 @@
   }
   @font-face {
     font-family: "circular-web";
-    src: url("/fonts/circularweb-book.woff2") format("woff2");
+    src: url("/fonts/web-circularbook.woff2") format("woff2");
   }
   @font-face {
+
     font-family: "zentry";
-    src: url("/fonts/zentry-regular.woff2") format("woff2");
+    src: url("/fonts/zentry-gta.woff2") format("woff2");
   }
 
   /* Your global base styles */
