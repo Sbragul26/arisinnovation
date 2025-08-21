@@ -75,11 +75,12 @@ const Hero = () => {
     return (
         <div className='relative h-dvh w-screen overflow-x-hidden'>
             {isLoading && (
-                <div className='flex-center absolute-center z-[100] h-dvh w-screen overflow-hidden bg-violet-50'>
-                    <div className='three-body'>
-                        <div className='three-body__dot' />
-                        <div className='three-body__dot' />
-                        <div className='three-body__dot' />
+                <div className='flex-center absolute-center z-[100] h-dvh w-screen overflow-hidden bg-white'>
+                    <div className='loading-container'>
+                        <div className='loading-circle'></div>
+                        <div className='loading-circle'></div>
+                        <div className='loading-circle'></div>
+                        <div className='loading-circle'></div>
                     </div>
                 </div>
             )}
@@ -153,6 +154,39 @@ const Hero = () => {
             <h1 className='font-bold text-6xl md:text-7xl absolute bottom-5 right-5 text-black'>
                 A<b>r</b>is
             </h1>
+            
+            <style jsx>{`
+                .loading-container {
+                    display: flex;
+                    align-items: center;
+                    justify-content: center;
+                    gap: 8px;
+                }
+                
+                .loading-circle {
+                    width: 12px;
+                    height: 12px;
+                    background: #3B82F6;
+                    border-radius: 50%;
+                    animation: bounce 1.4s ease-in-out infinite both;
+                }
+                
+                .loading-circle:nth-child(1) { animation-delay: -0.32s; }
+                .loading-circle:nth-child(2) { animation-delay: -0.16s; }
+                .loading-circle:nth-child(3) { animation-delay: 0s; }
+                .loading-circle:nth-child(4) { animation-delay: 0.16s; }
+                
+                @keyframes bounce {
+                    0%, 80%, 100% {
+                        transform: scale(0.8);
+                        opacity: 0.5;
+                    }
+                    40% {
+                        transform: scale(1);
+                        opacity: 1;
+                    }
+                }
+            `}</style>
         </div>
     );
 }
