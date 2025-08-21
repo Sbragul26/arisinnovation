@@ -15,6 +15,7 @@ const Hero = () => {
     const [loadedVideos, setLoadedVideos] = useState(0);
     const totalVideos = 3;
     const nextVideoRef = useRef(null);
+    const loadingRef = useRef(null);
 
     const handleVideoLoad = () => {
         setLoadedVideos((prevLoaded) => prevLoaded + 1);
@@ -22,7 +23,10 @@ const Hero = () => {
 
     useEffect(() => {
         if (loadedVideos === totalVideos - 1) {
-            setIsLoading(false);
+            // Delay the loading completion to show the animation
+            setTimeout(() => {
+                setIsLoading(false);
+            }, 1000);
         }
     }, [loadedVideos])
 
@@ -32,6 +36,124 @@ const Hero = () => {
         setHasClicked(true);
         setCurrentIndex(upcomingVideoIndex);
     };
+
+    // Loading animation
+    useGSAP(() => {
+        if (isLoading) {
+            const tl = gsap.timeline({ repeat: -1 });
+            
+            // Animate the brand name
+            tl.fromTo('#loading-brand', 
+                { 
+                    scale: 0.8, 
+                    opacity: 0.7,
+                    rotationY: 0 
+                },
+                { 
+                    scale: 1.1, 
+                    opacity: 1,
+                    rotationY: 360,
+                    duration: 2, 
+                    ease: 'power2.inOut' 
+                }
+            );
+
+            // Animate particles
+            gsap.set('.particle', {
+                x: () => gsap.utils.random(-200, 200),
+                y: () => gsap.utils.random(-200, 200),
+                scale: () => gsap.utils.random(0.5, 1.5),
+                opacity: 0
+            });
+
+            gsap.to('.particle', {
+                opacity: 0.6,
+                duration: 0.5,
+                stagger: 0.1,
+                yoyo: true,
+                repeat: -1,
+                ease: 'power2.inOut'
+            });
+
+            gsap.to('.particle', {
+                rotation: 360,
+                duration: 4,
+                repeat: -1,
+                ease: 'none'
+            });
+
+            // Floating animation for particles
+            gsap.to('.particle', {
+                y: '+=20',
+                duration: 2,
+                repeat: -1,
+                yoyo: true,
+                ease: 'power1.inOut',
+                stagger: 0.2
+            });
+
+            // Pulse effect for the container
+            gsap.to('#loading-container', {
+                scale: 1.02,
+                duration: 2,
+                repeat: -1,
+                yoyo: true,
+                ease: 'power1.inOut'
+            });
+
+            // Animated text reveal
+            gsap.fromTo('#loading-text', 
+                { 
+                    y: 50, 
+                    opacity: 0 
+                },
+                { 
+                    y: 0, 
+                    opacity: 1, 
+                    duration: 1, 
+                    delay: 0.5,
+                    ease: 'power2.out'
+                }
+            );
+
+            // Progress bar animation
+            gsap.to('#progress-bar', {
+                width: '100%',
+                duration: 3,
+                ease: 'power2.inOut',
+                repeat: -1
+            });
+        }
+    }, [isLoading]);
+
+    // Loading exit animation
+    useGSAP(() => {
+        if (!isLoading) {
+            gsap.to('#loading-screen', {
+                opacity: 0,
+                scale: 1.1,
+                duration: 0.8,
+                ease: 'power2.inOut',
+                onComplete: () => {
+                    gsap.set('#loading-screen', { display: 'none' });
+                }
+            });
+
+            // Animate main content entrance
+            gsap.fromTo('#video-frame', 
+                { 
+                    scale: 0.9, 
+                    opacity: 0 
+                },
+                { 
+                    scale: 1, 
+                    opacity: 1, 
+                    duration: 1, 
+                    ease: 'power2.out' 
+                }
+            );
+        }
+    }, [isLoading]);
 
     useGSAP(() => {
         if (hasClicked) {
@@ -74,18 +196,64 @@ const Hero = () => {
 
     return (
         <div className='relative h-dvh w-screen overflow-x-hidden'>
+            {/* Enhanced Loading Screen */}
             {isLoading && (
-                <div className='flex-center absolute-center z-[100] h-dvh w-screen overflow-hidden bg-white'>
-                    <div className='loading-container'>
-                        <div className='loading-circle'></div>
-                        <div className='loading-circle'></div>
-                        <div className='loading-circle'></div>
-                        <div className='loading-circle'></div>
+                <div id="loading-screen" className='fixed inset-0 z-[100] bg-black overflow-hidden'>
+                    <div id="loading-container" className="relative w-full h-full flex items-center justify-center">
+                        {/* Animated particles */}
+                        {[...Array(12)].map((_, i) => (
+                            <div
+                                key={i}
+                                className="particle absolute w-2 h-2 bg-gradient-to-r from-blue-400 to-purple-500 rounded-full"
+                                style={{
+                                    filter: 'blur(0.5px)',
+                                }}
+                            />
+                        ))}
+
+                        {/* Main loading content */}
+                        <div className="text-center z-10">
+                            <div id="loading-brand" className="mb-8">
+                                <h1 className='font-serif text-8xl md:text-9xl italic text-white mb-4'>
+                                    A<span className="text-blue-400">r</span>is
+                                </h1>
+                            </div>
+
+                            <div id="loading-text" className="mb-8">
+                                <p className="text-white/80 text-xl font-light tracking-wider">
+                                    Crafting Excellence
+                                </p>
+                                <p className="text-white/60 text-sm mt-2">
+                                    Loading your creative experience...
+                                </p>
+                            </div>
+
+                            {/* Progress bar */}
+                            <div className="w-64 h-1 bg-white/20 rounded-full mx-auto overflow-hidden">
+                                <div 
+                                    id="progress-bar" 
+                                    className="h-full bg-gradient-to-r from-blue-400 to-purple-500 rounded-full w-0"
+                                ></div>
+                            </div>
+
+                            {/* Loading dots */}
+                            <div className='loading-container mt-8'>
+                                <div className='loading-circle'></div>
+                                <div className='loading-circle'></div>
+                                <div className='loading-circle'></div>
+                                <div className='loading-circle'></div>
+                            </div>
+                        </div>
+
+                        {/* Background grid pattern */}
+                        <div className="absolute inset-0 opacity-10">
+                            <div className="grid-pattern"></div>
+                        </div>
                     </div>
                 </div>
             )}
 
-            <div id='video-frame' className='relative z-10 h-dvh w-screen overflow-hidden rounded-lg bg-blue-75'>
+            <div id='video-frame' className='relative z-10 h-dvh w-screen overflow-hidden rounded-lg bg-black'>
                 <div>
                     <div className='mask-clip-path absolute-center z-50 size-64 cursor-pointer overflow-hidden rounded-lg'>
                         <div
@@ -166,9 +334,10 @@ const Hero = () => {
                 .loading-circle {
                     width: 12px;
                     height: 12px;
-                    background: #3B82F6;
+                    background: linear-gradient(45deg, #60a5fa, #a855f7);
                     border-radius: 50%;
                     animation: bounce 1.4s ease-in-out infinite both;
+                    box-shadow: 0 0 10px rgba(96, 165, 250, 0.5);
                 }
                 
                 .loading-circle:nth-child(1) { animation-delay: -0.32s; }
@@ -182,8 +351,41 @@ const Hero = () => {
                         opacity: 0.5;
                     }
                     40% {
-                        transform: scale(1);
+                        transform: scale(1.2);
                         opacity: 1;
+                        box-shadow: 0 0 20px rgba(96, 165, 250, 0.8);
+                    }
+                }
+
+                .grid-pattern {
+                    background-image: 
+                        linear-gradient(rgba(255,255,255,0.1) 1px, transparent 1px),
+                        linear-gradient(90deg, rgba(255,255,255,0.1) 1px, transparent 1px);
+                    background-size: 50px 50px;
+                    width: 100%;
+                    height: 100%;
+                    animation: moveGrid 20s linear infinite;
+                }
+
+                @keyframes moveGrid {
+                    0% {
+                        transform: translate(0, 0);
+                    }
+                    100% {
+                        transform: translate(50px, 50px);
+                    }
+                }
+
+                .particle {
+                    animation: float 6s ease-in-out infinite;
+                }
+
+                @keyframes float {
+                    0%, 100% {
+                        transform: translateY(0px) rotate(0deg);
+                    }
+                    50% {
+                        transform: translateY(-20px) rotate(180deg);
                     }
                 }
             `}</style>
