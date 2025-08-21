@@ -213,14 +213,14 @@ const AboutUs = () => {
   ];
 
   const stats = [
-    { number: '100+', label: 'Projects Completed' },
-    { number: '50+', label: 'Happy Clients' },
-    { number: '5+', label: 'Years Experience' },
+    { number: '50+', label: 'Projects Completed' },
+    { number: '70+', label: 'Happy Clients' },
+    { number: '2+', label: 'Years Experience' },
     { number: '24/7', label: 'Support Available' },
   ];
 
   const partners = [
-    'astra', 'BA', 'Dia cure logo', 'Eicher-Motors-Logo', 'GK Logo',
+    'astra', 'BA','cit', 'Dia cure logo', 'Eicher-Motors-Logo', 'GK Logo',
     'H&H Logo', 'Happy bites Logo', 'Homefin Logo', 'KB Logo', 'MKS Logo',
     'SDC Logo', 'SSb Logo-01', 'TK LOGO', 'Trip38 Logo', 'Trust Logo'
   ];

@@ -4,15 +4,15 @@ import { FaWhatsapp, FaInstagram, FaLinkedin } from "react-icons/fa";
 
 const links = [
   {
-    href: 'https://wa.me/9629210630', 
+    href: 'https://wa.me/6385870211', 
     icon: <FaWhatsapp />
   },
   {
-    href: 'https://instagram.com/yourprofile', 
+    href: 'https://instagram.com/arisinnovations', 
     icon: <FaInstagram />
   },
   {
-    href: 'https://linkedin.com/in/yourprofile', 
+    href: 'https://linkedin.com/company/arisinnovation ',
     icon: <FaLinkedin />
   }
 ];

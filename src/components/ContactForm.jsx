@@ -28,9 +28,7 @@ const ContactForm = () => {
       errors.subject = 'Subject is required';
     }
     
-    if (!values.message.trim()) {
-      errors.message = 'Message is required';
-    } else if (values.message.length < 10) {
+    if (values.message.trim() && values.message.length < 10) {
       errors.message = 'Message must be at least 10 characters';
     }
     
@@ -39,7 +37,7 @@ const ContactForm = () => {
 
   // Initialize EmailJS (call this once in your app)
   React.useEffect(() => {
-    emailjs.init('YOUR_PUBLIC_KEY'); // Replace with your EmailJS public key
+    emailjs.init('WKc3FaCt0C7spt92s'); // Your EmailJS public key
   }, []);
 
   const [formData, setFormData] = useState({
@@ -147,19 +145,23 @@ const ContactForm = () => {
       setSubmitStatus(null);
       
       try {
-        // EmailJS template parameters
+        // EmailJS template parameters - message will be sent to innovationsaris@gmail.com
         const templateParams = {
-          to_email: '71762333040@cit.edu.in',
+          to_email: 'innovationsaris@gmail.com', // Fixed recipient email
           from_name: `${formData.firstName} ${formData.lastName}`,
           from_email: formData.email,
           subject: formData.subject,
           message: formData.message,
-          reply_to: formData.email
+          reply_to: formData.email, // This allows you to reply directly to the sender
+          // Additional fields for better email formatting
+          user_first_name: formData.firstName,
+          user_last_name: formData.lastName,
+          user_email: formData.email
         };
 
         await emailjs.send(
-          'YOUR_SERVICE_ID',    // Replace with your EmailJS service ID
-          'YOUR_TEMPLATE_ID',   // Replace with your EmailJS template ID
+          'service_6zxu7nc',    // Your Gmail service ID 
+          'template_8z77558',   // Your template ID
           templateParams
         );
 
@@ -202,7 +204,7 @@ const ContactForm = () => {
           {/* Status Messages */}
           {submitStatus === 'success' && (
             <div className='mb-6 p-4 bg-green-500/20 border border-green-400/30 rounded-xl'>
-              <p className='text-green-400 text-center'>✓ Message sent successfully!</p>
+              <p className='text-green-400 text-center'>✓ Message sent successfully to innovationsaris@gmail.com!</p>
             </div>
           )}
           
@@ -292,7 +294,7 @@ const ContactForm = () => {
 
             <div className='group'>
               <label className='block text-white/90 text-sm font-medium mb-2 group-focus-within:text-cyan-300 transition-colors'>
-                Message
+                Message <span className='text-white/50 text-xs'>(Optional)</span>
               </label>
               <textarea
                 name='message'
@@ -302,7 +304,7 @@ const ContactForm = () => {
                 className={`w-full px-4 py-3 bg-white/5 border ${
                   errors.message ? 'border-red-500' : 'border-white/20'
                 } rounded-xl text-white placeholder-white/50 focus:outline-none focus:border-cyan-300 focus:bg-white/10 transition-all duration-300 backdrop-blur-sm resize-none focus:shadow-lg focus:shadow-cyan-300/20`}
-                placeholder='Tell us about your project...'
+                placeholder='Tell us about your project... (optional)'
               ></textarea>
               {errors.message && (
                 <p className="text-red-500 text-sm mt-1">{errors.message}</p>

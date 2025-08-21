@@ -14,7 +14,7 @@ const Arisportfolio = () => {
 
   // Countdown timer (you can set your target date)
   useEffect(() => {
-    const targetDate = new Date('2025-12-31T00:00:00').getTime();
+    const targetDate = new Date('2026-02-17T00:00:00').getTime();
 
     const interval = setInterval(() => {
       const now = new Date().getTime();
@@ -90,33 +90,6 @@ const Arisportfolio = () => {
 
 
   }, []);
-
-  const upcomingFeatures = [
-    {
-      title: 'Interactive <b>Showcases</b>',
-      description: 'Immersive project presentations with 3D elements and smooth transitions.',
-      icon: '🎨',
-      progress: 85
-    },
-    {
-      title: 'Case <b>Studies</b>',
-      description: 'Detailed breakdowns of our creative process and project outcomes.',
-      icon: '📊',
-      progress: 70
-    },
-    {
-      title: 'Live <b>Demos</b>',
-      description: 'Interactive prototypes and real-time project demonstrations.',
-      icon: '🚀',
-      progress: 60
-    },
-    {
-      title: 'Client <b>Testimonials</b>',
-      description: 'Video testimonials and success stories from satisfied clients.',
-      icon: '💬',
-      progress: 45
-    }
-  ];
 
 
 

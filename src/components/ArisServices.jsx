@@ -555,9 +555,9 @@ const InnovativeServicesPage = () => {
   ];
 
   const stats = [
-    { number: '250+', label: 'Projects Completed' },
-    { number: '98', label: 'Client Satisfaction %' },
-    { number: '5', label: 'Years Experience' },
+    { number: '50+', label: 'Projects Completed' },
+    { number: '99%', label: 'Client Satisfaction %' },
+    { number: '2+', label: 'Years Experience' },
     { number: '24/7', label: 'Support Available' }
   ];
 
