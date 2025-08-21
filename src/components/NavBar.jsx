@@ -37,11 +37,13 @@ const NavbarLinks = [
 const NavBar = () => {
   const location = useLocation();
   const navContainer = useRef(null);
+  const mobileMenuRef = useRef(null);
   const audioElement = useRef(null);
   const [isAudioPlaying, setIsAudioPlaying] = useState(false);
   const [isIndicatorVisible, setIsIndicatorVisible] = useState(false);
   const [lastScrolledY, setLastScrolledY] = useState(0);
   const [isNavVisible, setIsNavVisible] = useState(true);
+  const [isMobileMenuOpen, setIsMobileMenuOpen] = useState(false);
   const { y: currentScrollY } = useWindowScroll();
 
   const matchRoute = (route) => {
@@ -53,9 +55,18 @@ const NavBar = () => {
     setIsIndicatorVisible(!isIndicatorVisible);
   };
 
+  const toggleMobileMenu = () => {
+    setIsMobileMenuOpen(!isMobileMenuOpen);
+  };
+
+  const closeMobileMenu = () => {
+    setIsMobileMenuOpen(false);
+  };
+
   useEffect(() => {
     setIsAudioPlaying(false);
     setIsIndicatorVisible(false);
+    setIsMobileMenuOpen(false); // Close mobile menu on route change
   }, [location.pathname]);
 
   useEffect(() => {
@@ -91,11 +102,37 @@ const NavBar = () => {
 
   useEffect(() => {
     gsap.to(navContainer.current, {
-      y: isNavVisible ? 0 : -100,
+      y: isNavVisible ? 0 : -80,
       opacity: isNavVisible ? 1 : 0,
       duration: 0.2,
     });
   }, [isNavVisible]);
+
+  // Mobile menu animation
+  useEffect(() => {
+    if (mobileMenuRef.current) {
+      gsap.to(mobileMenuRef.current, {
+        height: isMobileMenuOpen ? 'auto' : 0,
+        opacity: isMobileMenuOpen ? 1 : 0,
+        duration: 0.3,
+        ease: "power2.out",
+      });
+    }
+  }, [isMobileMenuOpen]);
+
+  // Close mobile menu when clicking outside
+  useEffect(() => {
+    const handleClickOutside = (event) => {
+      if (navContainer.current && !navContainer.current.contains(event.target)) {
+        setIsMobileMenuOpen(false);
+      }
+    };
+
+    document.addEventListener('mousedown', handleClickOutside);
+    return () => {
+      document.removeEventListener('mousedown', handleClickOutside);
+    };
+  }, []);
 
   // Map NavbarLinks to PillNav items format
   const pillNavItems = NavbarLinks.map((item) => ({
@@ -106,80 +143,146 @@ const NavBar = () => {
   return (
     <div
       ref={navContainer}
-      className="fixed inset-x-0 top-4 z-50 h-16 flex border-none transition-all duration-700 sm:inset-x-6"
+      className="fixed inset-x-4 top-6 z-50 h-14 border-none transition-all duration-700 sm:inset-x-8 lg:inset-x-12"
     >
-      <header className="absolute top-1/2 w-full -translate-y-1/2">
-        <nav className="flex size-full items-center justify-between p-4">
-          {/* Logo and Product button */}
-          <div className="flex items-center gap-7">
-            <img src={logo} alt="Company Logo" className="w-16 h-auto" />
-            <Link to="/products">
-              <Button
-                id="product-button"
-                title="Products"
-                rightIcon={<TiLocationArrow />}
-                containerClass="bg-blue-50 md:flex hidden items-center justify-center gap-1 text-2xl font-bold py-2 px-4 h-10"
-              />
-            </Link>
-          </div>
+      <nav className="flex w-full h-full items-center justify-between px-4 py-2 rounded-xl">
+        {/* Logo and Product button */}
+        <div className="flex items-center gap-3 sm:gap-6">
+          <img src={logo} alt="Company Logo" className="w-10 h-auto sm:w-12" />
+          <Link to="/products" className="hidden lg:block">
+            <Button
+              id="product-button"
+              title="Products"
+              rightIcon={<TiLocationArrow />}
+              containerClass="bg-blue-50 flex items-center justify-center gap-1 text-lg font-bold py-1.5 px-3 h-8"
+            />
+          </Link>
+        </div>
 
-          {/* PillNav and Audio Button */}
-          <div className="flex h-full items-center">
-            <div className="hidden md:block">
-              <PillNav
-                logo={null} // Remove duplicate logo since it's already on the left
-                logoAlt=""
-                items={pillNavItems}
-                activeHref={location.pathname}
-                className="rounded-full backdrop-blur-sm bg-white/10 border border-white/20 shadow-lg"
-                ease="power2.easeOut"
-                baseColor="rgba(255, 255, 255, 0.1)"
-                pillColor="#ffffff"
-                hoveredPillTextColor="#000000"
-                pillTextColor="#ffffff"
-              />
-            </div>
+        {/* Desktop PillNav and Audio Button */}
+        <div className="hidden md:flex h-full items-center">
+          <PillNav
+            logo={null}
+            logoAlt=""
+            items={pillNavItems}
+            activeHref={location.pathname}
+            className="rounded-full backdrop-blur-sm bg-white/10 border border-white/20 shadow-lg"
+            ease="power2.easeOut"
+            baseColor="rgba(255, 255, 255, 0.1)"
+            pillColor="#ffffff"
+            hoveredPillTextColor="#000000"
+            pillTextColor="#ffffff"
+          />
 
-            {/* Audio Indicator - only show on home page */}
-            {matchRoute("/") && (
-              <button
-                className="ml-10 flex items-center space-x-0.5 cursor-pointer h-5 w-4"
-                onClick={toggleAudioIndicator}
-                aria-label="Toggle background audio"
-              >
-                <audio ref={audioElement} src="/audio/loop.mp3" className="hidden" loop />
-                {[1, 2, 3, 4].map((bar) => (
-                  <div
-                    key={bar}
-                    className={`indicator-line w-0.5 h-full bg-white rounded-sm transition-all duration-300 ${
-                      isIndicatorVisible ? 'animate-pulse' : ''
-                    }`}
-                    style={{
-                      animationDelay: `${bar * 0.1}s`,
-                      height: isIndicatorVisible ? `${Math.random() * 100 + 50}%` : '20%',
-                    }}
-                  />
-                ))}
-              </button>
-            )}
-          </div>
-        </nav>
-      </header>
+          {/* Audio Indicator - only show on home page */}
+          {matchRoute("/") && (
+            <button
+              className="ml-6 flex items-center space-x-0.5 cursor-pointer h-4 w-3"
+              onClick={toggleAudioIndicator}
+              aria-label="Toggle background audio"
+            >
+              <audio ref={audioElement} src="/audio/loop.mp3" className="hidden" loop />
+              {[1, 2, 3, 4].map((bar) => (
+                <div
+                  key={bar}
+                  className={`indicator-line w-0.5 h-full bg-white rounded-sm transition-all duration-300 ${
+                    isIndicatorVisible ? 'animate-pulse' : ''
+                  }`}
+                  style={{
+                    animationDelay: `${bar * 0.1}s`,
+                    height: isIndicatorVisible ? `${Math.random() * 100 + 50}%` : '20%',
+                  }}
+                />
+              ))}
+            </button>
+          )}
+        </div>
 
-      {/* Mobile Menu - Simple fallback for smaller screens */}
-      <div className="md:hidden absolute top-full left-0 w-full bg-black/90 backdrop-blur-sm mt-2 rounded-lg p-4 hidden">
-        <div className="flex flex-col gap-2">
-          {NavbarLinks.map((item) => (
+        {/* Mobile Menu Toggle and Audio Button */}
+        <div className="flex md:hidden items-center gap-3">
+          {/* Mobile Audio Indicator - only show on home page */}
+          {matchRoute("/") && (
+            <button
+              className="flex items-center space-x-0.5 cursor-pointer h-3 w-2.5"
+              onClick={toggleAudioIndicator}
+              aria-label="Toggle background audio"
+            >
+              {[1, 2, 3, 4].map((bar) => (
+                <div
+                  key={bar}
+                  className={`indicator-line w-0.5 h-full bg-white rounded-sm transition-all duration-300 ${
+                    isIndicatorVisible ? 'animate-pulse' : ''
+                  }`}
+                  style={{
+                    animationDelay: `${bar * 0.1}s`,
+                    height: isIndicatorVisible ? `${Math.random() * 100 + 50}%` : '20%',
+                  }}
+                />
+              ))}
+            </button>
+          )}
+
+          {/* Hamburger Menu Button */}
+          <button
+            onClick={toggleMobileMenu}
+            className="flex flex-col justify-center items-center w-6 h-6 space-y-1 focus:outline-none"
+            aria-label="Toggle mobile menu"
+          >
+            <span
+              className={`block w-5 h-0.5 bg-white transition-all duration-300 ${
+                isMobileMenuOpen ? 'rotate-45 translate-y-1' : ''
+              }`}
+            />
+            <span
+              className={`block w-5 h-0.5 bg-white transition-all duration-300 ${
+                isMobileMenuOpen ? 'opacity-0' : ''
+              }`}
+            />
+            <span
+              className={`block w-5 h-0.5 bg-white transition-all duration-300 ${
+                isMobileMenuOpen ? '-rotate-45 -translate-y-1' : ''
+              }`}
+            />
+          </button>
+        </div>
+      </nav>
+
+      {/* Mobile Menu */}
+      <div
+        ref={mobileMenuRef}
+        className="md:hidden overflow-hidden"
+        style={{ height: 0, opacity: 0 }}
+      >
+        <div className="bg-black/95 backdrop-blur-sm mt-2 rounded-lg p-3 border border-white/10 shadow-xl">
+          <div className="flex flex-col gap-1">
+            {/* Mobile Products Link */}
             <Link
-              key={item.path}
-              to={item.path}
-              className={`px-4 py-2 rounded-lg text-white hover:bg-white/10 transition-colors ${
-                location.pathname === item.path ? 'bg-white/20' : ''
+              to="/products"
+              onClick={closeMobileMenu}
+              className={`px-3 py-2 rounded-lg text-white hover:bg-white/10 transition-colors text-sm font-medium ${
+                location.pathname === "/products" ? 'bg-white/20' : ''
               }`}
             >
-              {item.title}
+              Products
             </Link>
-          ))}
+            
+            {/* Divider */}
+            <div className="h-px bg-white/10 my-1" />
+            
+            {/* Navigation Links */}
+            {NavbarLinks.map((item) => (
+              <Link
+                key={item.path}
+                to={item.path}
+                onClick={closeMobileMenu}
+                className={`px-3 py-2 rounded-lg text-white hover:bg-white/10 transition-colors text-sm font-medium ${
+                  location.pathname === item.path ? 'bg-white/20' : ''
+                }`}
+              >
+                {item.title}
+              </Link>
+            ))}
+          </div>
         </div>
       </div>
 
@@ -207,6 +310,9 @@ const NavBar = () => {
             height: 100%;
           }
         }
+
+        /* Prevent body scroll when mobile menu is open */
+        ${isMobileMenuOpen ? 'body { overflow: hidden; }' : ''}
       `}</style>
     </div>
   );

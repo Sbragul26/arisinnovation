@@ -14,10 +14,6 @@ const ContactForm = () => {
       errors.firstName = 'First name is required';
     }
     
-    if (!values.lastName.trim()) {
-      errors.lastName = 'Last name is required';
-    }
-    
     if (!values.email.trim()) {
       errors.email = 'Email is required';
     } else if (!/\S+@\S+\.\S+/.test(values.email)) {
@@ -148,15 +144,16 @@ const ContactForm = () => {
         // EmailJS template parameters - message will be sent to innovationsaris@gmail.com
         const templateParams = {
           to_email: 'innovationsaris@gmail.com', // Fixed recipient email
-          from_name: `${formData.firstName} ${formData.lastName}`,
-          from_email: formData.email,
-          subject: formData.subject,
+          from_name: 'clients-@aris', // Fixed sender name to avoid "me" issue
+          from_email: 'noreply@emailjs.com', // Use EmailJS default
+          subject: `${formData.subject} - from ${formData.firstName}${formData.lastName ? ' ' + formData.lastName : ''}`,
           message: formData.message,
           reply_to: formData.email, // This allows you to reply directly to the sender
-          // Additional fields for better email formatting
+          // Contact details for email content
           user_first_name: formData.firstName,
-          user_last_name: formData.lastName,
-          user_email: formData.email
+          user_last_name: formData.lastName || '',
+          user_email: formData.email,
+          user_full_name: `${formData.firstName}${formData.lastName ? ' ' + formData.lastName : ''}`
         };
 
         await emailjs.send(
@@ -228,7 +225,7 @@ const ContactForm = () => {
                   className={`w-full px-4 py-3 bg-white/5 border ${
                     errors.firstName ? 'border-red-500' : 'border-white/20'
                   } rounded-xl text-white placeholder-white/50 focus:outline-none focus:border-cyan-300 focus:bg-white/10 transition-all duration-300 backdrop-blur-sm focus:shadow-lg focus:shadow-cyan-300/20`}
-                  placeholder='John'
+                  placeholder=''
                 />
                 {errors.firstName && (
                   <p className="text-red-500 text-sm mt-1">{errors.firstName}</p>
@@ -236,7 +233,7 @@ const ContactForm = () => {
               </div>
               <div className='group'>
                 <label className='block text-white/90 text-sm font-medium mb-2 group-focus-within:text-cyan-300 transition-colors'>
-                  Last Name
+                  Last Name <span className='text-white/50 text-xs'>(Optional)</span>
                 </label>
                 <input
                   type='text'
@@ -246,7 +243,7 @@ const ContactForm = () => {
                   className={`w-full px-4 py-3 bg-white/5 border ${
                     errors.lastName ? 'border-red-500' : 'border-white/20'
                   } rounded-xl text-white placeholder-white/50 focus:outline-none focus:border-cyan-300 focus:bg-white/10 transition-all duration-300 backdrop-blur-sm focus:shadow-lg focus:shadow-cyan-300/20`}
-                  placeholder='Doe'
+                  placeholder=''
                 />
                 {errors.lastName && (
                   <p className="text-red-500 text-sm mt-1">{errors.lastName}</p>
@@ -266,7 +263,7 @@ const ContactForm = () => {
                 className={`w-full px-4 py-3 bg-white/5 border ${
                   errors.email ? 'border-red-500' : 'border-white/20'
                 } rounded-xl text-white placeholder-white/50 focus:outline-none focus:border-cyan-300 focus:bg-white/10 transition-all duration-300 backdrop-blur-sm focus:shadow-lg focus:shadow-cyan-300/20`}
-                placeholder='john@example.com'
+                placeholder='example@gmail.com'
               />
               {errors.email && (
                 <p className="text-red-500 text-sm mt-1">{errors.email}</p>
@@ -304,7 +301,7 @@ const ContactForm = () => {
                 className={`w-full px-4 py-3 bg-white/5 border ${
                   errors.message ? 'border-red-500' : 'border-white/20'
                 } rounded-xl text-white placeholder-white/50 focus:outline-none focus:border-cyan-300 focus:bg-white/10 transition-all duration-300 backdrop-blur-sm resize-none focus:shadow-lg focus:shadow-cyan-300/20`}
-                placeholder='Tell us about your project... (optional)'
+                placeholder='Tell us about your project'
               ></textarea>
               {errors.message && (
                 <p className="text-red-500 text-sm mt-1">{errors.message}</p>
