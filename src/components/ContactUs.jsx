@@ -44,10 +44,10 @@ const ContactUs = () => {
             Partner with Aris
           </p>
 
-          <AnimatedTitle
-            title="let&#39;s cr<b>e</b>ate something <br /> extraordin<b>a</b>ry <br /> tog<b>e</b>ther."
-            className="font-sans font-light !text-4xl md:!text-6xl lg:!text-7xl w-full !leading-[.9] tracking-wide"
-          />
+         <AnimatedTitle
+  title="let&#39;s cr<b>e</b>ate something <br /> extraordin<b>a</b>ry <br /> tog<b>e</b>ther."
+  className="font-sans font-light !text-2xl xs:!text-3xl sm:!text-4xl md:!text-5xl lg:!text-6xl xl:!text-7xl w-full !leading-[0.8] sm:!leading-[0.85] md:!leading-[0.9] tracking-wide px-2 sm:px-4"
+/>
           <Link to={'/contact'}>
             <Button 
                 title="start your project" 
