@@ -114,18 +114,17 @@ const Arisproducts = () => {
             
             <div className="max-w-4xl mx-auto">
               <p className="text-xl md:text-2xl font-light text-gray-200 leading-relaxed mb-12">
-                We're crafting something extraordinary. Our portfolio showcase will feature stunning 
-                <span className="text-cyan-300 font-medium"> interactive experiences</span> and 
-                <span className="text-cyan-300 font-medium"> cutting-edge designs</span> that push 
-                the boundaries of creativity.
+                We're building awesome software tools that make your life easier. Our new 
+                <span className="text-cyan-300 font-medium"> web applications</span> and 
+                <span className="text-cyan-300 font-medium"> software solutions</span> will help your business grow faster.
               </p>
               
               <div className="flex flex-wrap justify-center gap-4 text-sm uppercase tracking-widest text-cyan-300 font-medium mb-16">
-                <span>Innovation</span>
+                <span>Easy to Use</span>
                 <span>•</span>
-                <span>Creativity</span>
+                <span>Fast & Reliable</span>
                 <span>•</span>
-                <span>Excellence</span>
+                <span>Built for You</span>
                 <span>•</span>
                 <span>Coming Soon</span>
               </div>
@@ -134,7 +133,7 @@ const Arisproducts = () => {
 
           {/* Countdown Timer */}
           <div className="countdown-section mb-20">
-            <h3 className="text-3xl font-semibold text-cyan-300 mb-8">Launch Countdown</h3>
+            <h3 className="text-3xl font-semibold text-cyan-300 mb-8">Products Launch in</h3>
             <div className="flex flex-wrap justify-center gap-6">
               <div className="countdown-item text-center p-6 bg-gradient-to-br from-gray-800/70 to-gray-900/70 rounded-2xl border border-cyan-500/20 backdrop-blur-md min-w-[120px]">
                 <div className="text-4xl md:text-5xl font-bold text-cyan-300 mb-2">{timeLeft.days}</div>
@@ -161,9 +160,9 @@ const Arisproducts = () => {
         {/* Features Preview Section */}
         <div className="features-section mt-32">
           <div className="text-center mb-16">
-            <h2 className="text-5xl md:text-6xl font-semibold text-cyan-300 mb-8">What's <b>Coming</b></h2>
+            <h2 className="text-5xl md:text-6xl font-semibold text-cyan-300 mb-8">What We're <b>Creating</b></h2>
             <p className="max-w-3xl mx-auto text-lg text-gray-200">
-              Get ready for an immersive portfolio experience featuring our best work and innovative showcases.
+              We're working hard to build software that actually works for you. Simple, fast, and made to solve real problems that businesses face every day.
             </p>
           </div>
 {/*}
@@ -211,7 +210,7 @@ const Arisproducts = () => {
               <div key={index} className="aspect-video bg-gradient-to-br from-gray-800/60 to-gray-900/60 rounded-2xl border border-cyan-500/20 backdrop-blur-md flex items-center justify-center hover:border-cyan-400/40 transition-all duration-300 group cursor-pointer">
                 <div className="text-center">
                   <div className="text-6xl text-cyan-300/50 mb-4 group-hover:text-cyan-300/80 transition-all duration-300">🎨</div>
-                  <p className="text-gray-400 text-sm group-hover:text-gray-300 transition-all duration-300">Project Preview</p>
+                  <p className="text-gray-400 text-sm group-hover:text-gray-300 transition-all duration-300">Product Preview</p>
                 </div>
               </div>
             ))}
@@ -222,9 +221,9 @@ const Arisproducts = () => {
         {/* CTA Section */}
         <div className="cta-section mt-32 text-center">
           <div className="max-w-4xl mx-auto p-12 bg-gradient-to-r from-cyan-500/20 to-blue-600/20 rounded-3xl border border-cyan-500/30 backdrop-blur-lg">
-            <h2 className="text-4xl md:text-5xl font-semibold text-cyan-300 mb-6">Stay <b>Updated</b></h2>
+            <h2 className="text-4xl md:text-5xl font-semibold text-cyan-300 mb-6">Stay in <b>Touch</b></h2>
             <p className="text-lg text-gray-200 mb-8">
-              Be the first to experience our new portfolio showcase. Follow us for updates and behind-the-scenes content.
+              Want to know when our new software is ready? Join our list and be the first to try our tools. We'll also give you special pricing when we launch.
             </p>
             <div className="flex flex-wrap justify-center gap-4">
               {/*}

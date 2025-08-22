@@ -132,41 +132,12 @@ const Arisportfolio = () => {
             </div>
           </div>
 
-          {/* Countdown Timer */}
-          <div className="countdown-section mb-20">
-            <h3 className="text-3xl font-semibold text-cyan-300 mb-8">Launch Countdown</h3>
-            <div className="flex flex-wrap justify-center gap-6">
-              <div className="countdown-item text-center p-6 bg-gradient-to-br from-gray-800/70 to-gray-900/70 rounded-2xl border border-cyan-500/20 backdrop-blur-md min-w-[120px]">
-                <div className="text-4xl md:text-5xl font-bold text-cyan-300 mb-2">{timeLeft.days}</div>
-                <div className="text-gray-300 text-sm uppercase tracking-wider">Days</div>
-              </div>
-              <div className="countdown-item text-center p-6 bg-gradient-to-br from-gray-800/70 to-gray-900/70 rounded-2xl border border-cyan-500/20 backdrop-blur-md min-w-[120px]">
-                <div className="text-4xl md:text-5xl font-bold text-cyan-300 mb-2">{timeLeft.hours}</div>
-                <div className="text-gray-300 text-sm uppercase tracking-wider">Hours</div>
-              </div>
-              <div className="countdown-item text-center p-6 bg-gradient-to-br from-gray-800/70 to-gray-900/70 rounded-2xl border border-cyan-500/20 backdrop-blur-md min-w-[120px]">
-                <div className="text-4xl md:text-5xl font-bold text-cyan-300 mb-2">{timeLeft.minutes}</div>
-                <div className="text-gray-300 text-sm uppercase tracking-wider">Minutes</div>
-              </div>
-              <div className="countdown-item text-center p-6 bg-gradient-to-br from-gray-800/70 to-gray-900/70 rounded-2xl border border-cyan-500/20 backdrop-blur-md min-w-[120px]">
-                <div className="text-4xl md:text-5xl font-bold text-cyan-300 mb-2">{timeLeft.seconds}</div>
-                <div className="text-gray-300 text-sm uppercase tracking-wider">Seconds</div>
-              </div>
-            </div>
-          </div>
+
         </div>
 
 
 
-        {/* Features Preview Section */}
-        <div className="features-section mt-32">
-          <div className="text-center mb-16">
-            <h2 className="text-5xl md:text-6xl font-semibold text-cyan-300 mb-8">What's <b>Coming</b></h2>
-            <p className="max-w-3xl mx-auto text-lg text-gray-200">
-              Get ready for an immersive portfolio experience featuring our best work and innovative showcases.
-            </p>
-          </div>
-{/*}
+{/*
           <div className="grid grid-cols-1 md:grid-cols-2 gap-8 max-w-6xl mx-auto">
             {upcomingFeatures.map((feature, index) => (
               <div key={index} className="feature-card relative p-8 bg-gradient-to-br from-gray-800/80 to-gray-900/80 rounded-3xl border border-cyan-500/30 backdrop-blur-md hover:border-cyan-400/50 transition-all duration-300">
@@ -196,7 +167,6 @@ const Arisportfolio = () => {
           </div>
 */}
 
-        </div>
 {/*
         <div className="mt-32">
           <div className="text-center mb-16">
@@ -219,25 +189,6 @@ const Arisportfolio = () => {
         </div>
 */}
 
-        {/* CTA Section */}
-        <div className="cta-section mt-32 text-center">
-          <div className="max-w-4xl mx-auto p-12 bg-gradient-to-r from-cyan-500/20 to-blue-600/20 rounded-3xl border border-cyan-500/30 backdrop-blur-lg">
-            <h2 className="text-4xl md:text-5xl font-semibold text-cyan-300 mb-6">Stay <b>Updated</b></h2>
-            <p className="text-lg text-gray-200 mb-8">
-              Be the first to experience our new portfolio showcase. Follow us for updates and behind-the-scenes content.
-            </p>
-            <div className="flex flex-wrap justify-center gap-4">
-              {/*}
-              <button className="bg-gradient-to-r from-cyan-400 to-blue-500 text-black px-8 py-3 text-lg font-semibold rounded-full hover:scale-105 hover:shadow-2xl hover:shadow-cyan-400/30 transition-all duration-300">
-                Notify Me
-              </button>
-              <button className="border border-cyan-400 text-cyan-300 px-8 py-3 text-lg font-semibold rounded-full hover:bg-cyan-400/10 hover:scale-105 transition-all duration-300">
-                Learn More
-              </button>
-              */}
-            </div>
-          </div>
-        </div>
       </div>
     </div>
   );

@@ -2,11 +2,7 @@ import React, { useState, useEffect, useRef } from 'react';
 import AnimatedTitle from './AnimatedTitle';
 import Button from './Button';
 import { Link } from 'react-router-dom';
-import { useGSAP } from '@gsap/react';
-import gsap from 'gsap';
-import { ScrollTrigger } from 'gsap/ScrollTrigger';
 
-gsap.registerPlugin(ScrollTrigger);
 
 const CounterCard = ({ targetNumber, label, duration = 2000, delay = 0 }) => {
   const [count, setCount] = useState(0);
@@ -87,7 +83,7 @@ const CounterCard = ({ targetNumber, label, duration = 2000, delay = 0 }) => {
   return (
     <div 
       ref={cardRef}
-      className="stats-card text-center p-8 bg-gradient-to-br from-gray-800/70 to-gray-900/70 rounded-3xl border border-cyan-500/20 backdrop-blur-md shadow-lg"
+      className="stats-card text-center p-8 bg-gradient-to-br from-gray-800/70 to-gray-900/70 rounded-3xl border border-cyan-500/20 backdrop-blur-md shadow-lg hover:border-cyan-400/40 hover:scale-105 transition-all duration-300"
     >
       <h3 className="text-5xl md:text-6xl font-bold text-cyan-300 mb-3">
         {displayValue()}
@@ -97,181 +93,92 @@ const CounterCard = ({ targetNumber, label, duration = 2000, delay = 0 }) => {
   );
 };
 
-const AboutUs = () => {
-  useGSAP(() => {
-    gsap.from('.about-section', {
-      opacity: 0,
-      y: 50,
-      duration: 1,
-      ease: 'power2.out',
-      scrollTrigger: {
-        trigger: '.about-section',
-        start: 'top 80%',
-        toggleActions: 'play none none reverse',
-      },
-    });
+// Logo Scroll Component with CSS-based animation (no GSAP dependency)
+const LogoScroll = ({ items, scrollSpeed = 0.3, pauseOnHover = true }) => {
+  const scrollerRef = useRef(null);
+  const [isPaused, setIsPaused] = useState(false);
 
-    gsap.from('.service-card', {
-      opacity: 0,
-      scale: 0.9,
-      stagger: 0.2,
-      duration: 0.8,
-      ease: 'power2.out',
-      scrollTrigger: {
-        trigger: '.services-grid',
-        start: 'top 75%',
-        toggleActions: 'play none none reverse',
-      },
-    });
-
-    gsap.from('.stats-card', {
-      opacity: 0,
-      y: 30,
-      stagger: 0.1,
-      duration: 0.6,
-      ease: 'power2.out',
-      scrollTrigger: {
-        trigger: '.stats-section',
-        start: 'top 80%',
-        toggleActions: 'play none none reverse',
-      },
-    });
-
-    // Vision & Mission Section Animation
-    gsap.from('.vision-mission-title', {
-      opacity: 0,
-      scale: 0.8,
-      duration: 1.2,
-      ease: 'back.out(1.7)',
-      scrollTrigger: {
-        trigger: '.vision-mission-section',
-        start: 'top 75%',
-        toggleActions: 'play none none reverse',
-      },
-    });
-
-    gsap.from('.vision-card', {
-      opacity: 0,
-      x: -100,
-      rotation: -5,
-      duration: 1,
-      ease: 'power3.out',
-      scrollTrigger: {
-        trigger: '.vision-mission-section',
-        start: 'top 70%',
-        toggleActions: 'play none none reverse',
-      },
-    });
-
-    gsap.from('.mission-card', {
-      opacity: 0,
-      x: 100,
-      rotation: 5,
-      duration: 1,
-      delay: 0.3,
-      ease: 'power3.out',
-      scrollTrigger: {
-        trigger: '.vision-mission-section',
-        start: 'top 70%',
-        toggleActions: 'play none none reverse',
-      },
-    });
-
-    // Floating animation for vision/mission cards
-    gsap.to('.vision-card', {
-      y: -10,
-      rotation: 2,
-      duration: 3,
-      ease: 'power2.inOut',
-      repeat: -1,
-      yoyo: true,
-    });
-
-    gsap.to('.mission-card', {
-      y: 10,
-      rotation: -2,
-      duration: 3.5,
-      ease: 'power2.inOut',
-      repeat: -1,
-      yoyo: true,
-      delay: 1,
-    });
-
-    gsap.from('.mission-section', {
-      opacity: 0,
-      x: -50,
-      duration: 1,
-      ease: 'power2.out',
-      scrollTrigger: {
-        trigger: '.mission-section',
-        start: 'top 80%',
-        toggleActions: 'play none none reverse',
-      },
-    });
-
-    gsap.from('.partners-section', {
-      opacity: 0,
-      y: 30,
-      duration: 1,
-      ease: 'power2.out',
-      scrollTrigger: {
-        trigger: '.partners-section',
-        start: 'top 85%',
-        toggleActions: 'play none none reverse',
-      },
-    });
-
-    gsap.to('.partners-scroll', {
-      x: '-50%',
-      duration: 20,
-      ease: 'none',
-      repeat: -1,
-    });
-  }, []);
-
-  const services = [
-    {
-      title: 'UI/UX <b>D</b>esign',
-      description: 'Crafting intuitive and engaging designs to deliver seamless user experiences.',
-      image: '/images/ui-ux-design.png',
-    },
-    {
-      title: 'Web <b>D</b>esigning',
-      description: 'Building visually stunning and functional websites tailored to your brand.',
-      image: '/images/web-design.png',
-    },
-    {
-      title: 'Digital <b>M</b>arketing',
-      description: 'Boosting your brand reach with strategic campaigns that drive results.',
-      image: '/images/digital-marketing.png',
-    },
-    {
-      title: 'Graphic <b>D</b>esigning',
-      description: 'Creating captivating visuals to elevate your brand identity.',
-      image: '/images/graphic-design.png',
-    },
-    {
-      title: 'Br<b>a</b>nding',
-      description: 'Developing a unique brand story that resonates with your audience.',
-      image: '/images/branding.png',
-    },
-    {
-      title: 'Print <b>M</b>edia',
-      description: 'Designing high-impact print materials for lasting impressions.',
-      image: '/images/photoshoot.png',
-    },
-    {
-      title: 'Custom PC & Server <b>B</b>uilding',
-      description: 'Delivering high-performance hardware solutions for your needs.',
-      image: '/images/photoshoot.png',
-    },
-    {
-      title: 'Product <b>P</b>hotoshoots',
-      description: 'Capturing your products with professional, high-quality photography.',
-      image: '/images/photoshoot.png',
-    },
+  const defaultLogos = [
+    'astra', 'BA','cit', 'Dia cure logo', 'Eicher-Motors-Logo', 'GK Logo',
+    'H&H Logo', 'Happy bites Logo', 'Homefin Logo', 'KB Logo', 'MKS Logo',
+    'SDC Logo', 'SSb Logo-01', 'TK LOGO', 'Trip38 Logo', 'Trust Logo'
   ];
 
+  const logoItems = items && items.length ? items : defaultLogos;
+
+  useEffect(() => {
+    if (!scrollerRef.current) return;
+
+    const scroller = scrollerRef.current;
+    const scrollerContent = Array.from(scroller.children);
+
+    // Clone items for seamless loop
+    scrollerContent.forEach(item => {
+      const duplicatedItem = item.cloneNode(true);
+      scroller.appendChild(duplicatedItem);
+    });
+  }, [logoItems]);
+
+  const animationSpeed = 30 / scrollSpeed; // Adjust speed
+
+  return (
+    <div className="relative overflow-hidden py-16">
+      {/* Gradient overlays */}
+      <div className="absolute inset-y-0 left-0 w-40 bg-gradient-to-r from-black to-transparent z-10"></div>
+      <div className="absolute inset-y-0 right-0 w-40 bg-gradient-to-l from-black to-transparent z-10"></div>
+
+      <div 
+        ref={scrollerRef}
+        className="flex items-center space-x-8 animate-scroll"
+        style={{
+          animationDuration: `${animationSpeed}s`,
+          animationPlayState: (pauseOnHover && isPaused) ? 'paused' : 'running'
+        }}
+        onMouseEnter={() => pauseOnHover && setIsPaused(true)}
+        onMouseLeave={() => pauseOnHover && setIsPaused(false)}
+      >
+        {logoItems.map((partner, index) => (
+          <div 
+            key={index} 
+            className="flex-shrink-0 w-64 h-36 bg-white/10 rounded-xl border border-cyan-500/20 backdrop-blur-md flex items-center justify-center hover:bg-white/20 hover:border-cyan-400/40 hover:scale-105 transition-all duration-300 group cursor-pointer"
+          >
+            <img
+              src={`/logos/${partner}.png`}
+              alt={partner}
+              className="max-w-48 max-h-24 object-contain filter brightness-90 group-hover:brightness-110 transition-all duration-300"
+              onError={(e) => {
+                e.target.style.display = 'none';
+                e.target.nextSibling.style.display = 'block';
+              }}
+            />
+            <span className="text-gray-300 text-sm font-medium hidden group-hover:text-white transition-colors duration-300">
+              {partner}
+            </span>
+          </div>
+        ))}
+      </div>
+
+      {pauseOnHover }
+      <style jsx>{`
+        @keyframes scroll {
+          0% {
+            transform: translateX(0);
+          }
+          100% {
+            transform: translateX(-50%);
+          }
+        }
+        
+        .animate-scroll {
+          animation: scroll linear infinite;
+          width: max-content;
+        }
+      `}</style>
+    </div>
+  );
+};
+
+const AboutUs = () => {
   const stats = [
     { number: '50+', label: 'Projects Completed' },
     { number: '70+', label: 'Happy Clients' },
@@ -286,13 +193,13 @@ const AboutUs = () => {
   ];
 
   return (
-    <div className="min-h-screen w-screen bg-gradient-to-br from-gray-900 via-black to-gray-900 text-white overflow-x-hidden font-['Poppins',sans-serif]">
+    <div className="min-h-screen w-screen bg-gradient-to-br from-gray-900 via-black to-gray-900 text-white overflow-x-hidden font-sans">
       {/* Hero Section */}
       <div className="container mx-auto px-6 py-24">
         <div className="about-section text-center">
           <AnimatedTitle
             title="Shaping <b>F</b>utures <br /> Your Creative <b>P</b>artner"
-            containerClass="text-7xl md:text-[6rem] font-black tracking-wide !text-white text-center mb-12"
+            containerClass="text-7xl md:text-[6rem] font-black tracking-wide text-white text-center mb-12"
           />
           <p className="max-w-4xl mx-auto text-lg md:text-xl font-light text-gray-200 leading-relaxed mb-10">
             At Aris, we transform visions into reality with innovative, high-impact digital and creative solutions designed to elevate your brand and captivate your audience.
@@ -334,11 +241,11 @@ const AboutUs = () => {
 
           <div className="grid md:grid-cols-2 gap-12 max-w-7xl mx-auto">
             {/* Vision Card */}
-            <div className="vision-card relative">
-              <div className="absolute inset-0 bg-gradient-to-br from-cyan-500/20 to-blue-600/20 rounded-3xl blur-xl"></div>
-              <div className="relative bg-gradient-to-br from-gray-800/80 to-gray-900/80 p-12 rounded-3xl border border-cyan-500/30 backdrop-blur-lg hover:border-cyan-400/50 transition-all duration-500">
+            <div className="vision-card relative group">
+              <div className="absolute inset-0 bg-gradient-to-br from-cyan-500/20 to-blue-600/20 rounded-3xl blur-xl group-hover:blur-2xl transition-all duration-500"></div>
+              <div className="relative bg-gradient-to-br from-gray-800/80 to-gray-900/80 p-12 rounded-3xl border border-cyan-500/30 backdrop-blur-lg hover:border-cyan-400/50 hover:scale-105 transition-all duration-500">
                 <div className="flex items-center mb-8">
-                  <div className="w-16 h-16 bg-gradient-to-br from-cyan-400 to-blue-500 rounded-full flex items-center justify-center mr-6">
+                  <div className="w-16 h-16 bg-gradient-to-br from-cyan-400 to-blue-500 rounded-full flex items-center justify-center mr-6 hover:scale-110 transition-transform duration-300">
                     <svg className="w-8 h-8 text-black" fill="currentColor" viewBox="0 0 20 20">
                       <path d="M10 12a2 2 0 100-4 2 2 0 000 4z"/>
                       <path fillRule="evenodd" d="M.458 10C1.732 5.943 5.522 3 10 3s8.268 2.943 9.542 7c-1.274 4.057-5.064 7-9.542 7S1.732 14.057.458 10zM14 10a4 4 0 11-8 0 4 4 0 018 0z" clipRule="evenodd"/>
@@ -357,11 +264,11 @@ const AboutUs = () => {
             </div>
 
             {/* Mission Card */}
-            <div className="mission-card relative">
-              <div className="absolute inset-0 bg-gradient-to-br from-blue-500/20 to-purple-600/20 rounded-3xl blur-xl"></div>
-              <div className="relative bg-gradient-to-br from-gray-800/80 to-gray-900/80 p-12 rounded-3xl border border-blue-500/30 backdrop-blur-lg hover:border-blue-400/50 transition-all duration-500">
+            <div className="mission-card relative group">
+              <div className="absolute inset-0 bg-gradient-to-br from-blue-500/20 to-purple-600/20 rounded-3xl blur-xl group-hover:blur-2xl transition-all duration-500"></div>
+              <div className="relative bg-gradient-to-br from-gray-800/80 to-gray-900/80 p-12 rounded-3xl border border-blue-500/30 backdrop-blur-lg hover:border-blue-400/50 hover:scale-105 transition-all duration-500">
                 <div className="flex items-center mb-8">
-                  <div className="w-16 h-16 bg-gradient-to-br from-blue-400 to-purple-500 rounded-full flex items-center justify-center mr-6">
+                  <div className="w-16 h-16 bg-gradient-to-br from-blue-400 to-purple-500 rounded-full flex items-center justify-center mr-6 hover:scale-110 transition-transform duration-300">
                     <svg className="w-8 h-8 text-black" fill="currentColor" viewBox="0 0 20 20">
                       <path fillRule="evenodd" d="M6 6V5a3 3 0 013-3h2a3 3 0 013 3v1h2a2 2 0 012 2v3.57A22.952 22.952 0 0110 13a22.95 22.95 0 01-8-1.43V8a2 2 0 012-2h2zm2-1a1 1 0 011-1h2a1 1 0 011 1v1H8V5zm1 5a1 1 0 011-1h.01a1 1 0 110 2H10a1 1 0 01-1-1z" clipRule="evenodd"/>
                       <path d="M2 13.692V16a2 2 0 002 2h12a2 2 0 002-2v-2.308A24.974 24.974 0 0110 15c-2.796 0-5.487-.46-8-1.308z"/>
@@ -381,56 +288,30 @@ const AboutUs = () => {
           </div>
         </div>
 
-        {/* Partners Section */}
+        {/* Partners Section with Logo Scroll */}
         <div className="partners-section mt-32">
           <div className="text-center mb-16">
-            <h2 className="text-4xl md:text-5xl font-semibold text-cyan-300 mb-6">Trusted by <b>Leaders</b></h2>
+            <h2 className="text-4xl md:text-5xl font-semibold text-cyan-300 mb-6">
+              Trusted by <b>Leaders</b>
+            </h2>
             <p className="text-lg text-gray-200">
               Collaborating with top brands to deliver exceptional results
             </p>
           </div>
 
-          <div className="relative overflow-hidden py-16">
-            <div className="absolute inset-y-0 left-0 w-40 bg-gradient-to-r from-black to-transparent z-10"></div>
-            <div className="absolute inset-y-0 right-0 w-40 bg-gradient-to-l from-black to-transparent z-10"></div>
-
-            <div className="partners-scroll flex items-center space-x-24 whitespace-nowrap" style={{ width: '200%' }}>
-              {partners.map((partner, index) => (
-                <div key={index} className="flex-shrink-0 w-64 h-36 bg-white/10 rounded-xl border border-cyan-500/20 backdrop-blur-md flex items-center justify-center hover:bg-white/20 transition-all duration-300">
-                  <img
-                    src={`/logos/${partner}.png`}
-                    alt={partner}
-                    className="max-w-48 max-h-24 object-contain filter brightness-90 hover:brightness-110 transition-all duration-300"
-                    onError={(e) => {
-                      e.target.style.display = 'none';
-                      e.target.nextSibling.style.display = 'block';
-                    }}
-                  />
-                  <span className="text-gray-300 text-sm font-medium hidden">{partner}</span>
-                </div>
-              ))}
-              {partners.map((partner, index) => (
-                <div key={`duplicate-${index}`} className="flex-shrink-0 w-64 h-36 bg-white/10 rounded-xl border border-cyan-500/20 backdrop-blur-md flex items-center justify-center hover:bg-white/20 transition-all duration-300">
-                  <img
-                    src={`/logos/${partner}.png`}
-                    alt={partner}
-                    className="max-w-48 max-h-24 object-contain filter brightness-90 hover:brightness-110 transition-all duration-300"
-                    onError={(e) => {
-                      e.target.style.display = 'none';
-                      e.target.nextSibling.style.display = 'block';
-                    }}
-                  />
-                  <span className="text-gray-300 text-sm font-medium hidden">{partner}</span>
-                </div>
-              ))}
-            </div>
-          </div>
+          <LogoScroll 
+            items={partners}
+            scrollSpeed={1.2}
+            pauseOnHover={true}
+          />
         </div>
 
         {/* CTA Section */}
         <div className="mt-32 text-center">
-          <div className="max-w-4xl mx-auto p-12 bg-gradient-to-r from-cyan-500/20 to-blue-600/20 rounded-3xl border border-cyan-500/30 backdrop-blur-lg">
-            <h2 className="text-4xl md:text-5xl font-semibold text-cyan-300 mb-6">Ready to Build Something <b>Extraordinary</b>?</h2>
+          <div className="max-w-4xl mx-auto p-12 bg-gradient-to-r from-cyan-500/20 to-blue-600/20 rounded-3xl border border-cyan-500/30 backdrop-blur-lg hover:border-cyan-400/40 hover:scale-105 transition-all duration-500">
+            <h2 className="text-4xl md:text-5xl font-semibold text-cyan-300 mb-6">
+              Ready to Build Something <b>Extraordinary</b>?
+            </h2>
             <p className="text-lg text-gray-200 mb-8">
               Partner with Aris to turn your ideas into impactful realities. Let's create something unforgettable together.
             </p>
