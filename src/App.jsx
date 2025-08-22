@@ -3,7 +3,8 @@ import { BrowserRouter as Router, Routes, Route } from 'react-router-dom'
 import Home from './pages/Home'
 import AboutUs from './components/Aboutus';
 import NavBar from './components/NavBar'
-import About from './pages/About'
+//import About from './pages/About'
+import Arisproducts from './components/Arisproducts'
 import Contact from './pages/Contact'
 import Footer from './components/Footer'
 import ScrollTop from './components/ScrollTop'
@@ -17,7 +18,7 @@ const App = () => {
       <Routes>
         <Route path="/" element={<Home />} />
         <Route path="/aboutUs" element={<AboutUs />} />
-        <Route path="/products" element={<About />} />
+        <Route path="/products" element={<Arisproducts />} />
         <Route path="/contact" element={<Contact/>} />
         <Route path="/portfolio" element={<Portfolio />} />
         <Route path="/services" element={<ArisServices />} />
