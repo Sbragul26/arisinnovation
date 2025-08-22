@@ -137,63 +137,64 @@ const AboutUs = () => {
       },
     });
 
-    // Timeline animations
-    gsap.from('.timeline-title', {
+    // Vision & Mission Section Animation
+    gsap.from('.vision-mission-title', {
       opacity: 0,
-      y: 40,
-      duration: 1,
-      ease: 'power2.out',
+      scale: 0.8,
+      duration: 1.2,
+      ease: 'back.out(1.7)',
       scrollTrigger: {
-        trigger: '.timeline-section',
-        start: 'top 80%',
-        toggleActions: 'play none none reverse',
-      },
-    });
-
-    // Animate timeline line
-    gsap.fromTo('.timeline-line', 
-      { 
-        scaleY: 0,
-        transformOrigin: 'top center'
-      },
-      {
-        scaleY: 1,
-        duration: 2,
-        ease: 'power2.out',
-        scrollTrigger: {
-          trigger: '.timeline-section',
-          start: 'top 70%',
-          toggleActions: 'play none none reverse',
-        },
-      }
-    );
-
-    // Animate timeline items with stagger
-    gsap.from('.timeline-item', {
-      opacity: 0,
-      x: (index) => index % 2 === 0 ? -50 : 50,
-      stagger: 0.3,
-      duration: 0.8,
-      ease: 'power2.out',
-      scrollTrigger: {
-        trigger: '.timeline-container',
+        trigger: '.vision-mission-section',
         start: 'top 75%',
         toggleActions: 'play none none reverse',
       },
     });
 
-    // Animate timeline dots
-    gsap.from('.timeline-dot', {
-      scale: 0,
-      rotation: 360,
-      stagger: 0.2,
-      duration: 0.6,
-      ease: 'back.out(1.7)',
+    gsap.from('.vision-card', {
+      opacity: 0,
+      x: -100,
+      rotation: -5,
+      duration: 1,
+      ease: 'power3.out',
       scrollTrigger: {
-        trigger: '.timeline-container',
+        trigger: '.vision-mission-section',
         start: 'top 70%',
         toggleActions: 'play none none reverse',
       },
+    });
+
+    gsap.from('.mission-card', {
+      opacity: 0,
+      x: 100,
+      rotation: 5,
+      duration: 1,
+      delay: 0.3,
+      ease: 'power3.out',
+      scrollTrigger: {
+        trigger: '.vision-mission-section',
+        start: 'top 70%',
+        toggleActions: 'play none none reverse',
+      },
+    });
+
+    // Floating animation for vision/mission cards
+    gsap.to('.vision-card', {
+      y: -10,
+      rotation: 2,
+      duration: 3,
+      ease: 'power2.inOut',
+      repeat: -1,
+      yoyo: true,
+    });
+
+    gsap.to('.mission-card', {
+      y: 10,
+      rotation: -2,
+      duration: 3.5,
+      ease: 'power2.inOut',
+      repeat: -1,
+      yoyo: true,
+      delay: 1,
     });
 
     gsap.from('.mission-section', {
@@ -228,38 +229,54 @@ const AboutUs = () => {
     });
   }, []);
 
+  const services = [
+    {
+      title: 'UI/UX <b>D</b>esign',
+      description: 'Crafting intuitive and engaging designs to deliver seamless user experiences.',
+      image: '/images/ui-ux-design.png',
+    },
+    {
+      title: 'Web <b>D</b>esigning',
+      description: 'Building visually stunning and functional websites tailored to your brand.',
+      image: '/images/web-design.png',
+    },
+    {
+      title: 'Digital <b>M</b>arketing',
+      description: 'Boosting your brand reach with strategic campaigns that drive results.',
+      image: '/images/digital-marketing.png',
+    },
+    {
+      title: 'Graphic <b>D</b>esigning',
+      description: 'Creating captivating visuals to elevate your brand identity.',
+      image: '/images/graphic-design.png',
+    },
+    {
+      title: 'Br<b>a</b>nding',
+      description: 'Developing a unique brand story that resonates with your audience.',
+      image: '/images/branding.png',
+    },
+    {
+      title: 'Print <b>M</b>edia',
+      description: 'Designing high-impact print materials for lasting impressions.',
+      image: '/images/photoshoot.png',
+    },
+    {
+      title: 'Custom PC & Server <b>B</b>uilding',
+      description: 'Delivering high-performance hardware solutions for your needs.',
+      image: '/images/photoshoot.png',
+    },
+    {
+      title: 'Product <b>P</b>hotoshoots',
+      description: 'Capturing your products with professional, high-quality photography.',
+      image: '/images/photoshoot.png',
+    },
+  ];
+
   const stats = [
     { number: '50+', label: 'Projects Completed' },
     { number: '70+', label: 'Happy Clients' },
     { number: '2+', label: 'Years Experience' },
     { number: '24/7', label: 'Support Available' },
-  ];
-
-  const timelineData = [
-    {
-      year: '2022',
-      title: 'The Beginning',
-      description: 'Founded Aris with a vision to transform digital experiences and creative solutions.',
-      icon: '🚀'
-    },
-    {
-      year: '2023',
-      title: 'First Milestone',
-      description: 'Successfully delivered 25+ projects and built lasting relationships with key clients.',
-      icon: '🎯'
-    },
-    {
-      year: '2024',
-      title: 'Expansion',
-      description: 'Grew our team and expanded service offerings to include advanced digital solutions.',
-      icon: '📈'
-    },
-    {
-      year: '2025',
-      title: 'Innovation Leader',
-      description: 'Recognized as a leading creative partner with 70+ satisfied clients and counting.',
-      icon: '🏆'
-    }
   ];
 
   const partners = [
@@ -306,48 +323,60 @@ const AboutUs = () => {
           </div>
         </div>
 
-        {/* Timeline Section */}
-        <div className="timeline-section mt-32">
-          <div className="text-center mb-16">
-            <h2 className="timeline-title text-4xl md:text-5xl font-semibold text-cyan-300 mb-6">Our <b>Journey</b></h2>
-            <p className="text-lg text-gray-200">
-              From inception to innovation - the milestones that shaped our story
-            </p>
+        {/* Vision & Mission Section */}
+        <div className="vision-mission-section mt-32">
+          <div className="text-center mb-20">
+            <h2 className="vision-mission-title text-5xl md:text-6xl font-bold text-cyan-300 mb-6">
+              Our <b>Vision</b> & <b>Mission</b>
+            </h2>
+            <div className="w-24 h-1 bg-gradient-to-r from-cyan-400 to-blue-500 mx-auto rounded-full"></div>
           </div>
 
-          <div className="timeline-container relative max-w-6xl mx-auto">
-            {/* Timeline Line */}
-            <div className="timeline-line absolute left-1/2 transform -translate-x-1/2 w-1 bg-gradient-to-b from-cyan-400 to-blue-600 h-full rounded-full"></div>
-
-            {/* Timeline Items */}
-            <div className="space-y-16">
-              {timelineData.map((item, index) => (
-                <div 
-                  key={index}
-                  className={`timeline-item relative flex items-center ${
-                    index % 2 === 0 ? 'justify-start' : 'justify-end'
-                  }`}
-                >
-                  {/* Timeline Dot */}
-                  <div className="timeline-dot absolute left-1/2 transform -translate-x-1/2 w-6 h-6 bg-gradient-to-r from-cyan-400 to-blue-500 rounded-full border-4 border-gray-900 z-10 flex items-center justify-center">
-                    <div className="w-2 h-2 bg-white rounded-full"></div>
+          <div className="grid md:grid-cols-2 gap-12 max-w-7xl mx-auto">
+            {/* Vision Card */}
+            <div className="vision-card relative">
+              <div className="absolute inset-0 bg-gradient-to-br from-cyan-500/20 to-blue-600/20 rounded-3xl blur-xl"></div>
+              <div className="relative bg-gradient-to-br from-gray-800/80 to-gray-900/80 p-12 rounded-3xl border border-cyan-500/30 backdrop-blur-lg hover:border-cyan-400/50 transition-all duration-500">
+                <div className="flex items-center mb-8">
+                  <div className="w-16 h-16 bg-gradient-to-br from-cyan-400 to-blue-500 rounded-full flex items-center justify-center mr-6">
+                    <svg className="w-8 h-8 text-black" fill="currentColor" viewBox="0 0 20 20">
+                      <path d="M10 12a2 2 0 100-4 2 2 0 000 4z"/>
+                      <path fillRule="evenodd" d="M.458 10C1.732 5.943 5.522 3 10 3s8.268 2.943 9.542 7c-1.274 4.057-5.064 7-9.542 7S1.732 14.057.458 10zM14 10a4 4 0 11-8 0 4 4 0 018 0z" clipRule="evenodd"/>
+                    </svg>
                   </div>
-
-                  {/* Timeline Content */}
-                  <div className={`w-5/12 ${index % 2 === 0 ? 'pr-12 text-right' : 'pl-12 text-left'}`}>
-                    <div className="bg-gradient-to-br from-gray-800/60 to-gray-900/60 p-8 rounded-2xl border border-cyan-500/20 backdrop-blur-md hover:border-cyan-400/40 transition-all duration-300">
-                      <div className="flex items-center gap-3 mb-4">
-                        <span className="text-3xl">{item.icon}</span>
-                        <div>
-                          <h3 className="text-2xl font-bold text-cyan-300">{item.year}</h3>
-                          <h4 className="text-lg font-semibold text-white">{item.title}</h4>
-                        </div>
-                      </div>
-                      <p className="text-gray-300 leading-relaxed">{item.description}</p>
-                    </div>
-                  </div>
+                  <h3 className="text-3xl font-bold text-cyan-300">Our Vision</h3>
                 </div>
-              ))}
+                <p className="text-gray-200 text-lg leading-relaxed">
+                  To become the leading creative powerhouse that transforms businesses through innovative design and cutting-edge digital solutions, setting new standards of excellence in the creative industry while empowering brands to reach their full potential.
+                </p>
+                <div className="mt-8 flex items-center text-cyan-300">
+                  <div className="w-12 h-0.5 bg-cyan-400 mr-4"></div>
+                  <span className="text-sm font-medium tracking-wider uppercase">Future Forward</span>
+                </div>
+              </div>
+            </div>
+
+            {/* Mission Card */}
+            <div className="mission-card relative">
+              <div className="absolute inset-0 bg-gradient-to-br from-blue-500/20 to-purple-600/20 rounded-3xl blur-xl"></div>
+              <div className="relative bg-gradient-to-br from-gray-800/80 to-gray-900/80 p-12 rounded-3xl border border-blue-500/30 backdrop-blur-lg hover:border-blue-400/50 transition-all duration-500">
+                <div className="flex items-center mb-8">
+                  <div className="w-16 h-16 bg-gradient-to-br from-blue-400 to-purple-500 rounded-full flex items-center justify-center mr-6">
+                    <svg className="w-8 h-8 text-black" fill="currentColor" viewBox="0 0 20 20">
+                      <path fillRule="evenodd" d="M6 6V5a3 3 0 013-3h2a3 3 0 013 3v1h2a2 2 0 012 2v3.57A22.952 22.952 0 0110 13a22.95 22.95 0 01-8-1.43V8a2 2 0 012-2h2zm2-1a1 1 0 011-1h2a1 1 0 011 1v1H8V5zm1 5a1 1 0 011-1h.01a1 1 0 110 2H10a1 1 0 01-1-1z" clipRule="evenodd"/>
+                      <path d="M2 13.692V16a2 2 0 002 2h12a2 2 0 002-2v-2.308A24.974 24.974 0 0110 15c-2.796 0-5.487-.46-8-1.308z"/>
+                    </svg>
+                  </div>
+                  <h3 className="text-3xl font-bold text-blue-300">Our Mission</h3>
+                </div>
+                <p className="text-gray-200 text-lg leading-relaxed">
+                  To deliver exceptional creative solutions that drive measurable results for our clients. We combine strategic thinking, innovative design, and technical expertise to create memorable brand experiences that resonate with audiences and accelerate business growth.
+                </p>
+                <div className="mt-8 flex items-center text-blue-300">
+                  <div className="w-12 h-0.5 bg-blue-400 mr-4"></div>
+                  <span className="text-sm font-medium tracking-wider uppercase">Excellence Driven</span>
+                </div>
+              </div>
             </div>
           </div>
         </div>
