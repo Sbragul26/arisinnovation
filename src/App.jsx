@@ -7,13 +7,15 @@ import NavBar from './components/NavBar'
 import Arisproducts from './components/Arisproducts'
 import Contact from './pages/Contact'
 import Footer from './components/Footer'
-import ScrollTop from './components/ScrollTop'
+//import ScrollTop from './components/ScrollTop'
 import Portfolio from './pages/Portfolio'
 import ArisServices from './components/ArisServices';
+import ScrollToTopButton from './components/ScrollToTopButton'; // Import the new component
+
 const App = () => {
   return (
     <main className='relative min-h-screen w-screen overflow-x-hidden'>
-      <ScrollTop/>
+      
       <NavBar/>
       <Routes>
         <Route path="/" element={<Home />} />
@@ -24,6 +26,7 @@ const App = () => {
         <Route path="/services" element={<ArisServices />} />
       </Routes>
       <Footer/>
+      <ScrollToTopButton /> {/* Add the scroll to top button */}
     </main>
   )
 }

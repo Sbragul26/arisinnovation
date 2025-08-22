@@ -148,7 +148,13 @@ const NavBar = () => {
       <nav className="flex w-full h-full items-center justify-between px-4 py-2 rounded-xl">
         {/* Logo and Product button */}
         <div className="flex items-center gap-3 sm:gap-6">
-          <img src={logo} alt="Company Logo" className="w-10 h-auto sm:w-12" />
+          <Link to="/">
+            <img
+              src={logo}
+              alt="Company Logo"
+              className="w-10 h-auto sm:w-12 cursor-pointer"
+            />
+          </Link>
           {/*}
           <Link to="/products" className="hidden lg:block">
             <Button
