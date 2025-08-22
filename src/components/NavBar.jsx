@@ -17,16 +17,16 @@ const NavbarLinks = [
     path: "/aboutUs",
   },
   {
-    title: "Products",
-    path: "/products",
-  },
-  {
     title: "Services",
     path: "/services",
   },
   {
     title: "Portfolio",
     path: "/portfolio",
+  },
+  {
+    title: "Products",
+    path: "/products",
   },
   {
     title: "Contact Us",
@@ -149,6 +149,7 @@ const NavBar = () => {
         {/* Logo and Product button */}
         <div className="flex items-center gap-3 sm:gap-6">
           <img src={logo} alt="Company Logo" className="w-10 h-auto sm:w-12" />
+          {/*}
           <Link to="/products" className="hidden lg:block">
             <Button
               id="product-button"
@@ -157,6 +158,7 @@ const NavBar = () => {
               containerClass="bg-blue-50 flex items-center justify-center gap-1 text-lg font-bold py-1.5 px-3 h-8"
             />
           </Link>
+          */}
         </div>
 
         {/* Desktop PillNav and Audio Button */}
@@ -173,29 +175,6 @@ const NavBar = () => {
             hoveredPillTextColor="#000000"
             pillTextColor="#ffffff"
           />
-
-          {/* Audio Indicator - only show on home page */}
-          {matchRoute("/") && (
-            <button
-              className="ml-6 flex items-center space-x-0.5 cursor-pointer h-4 w-3"
-              onClick={toggleAudioIndicator}
-              aria-label="Toggle background audio"
-            >
-              <audio ref={audioElement} src="/audio/loop.mp3" className="hidden" loop />
-              {[1, 2, 3, 4].map((bar) => (
-                <div
-                  key={bar}
-                  className={`indicator-line w-0.5 h-full bg-white rounded-sm transition-all duration-300 ${
-                    isIndicatorVisible ? 'animate-pulse' : ''
-                  }`}
-                  style={{
-                    animationDelay: `${bar * 0.1}s`,
-                    height: isIndicatorVisible ? `${Math.random() * 100 + 50}%` : '20%',
-                  }}
-                />
-              ))}
-            </button>
-          )}
         </div>
 
         {/* Mobile Menu Toggle and Audio Button */}
