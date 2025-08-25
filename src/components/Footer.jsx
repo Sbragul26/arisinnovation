@@ -22,24 +22,17 @@ const socialLinks = [
 
 const quickLinks = [
   { href: '/', label: 'Home' },
-  { href: '/about', label: 'About Us' },
+  { href: '/aboutUs', label: 'About Us' },
   { href: '/services', label: 'Services' },
   { href: '/portfolio', label: 'Portfolio' },
   { href: '/contact', label: 'Contact' }
 ];
 
-const services = [
-  { href: '/services/web-development', label: 'Web Development' },
-  { href: '/services/mobile-apps', label: 'Mobile App Development' },
-  { href: '/services/digital-marketing', label: 'Digital Marketing' },
-  { href: '/services/ui-ux-design', label: 'UI/UX Design' },
-  { href: '/services/ecommerce', label: 'E-commerce Solutions' },
-  { href: '/services/branding', label: 'Branding & Identity' }
-];
+
 
 const Footer = () => {
   return (
-    <footer className="relative bg-gradient-to-br from-gray-900 via-black to-gray-900 text-white py-16 overflow-hidden">
+    <footer className="relative bg-gradient-to-br from-gray-900 via-black to-gray-900 text-white py-8 overflow-hidden">
       {/* Subtle Background Effects */}
       <div className="absolute inset-0 opacity-10">
         <div className="absolute top-10 left-1/5 w-48 h-48 bg-cyan-500 rounded-full blur-3xl animate-pulse"></div>
@@ -54,15 +47,15 @@ const Footer = () => {
       }}></div>
 
       <div className="container mx-auto px-6 sm:px-8 lg:px-12 relative">
-        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-10">
+        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6">
           {/* Company Info */}
           <div className="relative group">
             <div className="absolute inset-0 bg-gradient-to-br from-cyan-500/20 to-blue-600/20 rounded-3xl blur-xl group-hover:blur-2xl transition-all duration-500"></div>
-            <div className="relative bg-gradient-to-br from-gray-800/80 to-gray-900/80 p-8 rounded-3xl border border-cyan-500/30 backdrop-blur-lg hover:border-cyan-400/50 hover:scale-105 transition-all duration-500">
-              <h3 className="text-3xl font-bold mb-6 bg-gradient-to-r from-cyan-400 to-blue-500 bg-clip-text text-transparent">
+            <div className="relative bg-gradient-to-br from-gray-800/80 to-gray-900/80 p-4 rounded-3xl border border-cyan-500/30 backdrop-blur-lg hover:border-cyan-400/50 hover:scale-105 transition-all duration-500">
+              <h3 className="text-xl font-bold mb-3 bg-gradient-to-r from-cyan-400 to-blue-500 bg-clip-text text-transparent">
                 Aris Innovations
               </h3>
-              <p className="text-gray-200 text-sm leading-relaxed mb-6">
+              <p className="text-gray-200 text-xs leading-relaxed mb-3">
                 Transforming ideas into innovative digital solutions. We create cutting-edge technology experiences that drive business growth.
               </p>
               <div className="flex space-x-4">
@@ -72,10 +65,10 @@ const Footer = () => {
                     to={social.href}
                     target="_blank"
                     rel="noopener noreferrer"
-                    className="group w-12 h-12 rounded-full bg-gradient-to-br from-cyan-400 to-blue-500 flex items-center justify-center transition-all duration-300 hover:scale-110 hover:shadow-lg hover:shadow-cyan-400/40"
+                    className="group w-8 h-8 rounded-full bg-gradient-to-br from-cyan-400 to-blue-500 flex items-center justify-center transition-all duration-300 hover:scale-110 hover:shadow-lg hover:shadow-cyan-400/40"
                     aria-label={social.label}
                   >
-                    <span className="text-black text-lg group-hover:scale-110 transition-transform duration-300">
+                    <span className="text-black text-sm group-hover:scale-110 transition-transform duration-300">
                       {social.icon}
                     </span>
                   </Link>
@@ -86,11 +79,11 @@ const Footer = () => {
 
           {/* Quick Links */}
           <div>
-            <h3 className="text-2xl font-semibold mb-6 text-cyan-300 relative">
+            <h3 className="text-lg font-semibold mb-3 text-cyan-300 relative">
               Quick Links
-              <div className="absolute bottom-0 left-0 w-16 h-1 bg-gradient-to-r from-cyan-400 to-transparent rounded-full"></div>
+              <div className="absolute bottom-0 left-0 w-12 h-0.5 bg-gradient-to-r from-cyan-400 to-transparent rounded-full"></div>
             </h3>
-            <ul className="space-y-4">
+            <ul className="space-y-2">
               {quickLinks.map((link, index) => (
                 <li key={index}>
                   <Link
@@ -108,48 +101,32 @@ const Footer = () => {
 
           {/* Services */}
           <div>
-            <h3 className="text-2xl font-semibold mb-6 text-cyan-300 relative">
-              Services
-              <div className="absolute bottom-0 left-0 w-16 h-1 bg-gradient-to-r from-blue-400 to-transparent rounded-full"></div>
-            </h3>
-            <ul className="space-y-4">
-              {services.map((service, index) => (
-                <li key={index}>
-                  <Link
-                    to={service.href}
-                    className="text-gray-200 hover:text-blue-300 text-sm font-medium transition-all duration-300 hover:translate-x-2 inline-block group"
-                  >
-                    <span className="border-b border-transparent group-hover:border-blue-300 transition-all duration-300">
-                      {service.label}
-                    </span>
-                  </Link>
-                </li>
-              ))}
+            <ul className="space-y-2">
             </ul>
           </div>
 
           {/* Contact Info */}
           <div>
-            <h3 className="text-2xl font-semibold mb-6 text-cyan-300 relative">
+            <h3 className="text-lg font-semibold mb-3 text-cyan-300 relative">
               Contact Us
-              <div className="absolute bottom-0 left-0 w-16 h-1 bg-gradient-to-r from-purple-400 to-transparent rounded-full"></div>
+              <div className="absolute bottom-0 left-0 w-12 h-0.5 bg-gradient-to-r from-purple-400 to-transparent rounded-full"></div>
             </h3>
-            <address className="not-italic space-y-4">
+            <address className="not-italic space-y-2">
               <div className="flex items-center space-x-3 text-gray-200 hover:text-cyan-300 transition-colors duration-300">
-                <FaEnvelope className="text-cyan-400 flex-shrink-0 text-lg" />
-                <a href="mailto:info@arisinnovations.com" className="text-sm hover:underline">
+                <FaEnvelope className="text-cyan-400 flex-shrink-0 text-base" />
+                <a href="mailto:info@arisinnovations.com" className="text-xs hover:underline">
                   info@arisinnovations.com
                 </a>
               </div>
               <div className="flex items-center space-x-3 text-gray-200 hover:text-cyan-300 transition-colors duration-300">
-                <FaPhone className="text-blue-400 flex-shrink-0 text-lg" />
-                <a href="tel:+916385870211" className="text-sm hover:underline">
+                <FaPhone className="text-blue-400 flex-shrink-0 text-base" />
+                <a href="tel:+916385870211" className="text-xs hover:underline">
                   +91 63858 70211
                 </a>
               </div>
               <div className="flex items-start space-x-3 text-gray-200">
-                <FaMapMarkerAlt className="text-purple-400 flex-shrink-0 mt-1 text-lg" />
-                <span className="text-sm leading-relaxed">
+                <FaMapMarkerAlt className="text-purple-400 flex-shrink-0 mt-0.5 text-base" />
+                <span className="text-xs leading-relaxed">
                   Coimbatore, Tamil Nadu<br />
                   India
                 </span>
@@ -159,11 +136,11 @@ const Footer = () => {
         </div>
 
         {/* Bottom Section */}
-        <div className="border-t border-cyan-500/20 mt-12 pt-8 flex flex-col md:flex-row justify-between items-center space-y-4 md:space-y-0">
-          <p className="text-gray-300 text-sm font-light">
+        <div className="border-t border-cyan-500/20 mt-6 pt-4 flex flex-col md:flex-row justify-between items-center space-y-2 md:space-y-0">
+          <p className="text-gray-300 text-xs font-light">
             © {new Date().getFullYear()} Aris Innovations. All rights reserved.
           </p>
-          <div className="flex space-x-6 text-sm">
+          <div className="flex space-x-4 text-xs">
             <Link
               to="/privacy-policy"
               className="text-gray-200 hover:text-cyan-300 transition-colors duration-300 hover:underline"

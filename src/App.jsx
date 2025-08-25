@@ -11,12 +11,14 @@ import Footer from './components/Footer'
 import Portfolio from './pages/Portfolio'
 import ArisServices from './components/ArisServices';
 import ScrollToTopButton from './components/ScrollToTopButton'; // Import the new component
+import ScrollToTop from './components/Scroll';
 
 const App = () => {
   return (
     <main className='relative min-h-screen w-screen overflow-x-hidden'>
       
       <NavBar/>
+      <ScrollToTop /> {/* Ensure the page scrolls to top on route change */}
       <Routes>
         <Route path="/" element={<Home />} />
         <Route path="/aboutUs" element={<AboutUs />} />

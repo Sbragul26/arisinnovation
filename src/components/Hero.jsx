@@ -212,38 +212,41 @@ const Hero = () => {
                         ))}
 
                         {/* Main loading content */}
-                        <div className="text-center z-10">
-                            <div id="loading-brand" className="mb-8">
-                                <h1 className='font-serif text-8xl md:text-9xl italic text-white mb-4'>
-                                    A<span className="text-blue-400">r</span>is
-                                </h1>
-                            </div>
+                            <div className="text-center z-10">
+                                <div id="loading-brand" className="mb-8 flex flex-col items-center">
+                                    <img 
+                                        src="/img/logo.png" 
+                                        alt="Brand Logo" 
+                                        className="w-24 md:w-32 h-auto" 
+                                    />
 
-                            <div id="loading-text" className="mb-8">
-                                <p className="text-white/80 text-xl font-light tracking-wider">
-                                    Crafting The Extraordinary
-                                </p>
-                                <p className="text-white/60 text-sm mt-2">
-                                    Loading your creative experience...
-                                </p>
-                            </div>
+                                </div>
 
-                            {/* Progress bar */}
-                            <div className="w-64 h-1 bg-white/20 rounded-full mx-auto overflow-hidden">
-                                <div 
-                                    id="progress-bar" 
-                                    className="h-full bg-gradient-to-r from-blue-400 to-purple-500 rounded-full w-0"
-                                ></div>
-                            </div>
+                                <div id="loading-text" className="mb-8">
+                                    <p className="text-white/80 text-xl font-light tracking-wider">
+                                        Crafting The Extraordinary
+                                    </p>
+                                    <p className="text-white/60 text-sm mt-2">
+                                        Loading your creative experience...
+                                    </p>
+                                </div>
 
-                            {/* Loading dots */}
-                            <div className='loading-container mt-8'>
-                                <div className='loading-circle'></div>
-                                <div className='loading-circle'></div>
-                                <div className='loading-circle'></div>
-                                <div className='loading-circle'></div>
+                                {/* Progress bar */}
+                                <div className="w-64 h-1 bg-white/20 rounded-full mx-auto overflow-hidden">
+                                    <div 
+                                        id="progress-bar" 
+                                        className="h-full bg-gradient-to-r from-blue-400 to-purple-500 rounded-full w-0"
+                                    ></div>
+                                </div>
+
+                                {/* Loading dots */}
+                                <div className="loading-container mt-8">
+                                    <div className="loading-circle"></div>
+                                    <div className="loading-circle"></div>
+                                    <div className="loading-circle"></div>
+                                    <div className="loading-circle"></div>
+                                </div>
                             </div>
-                        </div>
 
                         {/* Background grid pattern */}
                         <div className="absolute inset-0 opacity-10">
