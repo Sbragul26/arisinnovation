@@ -3,6 +3,8 @@ import { Link } from "react-router-dom";
 import { gsap } from 'gsap';
 import { ScrollTrigger } from 'gsap/ScrollTrigger';
 import { TextPlugin } from 'gsap/TextPlugin';
+import { TiLocationArrow, TiArrowLeft } from "react-icons/ti";
+import DetailedServiceView from './DetailedServiceView'; // Importing the separate DetailedServiceView component
 
 // Register GSAP plugins
 gsap.registerPlugin(ScrollTrigger, TextPlugin);
@@ -185,7 +187,28 @@ const BentoTilt = ({ children, className }) => {
   );
 };
 
-// Enhanced Counter Card with Advanced Animations
+// BentoCard Component for detailed view
+const BentoCard = ({ src, title, description, isComingSoon }) => (
+  <div className="relative size-full">
+    <img
+      src={src}
+      alt="feature"
+      className="absolute left-0 top-0 size-full object-cover object-center"
+    />
+    {/* Enhanced overlay for better text visibility */}
+    <div className="absolute inset-0 bg-gradient-to-br from-black/80 via-black/60 to-black/70"></div>
+    <div className="relative z-10 flex size-full flex-col justify-between p-5 text-white">
+      <div>
+        <h1 className="bento-title special-font text-white drop-shadow-lg">{title}</h1>
+        {description && (
+          <p className="mt-3 max-w-64 text-xs md:text-base text-gray-100 drop-shadow-md">{description}</p>
+        )}
+      </div>
+    </div>
+  </div>
+);
+
+// Enhanced CounterCard with Advanced Animations
 const CounterCard = ({ targetNumber, label, duration = 2000, delay = 0 }) => {
   const [count, setCount] = useState(0);
   const [hasAnimated, setHasAnimated] = useState(false);
@@ -331,10 +354,9 @@ const CounterCard = ({ targetNumber, label, duration = 2000, delay = 0 }) => {
 // Enhanced Floating Hero Image
 const FloatingHeroImage = () => {
   const frameRef = useRef(null);
-  const imageRef = useRef(null);
 
   useEffect(() => {
-    if (frameRef.current && imageRef.current) {
+    if (frameRef.current) {
       // Initial hero animation
       gsap.fromTo(frameRef.current,
         {
@@ -432,6 +454,7 @@ const FloatingHeroImage = () => {
 // Main Services Component with Enhanced GSAP
 const InnovativeServicesPage = () => {
   const [activeService, setActiveService] = useState(0);
+  const [selectedService, setSelectedService] = useState(null);
   const heroRef = useRef(null);
   const servicesRef = useRef(null);
   const processRef = useRef(null);
@@ -561,6 +584,19 @@ const InnovativeServicesPage = () => {
     { number: '24/7', label: 'Support Available' }
   ];
 
+  const handleLearnMore = (service) => {
+    setSelectedService(service);
+  };
+
+  const handleBackToServices = () => {
+    setSelectedService(null);
+  };
+
+  // If a service is selected, show the detailed view
+  if (selectedService) {
+    return <DetailedServiceView service={selectedService} onBack={handleBackToServices} />;
+  }
+
   return (
     <div className="min-h-screen w-full bg-gradient-to-br from-gray-900 via-black to-gray-900 text-white overflow-x-hidden font-['Inter',sans-serif]">
       
@@ -643,6 +679,7 @@ const InnovativeServicesPage = () => {
                     <Button
                       title="Learn More"
                       containerClass="mt-6 bg-gradient-to-r from-cyan-400 to-blue-500 text-black px-6 py-3 text-sm font-semibold rounded-full hover:scale-105 hover:shadow-lg hover:shadow-cyan-400/30 transition-all duration-300"
+                      onClick={() => handleLearnMore(service)}
                     />
                   </div>
                 </div>
