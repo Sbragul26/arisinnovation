@@ -173,7 +173,7 @@ const Hero = () => {
             });
         }
     }, { dependencies: [currentIndex], revertOnUpdate: true });
-
+{/*
     useGSAP(() => {
         gsap.set("#video-frame", {
             clipPath: "polygon(14% 0, 72% 0, 88% 90%, 0 95%)",
@@ -191,6 +191,7 @@ const Hero = () => {
             },
         });
     });
+    */}
 
     const getVideoSrc = (index) => `videos/hero-${index}.mp4`;
 
@@ -296,10 +297,11 @@ const Hero = () => {
                     />
                 </div>
 
-                {/* Brand name positioned at bottom right */}
+                {/* Brand name positioned at bottom right 
                 <h1 className='font-serif text-7xl md:text-8xl italic absolute bottom-5 right-5 z-40 text-blue-75'>
                     A<b>r</b>is
                 </h1>
+                */}
 
                 <div className='absolute left-0 top-0 z-40 size-full'>
                     <div className='mt-24 px-5 sm:px-10'>
