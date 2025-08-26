@@ -313,14 +313,14 @@ const Hero = () => {
                             We deliver comprehensive digital & creative<br />
                             services that elevate your brand.
                         </p>
-<Link to="/services" className="inline-block">
-  <Button
-    id="discover-services"
-    title="Discover Our Services"
-    leftIcon={<TiLocationArrow />}
-    containerClass="bg-yellow-300 flex items-center justify-center gap-1 w-fit px-4 py-2 rounded-full hover:bg-yellow-400 transition-colors"
-  />
-</Link>
+                        <Link to="/services" className="inline-block">
+                        <Button
+                            id="discover-services"
+                            title="Discover Our Services"
+                            leftIcon={<TiLocationArrow />}
+                            containerClass="bg-yellow-300 flex items-center justify-center gap-1 w-fit px-4 py-2 rounded-full hover:bg-yellow-400 transition-colors"
+                        />
+                        </Link>
                     </div>
                 </div>
             </div>
