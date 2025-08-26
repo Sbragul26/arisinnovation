@@ -180,7 +180,7 @@ const Footer = () => {
       </div>
 
       {/* Decorative bottom gradient */}
-      <div className="absolute bottom-0 left-0 right-0 h-1 bg-gradient-to-r from-violet-500 via-purple-500 via-pink-500 to-violet-500"></div>
+      <div className="absolute bottom-0 left-0 right-0 h-1 bg-gradient-to-r from-violet-500 via-pink-500 to-violet-500"></div>
     </footer>
   );
 };
