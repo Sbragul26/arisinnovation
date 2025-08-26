@@ -409,15 +409,13 @@ const FloatingHeroImage = () => {
 
   useEffect(() => {
     if (frameRef.current) {
-      // Scroll-triggered animation
+      // Simple scroll-triggered entrance animation - no fade, always bright
       gsap.fromTo(frameRef.current,
         {
-          opacity: 0,
           scale: 0.95,
           y: 50,
         },
         {
-          opacity: 1,
           scale: 1,
           y: 0,
           duration: 1.2,
@@ -425,23 +423,21 @@ const FloatingHeroImage = () => {
           scrollTrigger: {
             trigger: frameRef.current,
             start: 'top 85%',
-            end: 'top 50%',
-            scrub: 0.5,
-            toggleActions: 'play none none reverse'
+            toggleActions: 'play none none none'
           }
         }
       );
 
-      // Parallax-like effect on scroll
+      // Subtle parallax effect on scroll - less movement
       gsap.to(frameRef.current, {
-        y: -30,
+        y: -15,
         duration: 1,
         ease: 'none',
         scrollTrigger: {
           trigger: frameRef.current,
           start: 'top 80%',
           end: 'bottom top',
-          scrub: true,
+          scrub: 1,
         }
       });
     }
@@ -464,8 +460,8 @@ const FloatingHeroImage = () => {
     const centerX = rect.width / 2;
     const centerY = rect.height / 2;
 
-    const rotateX = ((yPos - centerY) / centerY) * -10;
-    const rotateY = ((xPos - centerX) / centerX) * 10;
+    const rotateX = ((yPos - centerY) / centerY) * -5; // Reduced rotation
+    const rotateY = ((xPos - centerX) / centerX) * 5;  // Reduced rotation
 
     gsap.to(element, {
       duration: 0.3,
@@ -491,7 +487,7 @@ const FloatingHeroImage = () => {
 
   return (
     <div className="flex justify-center items-center h-[600px] w-full mb-16">
-      <div className="relative floating-element">
+      <div className="relative">
         <img
           ref={frameRef}
           onMouseMove={handleMouseMove}
@@ -500,7 +496,7 @@ const FloatingHeroImage = () => {
           alt="Creative team collaboration"
           className="rounded-3xl shadow-2xl shadow-cyan-500/20 max-w-4xl w-full h-auto object-cover border border-cyan-500/30 glow-effect"
         />
-        <div className="absolute inset-0 bg-gradient-to-t from-black/50 to-transparent rounded-3xl"></div>
+        <div className="absolute inset-0 bg-gradient-to-t from-black/30 to-transparent rounded-3xl"></div>
       </div>
     </div>
   );
