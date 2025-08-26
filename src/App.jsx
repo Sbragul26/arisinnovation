@@ -9,10 +9,10 @@ import Contact from './pages/Contact'
 import Footer from './components/Footer'
 //import ScrollTop from './components/ScrollTop'
 import Portfolio from './pages/Portfolio'
-import ArisServices from './pages/ArisServices'
+import ArisServices from './components/ArisServices'
 import ScrollToTopButton from './components/ScrollToTopButton'; // Import the new component
 import ScrollToTop from './components/Scroll';
-import ServiceDetailPage from './pages/ServiceDetailPage';
+import ServiceDetailPage from './components/ServiceDetailPage';
 
 const App = () => {
   return (
