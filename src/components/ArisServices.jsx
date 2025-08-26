@@ -217,38 +217,57 @@ const CounterCard = ({ targetNumber, label, duration = 2000, delay = 0 }) => {
 
   useEffect(() => {
     if (cardRef.current) {
-      // Card entrance animation
+      // Card entrance animation - slide up with elastic bounce
       gsap.fromTo(cardRef.current,
         {
-          opacity: 0,
-          y: 80,
-          scale: 0.8,
-          rotateY: -45
+          y: 100,
+          scale: 0.9,
+          rotateX: 15
         },
         {
-          opacity: 1,
           y: 0,
           scale: 1,
-          rotateY: 0,
-          duration: 1,
-          ease: 'back.out(1.7)',
+          rotateX: 0,
+          duration: 1.2,
+          ease: 'elastic.out(1, 0.6)',
           delay: delay / 1000,
           scrollTrigger: {
             trigger: cardRef.current,
             start: 'top 80%',
-            toggleActions: 'play none none reverse'
+            toggleActions: 'play none none none'
           }
         }
       );
 
-      // Floating animation
+      // Professional hover tilt effect
+      cardRef.current.addEventListener('mouseenter', () => {
+        gsap.to(cardRef.current, {
+          rotateY: 5,
+          rotateX: 5,
+          scale: 1.02,
+          duration: 0.3,
+          ease: 'power2.out'
+        });
+      });
+
+      cardRef.current.addEventListener('mouseleave', () => {
+        gsap.to(cardRef.current, {
+          rotateY: 0,
+          rotateX: 0,
+          scale: 1,
+          duration: 0.3,
+          ease: 'power2.out'
+        });
+      });
+
+      // Subtle breathing animation
       gsap.to(cardRef.current, {
-        y: -10,
-        duration: 3,
-        ease: 'power1.inOut',
+        scale: 1.01,
+        duration: 4,
+        ease: 'sine.inOut',
         yoyo: true,
         repeat: -1,
-        delay: delay / 1000 + 1
+        delay: delay / 1000 + 1.5
       });
     }
 
@@ -269,8 +288,24 @@ const CounterCard = ({ targetNumber, label, duration = 2000, delay = 0 }) => {
               target = targetNumber;
             }
 
-            // Number animation with scale effect
+            // Enhanced number animation with professional effects
             setTimeout(() => {
+              // Initial number reveal animation
+              gsap.fromTo(numberRef.current, 
+                {
+                  scale: 0.5,
+                  opacity: 0,
+                  rotateY: 180
+                },
+                {
+                  scale: 1,
+                  opacity: 1,
+                  rotateY: 0,
+                  duration: 0.8,
+                  ease: 'back.out(2)'
+                }
+              );
+
               let startTime = null;
               const animate = (currentTime) => {
                 if (!startTime) startTime = currentTime;
@@ -281,11 +316,11 @@ const CounterCard = ({ targetNumber, label, duration = 2000, delay = 0 }) => {
                 
                 setCount(currentCount);
                 
-                // Pulse effect on number change
-                if (numberRef.current && currentCount !== target) {
+                // Professional pulse effect on number changes
+                if (numberRef.current && currentCount !== target && currentCount % Math.ceil(target / 20) === 0) {
                   gsap.to(numberRef.current, {
-                    scale: 1.1,
-                    duration: 0.1,
+                    scale: 1.05,
+                    duration: 0.15,
                     yoyo: true,
                     repeat: 1,
                     ease: 'power2.inOut'
@@ -296,15 +331,28 @@ const CounterCard = ({ targetNumber, label, duration = 2000, delay = 0 }) => {
                   requestAnimationFrame(animate);
                 } else {
                   setCount(target);
-                  // Final celebration animation
-                  gsap.to(numberRef.current, {
-                    scale: 1.2,
-                    color: '#00ffff',
-                    duration: 0.5,
-                    yoyo: true,
-                    repeat: 1,
-                    ease: 'elastic.out(1, 0.5)'
-                  });
+                  
+                  // Final success animation - professional glow effect
+                  gsap.timeline()
+                    .to(numberRef.current, {
+                      scale: 1.1,
+                      duration: 0.3,
+                      ease: 'power2.out'
+                    })
+                    .to(numberRef.current, {
+                      textShadow: '0 0 20px #00ffff, 0 0 40px #00ffff, 0 0 60px #00ffff',
+                      duration: 0.5,
+                      ease: 'power2.inOut'
+                    }, '-=0.2')
+                    .to(numberRef.current, {
+                      scale: 1,
+                      textShadow: '0 0 10px #00ffff',
+                      duration: 0.4,
+                      ease: 'elastic.out(1, 0.5)'
+                    })
+                    .set(numberRef.current, {
+                      textShadow: 'none'
+                    }, '+=0.5');
                 }
               };
               
@@ -342,6 +390,10 @@ const CounterCard = ({ targetNumber, label, duration = 2000, delay = 0 }) => {
     <div 
       ref={cardRef}
       className="stats-card text-center p-8 bg-gradient-to-br from-gray-800/70 to-gray-900/70 rounded-3xl border border-cyan-500/20 backdrop-blur-md shadow-lg hover:shadow-2xl hover:shadow-cyan-500/20 transition-all duration-300 glow-effect"
+      style={{ 
+        perspective: '1000px',
+        transformStyle: 'preserve-3d'
+      }}
     >
       <h3 ref={numberRef} className="text-5xl md:text-6xl font-bold text-cyan-300 mb-3">
         {displayValue()}
@@ -357,43 +409,46 @@ const FloatingHeroImage = () => {
 
   useEffect(() => {
     if (frameRef.current) {
-      // Initial hero animation
+      // Scroll-triggered animation
       gsap.fromTo(frameRef.current,
         {
           opacity: 0,
-          scale: 0.8,
-          y: 100,
-          rotateX: -20
+          scale: 0.95,
+          y: 50,
         },
         {
           opacity: 1,
           scale: 1,
           y: 0,
-          rotateX: 0,
-          duration: 1.5,
-          ease: 'power3.out',
-          delay: 1.5
+          duration: 1.2,
+          ease: 'power4.out',
+          scrollTrigger: {
+            trigger: frameRef.current,
+            start: 'top 85%',
+            end: 'top 50%',
+            scrub: 0.5,
+            toggleActions: 'play none none reverse'
+          }
         }
       );
 
-      // Continuous floating animation
+      // Parallax-like effect on scroll
       gsap.to(frameRef.current, {
-        y: -20,
-        duration: 4,
-        ease: 'power1.inOut',
-        yoyo: true,
-        repeat: -1
-      });
-
-      // Subtle rotation animation
-      gsap.to(frameRef.current, {
-        rotateY: 5,
-        duration: 6,
-        ease: 'power1.inOut',
-        yoyo: true,
-        repeat: -1
+        y: -30,
+        duration: 1,
+        ease: 'none',
+        scrollTrigger: {
+          trigger: frameRef.current,
+          start: 'top 80%',
+          end: 'bottom top',
+          scrub: true,
+        }
       });
     }
+
+    return () => {
+      ScrollTrigger.getAll().forEach(trigger => trigger.kill());
+    };
   }, []);
 
   const handleMouseMove = (e) => {
@@ -409,15 +464,15 @@ const FloatingHeroImage = () => {
     const centerX = rect.width / 2;
     const centerY = rect.height / 2;
 
-    const rotateX = ((yPos - centerY) / centerY) * -15;
-    const rotateY = ((xPos - centerX) / centerX) * 15;
+    const rotateX = ((yPos - centerY) / centerY) * -10;
+    const rotateY = ((xPos - centerX) / centerX) * 10;
 
     gsap.to(element, {
       duration: 0.3,
       rotateX,
       rotateY,
-      transformPerspective: 800,
-      ease: "power1.inOut",
+      transformPerspective: 1000,
+      ease: "power2.out",
     });
   };
 
@@ -429,7 +484,7 @@ const FloatingHeroImage = () => {
         duration: 0.5,
         rotateX: 0,
         rotateY: 0,
-        ease: "power1.inOut",
+        ease: "power2.out",
       });
     }
   };
