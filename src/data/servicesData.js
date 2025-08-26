@@ -4,7 +4,7 @@ export const servicesData = [
     slug: 'custom-software-saas-solutions',
     title: 'Custom Software / SaaS Solutions',
     description: 'Tailored software and SaaS platforms designed to streamline business operations and deliver scalable growth.',
-    image: 'https://images.unsplash.com/photo-1512941937669-90a1b58e7e9c?ixlib=rb-4.0.3&auto=format&fit=crop&w=500&q=80',
+    image: 'https://www.pexels.com/photo/golden-sunset-over-serene-lake-reflection-3165442',
     features: ['Enterprise Applications', 'Cloud Integration', 'Workflow Automation', 'Custom APIs']
   },
   {
