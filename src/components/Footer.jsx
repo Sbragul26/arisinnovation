@@ -29,12 +29,9 @@ const quickLinks = [
 ];
 
 const services = [
-  { href: '/services/web-development', label: 'Web Development' },
-  { href: '/services/mobile-apps', label: 'Mobile App Development' },
-  { href: '/services/digital-marketing', label: 'Digital Marketing' },
-  { href: '/services/ui-ux-design', label: 'UI/UX Design' },
-  { href: '/services/ecommerce', label: 'E-commerce Solutions' },
-  { href: '/services/branding', label: 'Branding & Identity' }
+  { href: '/services/custom-software-saas-solution', label: 'Custom Software / SaaS Solutions' },
+  { href: '/services/pwa-and-websites', label: 'Progressive Web Applications (PWAs) / Websites' },
+  { href: '/services/brand-sculpting-digital-identity', label: 'Brand Sculpting & Digital Identity' },
 ];
 
 const Footer = () => {
@@ -136,8 +133,8 @@ const Footer = () => {
             <address className="not-italic space-y-4">
               <div className="flex items-center space-x-3 text-gray-300 hover:text-white transition-colors duration-300">
                 <FaEnvelope className="text-violet-400 flex-shrink-0" />
-                <a href="mailto:info@arisinnovations.com" className="hover:underline">
-                  info@arisinnovations.com
+                <a href="mailto:innovationsaris@gmail.com" className="hover:underline">
+                  innovationsaris@gmail.com
                 </a>
               </div>
               <div className="flex items-center space-x-3 text-gray-300 hover:text-white transition-colors duration-300">
@@ -164,13 +161,13 @@ const Footer = () => {
           </p>
           <div className="flex space-x-6 text-sm">
             <Link
-              to="/privacy-policy"
+              to="/"
               className="text-gray-400 hover:text-violet-400 transition-colors duration-300 hover:underline"
             >
               Privacy Policy
             </Link>
             <Link
-              to="/terms-of-service"
+              to="/"
               className="text-gray-400 hover:text-purple-400 transition-colors duration-300 hover:underline"
             >
               Terms of Service
