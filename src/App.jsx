@@ -9,9 +9,10 @@ import Contact from './pages/Contact'
 import Footer from './components/Footer'
 //import ScrollTop from './components/ScrollTop'
 import Portfolio from './pages/Portfolio'
-import ArisServices from './components/ArisServices';
+import ArisServices from './pages/ArisServices'
 import ScrollToTopButton from './components/ScrollToTopButton'; // Import the new component
 import ScrollToTop from './components/Scroll';
+import ServiceDetailPage from './pages/ServiceDetailPage';
 
 const App = () => {
   return (
@@ -26,6 +27,7 @@ const App = () => {
         <Route path="/contact" element={<Contact/>} />
         <Route path="/portfolio" element={<Portfolio />} />
         <Route path="/services" element={<ArisServices />} />
+        <Route path="/services/:serviceSlug" element={<ServiceDetailPage />} />
       </Routes>
       <Footer/>
       <ScrollToTopButton /> {/* Add the scroll to top button */}
