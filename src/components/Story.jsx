@@ -73,7 +73,7 @@ const FloatingImage = ({
         };
 
   // images
-  const images = [ "/images/ui-ux-design.png","/images/web-design.png", "/images/hero.png"];
+  const images = [ "/images/ui-ux-design.png", "/img/intro.jpg","/images/hero.png"];
   const childArr = useMemo(
     () =>
       images.map((src, i) => (
