@@ -1,7 +1,7 @@
 import React from 'react';
 import { TiLocationArrow } from "react-icons/ti";
-import BentoTilt from '../../components/BentoTilt';
-import BentoCard from '../../components/BentoCard';
+import BentoTilt from '../../gsap/BentoTilt';
+import BentoCard from '../../gsap/BentoCard';
 
 
 const BrandSculptingDetails = () => {
