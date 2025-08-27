@@ -1,15 +1,15 @@
 import React from 'react'
 import { BrowserRouter as Router, Routes, Route } from 'react-router-dom'
 import Home from './pages/Home'
-import AboutUs from './components/Aboutus';
+import AboutUs from './pages/Aboutus';
 import NavBar from './components/NavBar'
 //import About from './pages/About'
-import Arisproducts from './components/Arisproducts'
+import Products from './pages/Products'
 import Contact from './pages/Contact'
 import Footer from './components/Footer'
 //import ScrollTop from './components/ScrollTop'
 import Portfolio from './pages/Portfolio'
-import ArisServices from './components/ArisServices'
+import Services from './pages/Services'
 import ScrollToTopButton from './components/ScrollToTopButton'; // Import the new component
 import ScrollToTop from './components/Scroll';
 import ServiceDetailPage from './components/ServiceDetailPage';
@@ -23,10 +23,11 @@ const App = () => {
       <Routes>
         <Route path="/" element={<Home />} />
         <Route path="/aboutUs" element={<AboutUs />} />
-        <Route path="/products" element={<Arisproducts />} />
+        <Route path="/products" element={<Products />} />
         <Route path="/contact" element={<Contact/>} />
         <Route path="/portfolio" element={<Portfolio />} />
-        <Route path="/services" element={<ArisServices />} />
+        <Route path="/services" element={<Services />} />
+
         <Route path="/services/:serviceSlug" element={<ServiceDetailPage />} />
       </Routes>
       <Footer/>

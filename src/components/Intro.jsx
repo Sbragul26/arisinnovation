@@ -1,5 +1,5 @@
 import React, { useRef } from 'react'
-import AnimatedTitle from './AnimatedTitle'
+import AnimatedTitle from '../gsap/AnimatedTitle'
 import { useGSAP } from '@gsap/react'
 import gsap from 'gsap'
 import { ScrollTrigger } from 'gsap/ScrollTrigger'

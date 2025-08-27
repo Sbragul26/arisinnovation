@@ -4,9 +4,9 @@ import { gsap } from 'gsap';
 import { ScrollTrigger } from 'gsap/ScrollTrigger';
 import { TiArrowLeft } from "react-icons/ti";
 import Button from "./Button";
-import CustomSoftwareDetails from '../pages/services/CustomSoftwareDetails';
-import PwaWebsiteDetails from '../pages/services/PwaWebsiteDetails';
-import BrandSculptingDetails from '../pages/services/BrandSculptingDetails';
+import CustomSoftwareDetails from '../components/services/CustomSoftwareDetails';
+import PwaWebsiteDetails from '../components/services/PwaWebsiteDetails';
+import BrandSculptingDetails from '../components/services/BrandSculptingDetails';
 
 gsap.registerPlugin(ScrollTrigger);
 

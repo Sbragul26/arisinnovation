@@ -9,7 +9,7 @@ import React, {
 import gsap from "gsap";
 import { Link } from "react-router-dom";
 import Button from "./Button";
-import AnimatedTitle from "./AnimatedTitle";
+import AnimatedTitle from "../gsap/AnimatedTitle";
 
 export const Card = forwardRef(({ customClass, ...rest }, ref) => (
   <div

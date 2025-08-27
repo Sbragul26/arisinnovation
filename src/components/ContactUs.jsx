@@ -1,5 +1,5 @@
 import React from "react";
-import AnimatedTitle from "./AnimatedTitle";
+import AnimatedTitle from "../gsap/AnimatedTitle";
 import Button from "./Button";
 import { Link } from "react-router-dom";
 

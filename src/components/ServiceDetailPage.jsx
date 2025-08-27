@@ -1,7 +1,8 @@
 import React, { useEffect } from 'react';
 import { useParams, useNavigate, Navigate } from 'react-router-dom';
 import DetailedServiceView from '../components/DetailedServiceView';
-import { servicesData } from '../data/servicesData';
+import { servicesData } from '../data/serviceData';
+
 
 const ServiceDetailPage = () => {
   const { serviceSlug } = useParams();

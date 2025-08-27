@@ -1,6 +1,6 @@
 import React, { useState, useEffect, useRef } from 'react';
-import AnimatedTitle from './AnimatedTitle';
-import Button from './Button';
+import AnimatedTitle from '../gsap/AnimatedTitle';
+import Button from '../components/Button';
 import { Link } from 'react-router-dom';
 
 
