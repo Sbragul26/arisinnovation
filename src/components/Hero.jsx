@@ -7,7 +7,6 @@ import { ScrollTrigger } from 'gsap/ScrollTrigger';
 import { Link } from "react-router-dom";
 gsap.registerPlugin(ScrollTrigger);
 
-
 const Hero = () => {
     const [currentIndex, setCurrentIndex] = useState(1);
     const [hasClicked, setHasClicked] = useState(false);
@@ -18,17 +17,23 @@ const Hero = () => {
     const loadingRef = useRef(null);
 
     const handleVideoLoad = () => {
-        setLoadedVideos((prevLoaded) => prevLoaded + 1);
+        setLoadedVideos((prevLoaded) => {
+            const newCount = prevLoaded + 1;
+            console.log(`Loaded videos: ${newCount}/${totalVideos}`); // Debug log
+            return newCount;
+        });
     };
 
     useEffect(() => {
-        if (loadedVideos === totalVideos - 1) {
+        // Fixed condition: should be === totalVideos, not totalVideos - 1
+        if (loadedVideos >= totalVideos) {
+            console.log('All videos loaded, hiding loading screen'); // Debug log
             // Delay the loading completion to show the animation
             setTimeout(() => {
                 setIsLoading(false);
             }, 1000);
         }
-    }, [loadedVideos])
+    }, [loadedVideos, totalVideos])
 
     const upcomingVideoIndex = (currentIndex % totalVideos) + 1;
 
@@ -116,19 +121,30 @@ const Hero = () => {
                 }
             );
 
-            // Progress bar animation
-            gsap.to('#progress-bar', {
-                width: '100%',
-                duration: 3,
-                ease: 'power2.inOut',
-                repeat: -1
-            });
+            // Progress bar animation - fixed to not repeat infinitely
+            gsap.fromTo('#progress-bar', 
+                {
+                    width: '0%'
+                },
+                {
+                    width: '100%',
+                    duration: 2.5,
+                    ease: 'power2.out',
+                    delay: 0.5
+                }
+            );
         }
     }, [isLoading]);
 
     // Loading exit animation
     useGSAP(() => {
         if (!isLoading) {
+            // Kill all loading animations
+            gsap.killTweensOf('#loading-brand');
+            gsap.killTweensOf('.particle');
+            gsap.killTweensOf('#loading-container');
+            gsap.killTweensOf('#progress-bar');
+
             gsap.to('#loading-screen', {
                 opacity: 0,
                 scale: 1.1,
@@ -166,32 +182,13 @@ const Hero = () => {
                 height: '100%',
                 duration: 1,
                 ease: 'power1.inOut',
-                onStart: () => nextVideoRef.current.play(),
+                onStart: () => nextVideoRef.current?.play(),
             });
             gsap.from('#current-video', {
                 transformOrigin: 'center center'
             });
         }
     }, { dependencies: [currentIndex], revertOnUpdate: true });
-{/*
-    useGSAP(() => {
-        gsap.set("#video-frame", {
-            clipPath: "polygon(14% 0, 72% 0, 88% 90%, 0 95%)",
-            borderRadius: "0% 0% 40% 10%",
-        });
-        gsap.from("#video-frame", {
-            clipPath: "polygon(0% 0%, 100% 0%, 100% 100%, 0% 100%)",
-            borderRadius: "0% 0% 0% 0%",
-            ease: "power1.inOut",
-            scrollTrigger: {
-                trigger: "#video-frame",
-                start: "center center",
-                end: "bottom center",
-                scrub: true,
-            },
-        });
-    });
-    */}
 
     const getVideoSrc = (index) => `videos/hero-${index}.mp4`;
 
@@ -213,41 +210,40 @@ const Hero = () => {
                         ))}
 
                         {/* Main loading content */}
-                            <div className="text-center z-10">
-                                <div id="loading-brand" className="mb-8 flex flex-col items-center">
-                                    <img 
-                                        src="/img/logo.png" 
-                                        alt="Brand Logo" 
-                                        className="w-24 md:w-32 h-auto" 
-                                    />
-
-                                </div>
-
-                                <div id="loading-text" className="mb-8">
-                                    <p className="text-white/80 text-xl font-light tracking-wider">
-                                        Crafting The Extraordinary
-                                    </p>
-                                    <p className="text-white/60 text-sm mt-2">
-                                        Loading your creative experience...
-                                    </p>
-                                </div>
-
-                                {/* Progress bar */}
-                                <div className="w-64 h-1 bg-white/20 rounded-full mx-auto overflow-hidden">
-                                    <div 
-                                        id="progress-bar" 
-                                        className="h-full bg-gradient-to-r from-blue-400 to-purple-500 rounded-full w-0"
-                                    ></div>
-                                </div>
-
-                                {/* Loading dots */}
-                                <div className="loading-container mt-8">
-                                    <div className="loading-circle"></div>
-                                    <div className="loading-circle"></div>
-                                    <div className="loading-circle"></div>
-                                    <div className="loading-circle"></div>
-                                </div>
+                        <div className="text-center z-10">
+                            <div id="loading-brand" className="mb-8 flex flex-col items-center">
+                                <img 
+                                    src="/img/logo.png" 
+                                    alt="Brand Logo" 
+                                    className="w-24 md:w-32 h-auto" 
+                                />
                             </div>
+
+                            <div id="loading-text" className="mb-8">
+                                <p className="text-white/80 text-xl font-light tracking-wider">
+                                    Crafting The Extraordinary
+                                </p>
+                                <p className="text-white/60 text-sm mt-2">
+                                    Loading your creative experience...
+                                </p>
+                            </div>
+
+                            {/* Progress bar */}
+                            <div className="w-64 h-1 bg-white/20 rounded-full mx-auto overflow-hidden">
+                                <div 
+                                    id="progress-bar" 
+                                    className="h-full bg-gradient-to-r from-blue-400 to-purple-500 rounded-full w-0"
+                                ></div>
+                            </div>
+
+                            {/* Loading dots */}
+                            <div className="loading-container mt-8">
+                                <div className="loading-circle"></div>
+                                <div className="loading-circle"></div>
+                                <div className="loading-circle"></div>
+                                <div className="loading-circle"></div>
+                            </div>
+                        </div>
 
                         {/* Background grid pattern */}
                         <div className="absolute inset-0 opacity-10">
@@ -265,11 +261,10 @@ const Hero = () => {
                             className='origin-center scale-50 opacity-0 transition-all duration-500 ease-in hover:scale-100 hover:opacity-100'
                         >
                             <video
-                                ref={nextVideoRef}
                                 src={getVideoSrc(upcomingVideoIndex)}
                                 loop
                                 muted
-                                id='current-video'
+                                id='mini-video'
                                 onLoadedData={handleVideoLoad}
                                 className='size-64 origin-center scale-150 object-cover object-center'
                             />
@@ -283,11 +278,10 @@ const Hero = () => {
                         muted
                         id='next-video'
                         className='absolute-center invisible absolute z-20 size-64 object-cover object-center'
-                        onLoadedData={handleVideoLoad}
                     />
 
                     <video
-                        src={getVideoSrc(currentIndex === totalVideos - 1 ? 1 : currentIndex)}
+                        src={getVideoSrc(currentIndex === totalVideos ? 1 : currentIndex)}
                         autoPlay
                         loop
                         muted
@@ -296,12 +290,6 @@ const Hero = () => {
                         onLoadedData={handleVideoLoad}
                     />
                 </div>
-
-                {/* Brand name positioned at bottom right 
-                <h1 className='font-serif text-7xl md:text-8xl italic absolute bottom-5 right-5 z-40 text-blue-75'>
-                    A<b>r</b>is
-                </h1>
-                */}
 
                 <div className='absolute left-0 top-0 z-40 size-full'>
                     <div className='mt-24 px-5 sm:px-10'>
