@@ -6,18 +6,26 @@ import Story from '../components/Story'
 import ContactUs from "../components/ContactUs"; 
 
 import CircularGallery from '../gsap/CircularGallery'
-import GradientBlinds from '../gsap/GradientBlinds/GradientBlinds';
+//import GradientBlinds from '../gsap/GradientBlinds';
+//import PixelTransition from '../gsap/PixelTransition';
 //import ScrollStack, { ScrollStackItem } from '../gsap/ScrollStack/ScrollStack';
+import HorizontalScroll from '../gsap/HorizontalScroll';
+
 
 
 const Home = () => {
   return (
     <div>
       <Hero/>
+
+
+      <HorizontalScroll>
+        <div className="horizontal-section flex-none w-screen h-screen"><Intro/></div>
+        <div className="horizontal-section flex-none w-screen h-screen"><Story/></div>
+      </HorizontalScroll>
+      
       <CircularGallery/>
-      <GradientBlinds/>
-      <Intro/>
-      <Story/>
+
       <ContactUs/>
     </div>
   )

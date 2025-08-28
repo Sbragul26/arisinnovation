@@ -73,7 +73,7 @@ const FloatingImage = ({
         };
 
   // images
-  const images = [ "/images/ui-ux-design.png", "/img/intro.jpg","/images/hero.png"];
+  const images = ["/images/ui-ux-design.png", "/img/intro.jpg", "/images/hero.png"];
   const childArr = useMemo(
     () =>
       images.map((src, i) => (
@@ -178,55 +178,66 @@ const FloatingImage = ({
   );
 
   return (
-    <div id="story" className="min-h-dvh w-screen bg-black text-blue-50">
-      <div className="flex size-full flex-col items-start py-10 pb-24 px-10 md:px-20">
-        
-        {/* Section Label */}
-        <p className="font-thin text-xs uppercase tracking-[0.3em] text-gray-400 mb-3">
-          creative design excellence
-        </p>
+    <>
+      <style>
+        {`
+          html, body {
+            margin: 0;
+            padding: 0;
+            height: 100%;
+            background-color: black;
+          }
+        `}
+      </style>
+      <div id="story" className="min-h-screen w-full bg-black text-blue-50">
+        <div className="flex size-full flex-col items-start py-10 pb-24 px-10 md:px-20">
+          {/* Section Label */}
+          <p className="font-thin text-xs uppercase tracking-[0.3em] text-gray-400 mb-3">
+            creative design excellence
+          </p>
 
-        <div className="relative w-full flex flex-col md:flex-row items-start">
-          {/* LEFT TEXT */}
-          <div className="w-full md:w-1/2 pr-10 flex flex-col items-start text-left">
-            <AnimatedTitle
-              title="OUR VISION COMES TO LIFE"
-              containerClass="
-                mt-5 pointer-events-none mix-blend-difference z-10
-                font-light
-                text-xl sm:text-2xl md:text-3xl lg:text-4xl xl:text-5xl
-                tracking-wide
-                leading-tight
-                whitespace-normal
-                max-w-4xl
-                mr-24
-                -ml-43
-              "
-              style={{ fontSize: '2rem', lineHeight: '2.5rem', maxWidth: '56rem' }} 
-            />
-            <p className="mt-6 max-w-md font-thin text-base text-violet-50 leading-loose text-left">
-              Where creativity meets strategy, lies Aris and endless possibilities.
-              Discover our approach and elevate your brand with innovative solutions
-              tailored for success.
-            </p>
-            <Link to={"/products"}>
-              <Button id="portfolio-btn" title="VIEW OUR PORTFOLIO" containerClass="mt-8" />
-            </Link>
-          </div>
+          <div className="relative w-full flex flex-col md:flex-row items-start">
+            {/* LEFT TEXT */}
+            <div className="w-full md:w-1/2 pr-10 flex flex-col items-start text-left">
+              <AnimatedTitle
+                title="OUR VISION COMES TO LIFE"
+                containerClass="
+                  mt-5 pointer-events-none mix-blend-difference z-10
+                  font-light
+                  text-xl sm:text-2xl md:text-3xl lg:text-4xl xl:text-5xl
+                  tracking-wide
+                  leading-tight
+                  whitespace-normal
+                  max-w-4xl
+                  mr-24
+                  -ml-43
+                "
+                style={{ fontSize: '2rem', lineHeight: '2.5rem', maxWidth: '56rem' }}
+              />
+              <p className="mt-6 max-w-md font-thin text-base text-violet-50 leading-loose text-left">
+                Where creativity meets strategy, lies Aris and endless possibilities.
+                Discover our approach and elevate your brand with innovative solutions
+                tailored for success.
+              </p>
+              <Link to={"/products"}>
+                <Button id="portfolio-btn" title="VIEW OUR PORTFOLIO" containerClass="mt-8" />
+              </Link>
+            </div>
 
-          {/* RIGHT STACK */}
-          <div
-            ref={container}
-            className="absolute bottom-0 right-0 transform translate-x-[5%] translate-y-[20%] origin-bottom-right perspective-[900px] overflow-visible 
-                       max-[768px]:translate-x-[25%] max-[768px]:translate-y-[25%] max-[768px]:scale-[0.75] 
-                       max-[480px]:translate-x-[25%] max-[480px]:translate-y-[25%] max-[480px]:scale-[0.55]"
-            style={{ width, height }}
-          >
-            {rendered}
+            {/* RIGHT STACK */}
+            <div
+              ref={container}
+              className="absolute bottom-0 right-0 transform translate-x-[5%] translate-y-[20%] origin-bottom-right perspective-[900px] overflow-visible 
+                         max-[768px]:translate-x-[25%] max-[768px]:translate-y-[25%] max-[768px]:scale-[0.75] 
+                         max-[480px]:translate-x-[25%] max-[480px]:translate-y-[25%] max-[480px]:scale-[0.55]"
+              style={{ width, height }}
+            >
+              {rendered}
+            </div>
           </div>
         </div>
       </div>
-    </div>
+    </>
   );
 };
 

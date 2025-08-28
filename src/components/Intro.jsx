@@ -60,8 +60,6 @@ const Intro = () => {
             ease: "power3.out"
         }, "-=0.4")
 
-
-
         // Subtle ambient animations
         gsap.to('.floating-element', {
             y: -8,
@@ -84,12 +82,12 @@ const Intro = () => {
     }, { scope: containerRef })
 
     return (
-        <div className='min-h-screen w-screen bg-slate-950 relative overflow-hidden flex items-center justify-center' id='about'>
+        <div className='min-h-screen w-screen bg-black relative overflow-hidden flex items-center justify-center' id='about'>
             {/* Professional background elements */}
-            <div className="absolute inset-0 bg-gradient-to-br from-slate-900 via-slate-950 to-slate-900"></div>
-            <div className="bg-element absolute top-20 left-10 w-96 h-96 bg-blue-500/5 rounded-full blur-3xl"></div>
-            <div className="bg-element absolute bottom-20 right-10 w-80 h-80 bg-violet-500/5 rounded-full blur-3xl"></div>
-            <div className="glow-element absolute top-1/2 left-1/2 transform -translate-x-1/2 -translate-y-1/2 w-[600px] h-[600px] bg-gradient-to-r from-blue-500/3 to-violet-500/3 rounded-full blur-3xl opacity-30"></div>
+            <div className="absolute inset-0 bg-gradient-to-br from-black via-black to-black"></div>
+            <div className="bg-element absolute top-20 left-10 w-96 h-96 bg-white/5 rounded-full blur-3xl"></div>
+            <div className="bg-element absolute bottom-20 right-10 w-80 h-80 bg-white/5 rounded-full blur-3xl"></div>
+            <div className="glow-element absolute top-1/2 left-1/2 transform -translate-x-1/2 -translate-y-1/2 w-[600px] h-[600px] bg-gradient-to-r from-white/3 to-white/3 rounded-full blur-3xl opacity-30"></div>
             
             {/* Subtle grid pattern */}
             <div className="absolute inset-0 opacity-[0.02]" style={{
