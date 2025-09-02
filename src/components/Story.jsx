@@ -193,7 +193,7 @@ const FloatingImage = ({
         <div className="flex size-full flex-col items-start py-10 pb-24 px-10 md:px-20">
           {/* Section Label */}
           <p className="font-thin text-xs uppercase tracking-[0.3em] text-gray-400 mb-3">
-            creative design excellence
+            
           </p>
 
           <div className="relative w-full flex flex-col md:flex-row items-start">

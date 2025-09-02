@@ -269,8 +269,8 @@ class Media {
       }
     }
     this.scale = this.screen.height / 1500;
-    this.plane.scale.y = (this.viewport.height * (900 * this.scale)) / this.screen.height;
-    this.plane.scale.x = (this.viewport.width * (700 * this.scale)) / this.screen.width;
+    this.plane.scale.y = (this.viewport.height * (800 * this.scale)) / this.screen.height;
+    this.plane.scale.x = (this.viewport.width * (850 * this.scale)) / this.screen.width;
     this.plane.program.uniforms.uPlaneSizes.value = [this.plane.scale.x, this.plane.scale.y];
     this.padding = 2;
     this.width = this.plane.scale.x + this.padding;
@@ -288,8 +288,8 @@ class App {
       textColor = "#ffffff",
       borderRadius = 0,
       font = "bold 30px Figtree",
-      scrollSpeed = 2,
-      scrollEase = 0.05,
+      scrollSpeed = 0,
+      scrollEase = 0,
     } = {}
   ) {
     document.documentElement.classList.remove("no-js");
@@ -332,18 +332,11 @@ class App {
   }
   createMedias(items, bend = 1, textColor, borderRadius, font) {
     const defaultItems = [
-      { image: `https://picsum.photos/seed/1/800/600?grayscale`, text: "Bridge" },
-      { image: `https://picsum.photos/seed/2/800/600?grayscale`, text: "Desk Setup" },
-      { image: `https://picsum.photos/seed/3/800/600?grayscale`, text: "Waterfall" },
-      { image: `https://picsum.photos/seed/4/800/600?grayscale`, text: "Strawberries" },
-      { image: `https://picsum.photos/seed/5/800/600?grayscale`, text: "Deep Diving" },
-      { image: `https://picsum.photos/seed/16/800/600?grayscale`, text: "Train Track" },
-      { image: `https://picsum.photos/seed/17/800/600?grayscale`, text: "Santorini" },
-      { image: `https://picsum.photos/seed/8/800/600?grayscale`, text: "Blurry Lights" },
-      { image: `https://picsum.photos/seed/9/800/600?grayscale`, text: "New York" },
-      { image: `https://picsum.photos/seed/10/800/600?grayscale`, text: "Good Boy" },
-      { image: `https://picsum.photos/seed/21/800/600?grayscale`, text: "Coastline" },
-      { image: `https://picsum.photos/seed/12/800/600?grayscale`, text: "Palm Trees" },
+      { image: `https://picsum.photos/seed/1/800/600?grayscale`, text: "Project1" },
+      { image: `https://picsum.photos/seed/2/800/600?grayscale`, text: "Project2" },
+      { image: `https://picsum.photos/seed/3/800/600?grayscale`, text: "Project3" },
+      { image: `https://picsum.photos/seed/4/800/600?grayscale`, text: "Project4" },
+      { image: `https://picsum.photos/seed/5/800/600?grayscale`, text: "Project5" },
     ];
     const galleryItems = items && items.length ? items : defaultItems;
     this.mediasImages = galleryItems.concat(galleryItems);
@@ -459,7 +452,7 @@ function CircularGallery({
   textColor = "#ffffff",
   borderRadius = 0.15,
   font = "bold 30px Figtree",
-  scrollSpeed = 0.05,
+  scrollSpeed = 0,
   scrollEase = 1,
 }) {
   const containerRef = useRef(null);
@@ -476,14 +469,14 @@ function CircularGallery({
 export default function Gallery() {
   return (
     <div className="h-screen w-screen bg-black flex items-center justify-center overflow-hidden">
-      <div className="h-full w-full max-w-[100vw]">
+      <div className="h-full w-full max-w-[100vw] transform rotate-12">
  
         <CircularGallery 
           bend={1.2}
           textColor="#e5e7eb"
           borderRadius={0.12}
           font="bold 24px Inter"
-          scrollSpeed={4}
+          scrollSpeed={2}
           scrollEase={0.08}
           visibleItems={4}
           edgeOffset={0}
