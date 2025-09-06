@@ -202,7 +202,8 @@ const AboutUs = () => {
             containerClass="text-7xl md:text-[6rem] font-black tracking-wide text-white text-center mb-12"
           />
           <p className="max-w-4xl mx-auto text-lg md:text-xl font-light text-gray-200 leading-relaxed mb-10">
-            At Aris, we transform visions into reality with innovative, high-impact digital and creative solutions designed to elevate your brand and captivate your audience.
+At Aris, we don’t just create — we transform.
+We turn bold visions into reality with innovative, high-impact digital and creative solutions that elevate your brand, captivate your audience, and fuel growth. Our passion lies in blending design, strategy, and technology to craft experiences that leave a lasting impression.
           </p>
           <div className="flex flex-wrap justify-center gap-4 text-sm uppercase tracking-widest text-cyan-300 font-medium">
             <span>Creativity</span>
@@ -254,7 +255,7 @@ const AboutUs = () => {
                   <h3 className="text-3xl font-bold text-cyan-300">Our Vision</h3>
                 </div>
                 <p className="text-gray-200 text-lg leading-relaxed">
-                  To become the leading creative powerhouse that transforms businesses through innovative design and cutting-edge digital solutions, setting new standards of excellence in the creative industry while empowering brands to reach their full potential.
+To be the most reliable creative partner,redefining how businesses grow through innovative design and digital excellence. We aim to empower brands to reach their full potential, setting new benchmarks of creativity, innovation, and impact.
                 </p>
                 <div className="mt-8 flex items-center text-cyan-300">
                   <div className="w-12 h-0.5 bg-cyan-400 mr-4"></div>
@@ -277,7 +278,7 @@ const AboutUs = () => {
                   <h3 className="text-3xl font-bold text-blue-300">Our Mission</h3>
                 </div>
                 <p className="text-gray-200 text-lg leading-relaxed">
-                  To deliver exceptional creative solutions that drive measurable results for our clients. We combine strategic thinking, innovative design, and technical expertise to create memorable brand experiences that resonate with audiences and accelerate business growth.
+To Deliver exceptional creative solutions that drive measurable results and help brands thrive in competitive markets. By uniting strategic thinking, imaginative design, and cutting-edge technology, we craft memorable brand experiences that resonate with audiences and inspire action.
                 </p>
                 <div className="mt-8 flex items-center text-blue-300">
                   <div className="w-12 h-0.5 bg-blue-400 mr-4"></div>

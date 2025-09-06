@@ -114,10 +114,10 @@ const Arisportfolio = () => {
             
             <div className="max-w-4xl mx-auto">
               <p className="text-xl md:text-2xl font-light text-gray-200 leading-relaxed mb-12">
-                We're crafting something extraordinary. Our portfolio showcase will feature stunning 
-                <span className="text-cyan-300 font-medium"> interactive experiences</span> and 
-                <span className="text-cyan-300 font-medium"> cutting-edge designs</span> that push 
-                the boundaries of creativity.
+            
+Every project tells a story — of challenges solved, ideas transformed, and businesses scaled. From sleek websites to powerful SaaS platforms and unforgettable brand identities, we’ve helped companies turn visions into reality.
+                
+  
               </p>
               
               <div className="flex flex-wrap justify-center gap-4 text-sm uppercase tracking-widest text-cyan-300 font-medium mb-16">
