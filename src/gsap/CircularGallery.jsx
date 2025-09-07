@@ -449,7 +449,7 @@ class App {
 function CircularGallery({
   items,
   bend = 1,
-  textColor = "#ffffff",
+  textColor = "#e5e7eb", // Adjusted to a lighter color for better visibility
   borderRadius = 0.15,
   font = "bold 30px Figtree",
   scrollSpeed = 0,
@@ -462,15 +462,13 @@ function CircularGallery({
       app.destroy();
     };
   }, [items, bend, textColor, borderRadius, font, scrollSpeed, scrollEase]);
-  return <div className="w-full h-215 overflow-hidden cursor-grab active:cursor-grabbing rounded-xl shadow-2xl" ref={containerRef} />;
+  return <div className="w-full h-full overflow-hidden cursor-grab active:cursor-grabbing rounded-xl shadow-2xl" ref={containerRef} />;
 }
-
 
 export default function Gallery() {
   return (
     <div className="h-screen w-screen bg-black flex items-center justify-center overflow-hidden">
-      <div className="h-full w-full max-w-[100vw] transform rotate-12">
- 
+      <div className="h-full w-full mt-16"> {/* Added mt-16 to push down slightly */}
         <CircularGallery 
           bend={1.2}
           textColor="#e5e7eb"
@@ -478,8 +476,6 @@ export default function Gallery() {
           font="bold 24px Inter"
           scrollSpeed={2}
           scrollEase={0.08}
-          visibleItems={4}
-          edgeOffset={0}
         />
       </div>
     </div>

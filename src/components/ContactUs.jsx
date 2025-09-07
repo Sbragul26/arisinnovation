@@ -2,76 +2,59 @@ import React from "react";
 import AnimatedTitle from "../gsap/AnimatedTitle";
 import Button from "./Button";
 import { Link } from "react-router-dom";
-import LightRays from '../gsap/LightRays'
+import LightRays from "../gsap/LightRays";
 
 const ImageClipBox = ({ src, clipClass }) => (
   <div className={clipClass}>
-    <img src={src} />
+    <img src={src} alt="" /> {/* Added alt for accessibility */}
   </div>
 );
 
 const ContactUs = () => {
   return (
-    <div id="contact" className="min-h-screen w-screen bg-black text-white px-10">
-      <div className="relative rounded-lg bg-black py-24 text-blue-50 sm:overflow-hidden">
+    <div id="contact" className="min-h-screen w-screen bg-black bg-opacity-50 text-white px-6 md:px-10">
+      <div className="relative h-full text-blue-50 overflow-hidden">
         <div className="absolute inset-0 z-0">
           <LightRays
-            raysOrigin="top-center"
+            raysOrigin="center" 
             raysColor="#ffffff"
-            raysSpeed={2}
-            lightSpread={2}
-            rayLength={1.2}
+            raysSpeed={1.2}
+            lightSpread={2.5} 
+            rayLength={1.8} 
             followMouse={true}
-            mouseInfluence={0.1}
-            noiseAmount={0.1}
-            distortion={0.05}
-            className="custom-rays w-full h-full"
+            mouseInfluence={0.05}
+            noiseAmount={0.02}
+            distortion={0.01}
+            className="custom-rays w-full h-full transition-opacity duration-1500 delay-500"
           />
         </div>
 
-        <div className="absolute -left-20 top-0 hidden h-full w-72 overflow-hidden sm:block lg:left-20 lg:w-96">
-          {/*}
-          <ImageClipBox
-            src="/images/digital.png"
-            clipClass="contact-clip-path-1"
-          />
-          <ImageClipBox
-            src="/images/web.png"
-            clipClass="contact-clip-path-2 lg:translate-y-40 translate-y-60"
-          />
-          */}
-        </div>
-
-        <div className="absolute -top-40 left-20 w-60 sm:top-1/2 md:left-auto md:right-10 lg:top-20 lg:w-80">
-          {/*}
-          <ImageClipBox
-            src="/img/swordman-partial.webp"
-            clipClass="absolute md:scale-125"
-          />
-          <ImageClipBox
-            src="/img/swordman.webp"
-            clipClass="sword-man-clip-path md:scale-125"
-          />
-          */}
-        </div>
-
-        <div className="relative flex flex-col items-center text-center z-10">
-          <p className="mb-10 font-sans font-light text-xs uppercase tracking-[0.3em] text-gray-400">
+        <div className="relative flex flex-col items-center justify-center h-full z-10 opacity-0 animate-fadeIn pt-42"> 
+          <p className="mb-6 font-sans font-light text-sm uppercase tracking-[0.3em] text-gray-400">
             Partner with Aris
           </p>
-
           <AnimatedTitle
             title="let&#39;s cr<b>e</b>ate something <br /> extraordin<b>a</b>ry <br /> tog<b>e</b>ther."
-            className="font-sans font-light !text-2xl xs:!text-3xl sm:!text-4xl md:!text-5xl lg:!text-6xl xl:!text-7xl w-full !leading-[0.8] sm:!leading-[0.85] md:!leading-[0.9] tracking-wide px-2 sm:px-4"
+            className="font-sans font-light text-2xl xs:text-3xl sm:text-4xl md:text-5xl lg:text-6xl w-full leading-[0.9] tracking-wide text-center px-4"
           />
-          <Link to={'/contact'}>
+          <Link to="/contact">
             <Button 
               title="start your project" 
-              containerClass="mt-10 cursor-pointer" 
+              containerClass="mt-8 md:mt-12 cursor-pointer" 
             />
           </Link>
         </div>
       </div>
+      {/* Inline CSS for fade-in animation */}
+      <style>{`
+        @keyframes fadeIn {
+          from { opacity: 0; }
+          to { opacity: 1; }
+        }
+        .animate-fadeIn {
+          animation: fadeIn 1.5s ease-in-out forwards;
+        }
+      `}</style>
     </div>
   );
 };

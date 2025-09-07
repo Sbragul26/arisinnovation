@@ -7,10 +7,10 @@ const hexToRgb = (hex) => {
   const m = /^#?([a-f\d]{2})([a-f\d]{2})([a-f\d]{2})$/i.exec(hex);
   return m
     ? [
-      parseInt(m[1], 16) / 255,
-      parseInt(m[2], 16) / 255,
-      parseInt(m[3], 16) / 255,
-    ]
+        parseInt(m[1], 16) / 255,
+        parseInt(m[2], 16) / 255,
+        parseInt(m[3], 16) / 255,
+      ]
     : [1, 1, 1];
 };
 
@@ -40,10 +40,10 @@ const LightRays = ({
   raysOrigin = "top-center",
   raysColor = DEFAULT_COLOR,
   raysSpeed = 1,
-  lightSpread = 1,
-  rayLength = 2,
+  lightSpread = 1.5,
+  rayLength = 2.0,
   pulsating = false,
-  fadeDistance = 1.0,
+  fadeDistance = 0.8,
   saturation = 1.0,
   followMouse = true,
   mouseInfluence = 0.1,
