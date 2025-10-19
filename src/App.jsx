@@ -13,11 +13,12 @@ import Services from './pages/Services'
 import ScrollToTopButton from './components/ScrollToTopButton'; // Import the new component
 import ScrollToTop from './components/Scroll';
 import ServiceDetailPage from './components/ServiceDetailPage';
+import MouseLightEffect from './gsap/MouseLightEffect';
 
 const App = () => {
   return (
     <main className='relative min-h-screen w-screen overflow-x-hidden'>
-      
+      <MouseLightEffect />
       <NavBar/>
       <ScrollToTop /> {/* Ensure the page scrolls to top on route change */}
       <Routes>
