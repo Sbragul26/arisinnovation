@@ -7,10 +7,7 @@ export const servicesData = [
     image:
       'https://images.unsplash.com/photo-1518770660439-4636190af475?ixlib=rb-4.0.3&auto=format&fit=crop&w=800&q=80',
     features: [
-      'Enterprise Applications',
-      'Cloud Integration',
-      'Workflow Automation',
-      'Custom APIs',
+
     ],
   },
   {
@@ -21,10 +18,7 @@ export const servicesData = [
     image:
       'https://images.unsplash.com/photo-1522199710521-72d69614c702?ixlib=rb-4.0.3&auto=format&fit=crop&w=800&q=80',
     features: [
-      'PWAs',
-      'Next.js/React',
-      'SEO Optimization',
-      'Cross-Browser Compatibility',
+
     ],
   },
   {
@@ -35,10 +29,7 @@ export const servicesData = [
     image:
       'https://images.unsplash.com/photo-1529101091764-c3526daf38fe?ixlib=rb-4.0.3&auto=format&fit=crop&w=800&q=80',
     features: [
-      'Logo Design',
-      'Visual Identity',
-      'Brand Guidelines',
-      'Content Strategy',
+
     ],
   },
 ];
